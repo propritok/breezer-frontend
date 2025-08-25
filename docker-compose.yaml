@@ -6,4 +6,4 @@ services:
     container_name: breezer-frontend
     restart: unless-stopped
     ports:
-      - '3117:3000'
+      - '3000:3000'

@@ -10,6 +10,10 @@
 - Кнопка-CTA `ContactCTAButton` (feature): самодостаточная кнопка, открывающая модалку с формой обратной связи. Можно встраивать на любые страницы.
 - Декомпозиция страницы товара `src/pages/catalog/[id].tsx` на виджеты: `ProductGallery`, `ProductHeader`, `ProductStatusChips`, `ProductPurchaseSection`, `ProductInfoBadges`, `PromoConsultationCard`.
 - Общая таблица характеристик: `SpecsTable` + `getSpecsRows(product)`.
+- Раздел "Описание" на странице товара: новый компонент `ProductDescription` для отображения детального описания товара.
+- Поле `description` в интерфейсе `Product` для хранения описания товара.
+- Детальные описания для всех продуктов в мок-данных, включая технические характеристики, особенности и рекомендации по применению.
+- Поле `description` в интерфейсе `Product` для хранения описания товара.
 
 ### Изменено
 

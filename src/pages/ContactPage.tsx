@@ -1,4 +1,4 @@
-import { Button, Card, CardBody, Input, Textarea } from "@heroui/react";
+import { Button, Card, CardBody, Input, Textarea } from '@heroui/react';
 import React from 'react';
 
 const ContactPage: React.FC = () => {
@@ -13,7 +13,7 @@ const ContactPage: React.FC = () => {
           <div className='space-y-4 mb-8'>
             <div>
               <h3 className='font-semibold mb-2'>Телефон:</h3>
-              <p className='text-gray-600'>+7 (999) 123-45-67</p>
+              <p className='text-gray-600'>+79295850880</p>
             </div>
 
             <div>
@@ -42,7 +42,7 @@ const ContactPage: React.FC = () => {
             <h3 className='text-xl font-semibold mb-4'>Оставить заявку</h3>
             <form className='space-y-4'>
               <Input label='Имя' placeholder='Введите ваше имя' variant='bordered' />
-              <Input label='Телефон' placeholder='+7 (999) 123-45-67' variant='bordered' />
+              <Input label='Телефон' placeholder='+79295850880' variant='bordered' />
               <Input label='Email' placeholder='example@mail.com' variant='bordered' />
               <Textarea
                 label='Сообщение'

@@ -35,7 +35,7 @@ export const config = {
 
   // Настройки контактов
   contact: {
-    phone: '+7 (999) 123-45-67',
+    phone: '+79295850880',
     email: 'info@propritok.ru',
     address: 'г. Москва, ул. Примерная, д. 123',
     workingHours: {

@@ -168,6 +168,10 @@ export default function Home() {
                     <span className='font-medium'>Монтаж с выводом в откос</span>
                     <span className='font-bold text-lg'>14 000 ₽</span>
                   </div>
+                  <div className='flex justify-between items-center p-3 bg-gray-50 rounded'>
+                    <span className='font-medium'>Монтаж бризера на готовое отверстие</span>
+                    <span className='font-bold text-lg'>6 000 ₽</span>
+                  </div>
                 </div>
               </div>
             </div>

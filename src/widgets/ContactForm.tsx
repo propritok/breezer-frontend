@@ -1,6 +1,6 @@
 import { PhoneInput } from '@/shared/ui/PhoneInput';
+import { Button, Card, CardBody, Input, Textarea } from '@heroui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Card, CardBody, Input, Textarea } from "@heroui/react";
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';

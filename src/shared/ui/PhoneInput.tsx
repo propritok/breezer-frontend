@@ -1,7 +1,7 @@
-import { Input } from "@heroui/react";
-import { Controller, Control } from "react-hook-form";
-import InputMask from "react-input-mask";
-import React, { useState, useEffect } from "react";
+import { Input } from '@heroui/react';
+import React, { useEffect, useState } from 'react';
+import { Control, Controller } from 'react-hook-form';
+import InputMask from 'react-input-mask';
 
 interface PhoneInputProps {
   control: Control<any>;
@@ -9,11 +9,7 @@ interface PhoneInputProps {
   error?: string;
 }
 
-export const PhoneInput: React.FC<PhoneInputProps> = ({
-  control,
-  name,
-  error,
-}) => {
+export const PhoneInput: React.FC<PhoneInputProps> = ({ control, name, error }) => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -22,14 +18,7 @@ export const PhoneInput: React.FC<PhoneInputProps> = ({
 
   // Не рендерим InputMask на сервере
   if (!mounted) {
-    return (
-      <Input
-        label="Телефон"
-        placeholder="+7 (999) 123-45-67"
-        variant="bordered"
-        disabled
-      />
-    );
+    return <Input label='Телефон' placeholder='+7 (999) 123-45-67' variant='bordered' disabled />;
   }
 
   return (
@@ -37,17 +26,13 @@ export const PhoneInput: React.FC<PhoneInputProps> = ({
       name={name}
       control={control}
       render={({ field }) => (
-        <InputMask
-          mask="+7 (999) 999-99-99"
-          value={field.value || ""}
-          onChange={field.onChange}
-        >
+        <InputMask mask='+7 (999) 999-99-99' value={field.value || ''} onChange={field.onChange}>
           {(inputProps: any) => (
             <Input
               {...inputProps}
-              label="Телефон"
-              placeholder="+7 (999) 123-45-67"
-              variant="bordered"
+              label='Телефон'
+              placeholder='+7 (999) 123-45-67'
+              variant='bordered'
               isInvalid={!!error}
               errorMessage={error}
             />

@@ -1,4 +1,4 @@
-import { Button, Card, CardBody, Input, Select, SelectItem, Textarea } from "@heroui/react";
+import { Button, Card, CardBody, Input, Select, SelectItem, Textarea } from '@heroui/react';
 import React, { useEffect, useState } from 'react';
 
 const OrderForm: React.FC = () => {
@@ -51,14 +51,10 @@ const OrderForm: React.FC = () => {
               placeholder='Выберите модель'
               variant='bordered'
               disabled>
-              <SelectItem key='tion'>
-                Бризер Tion
-              </SelectItem>
+              <SelectItem key='tion'>Бризер Tion</SelectItem>
             </Select>
             <Select label='Нужна ли установка?' variant='bordered' disabled>
-              <SelectItem key='yes' >
-                Да, нужна установка
-              </SelectItem>
+              <SelectItem key='yes'>Да, нужна установка</SelectItem>
             </Select>
             <Input
               label='Адрес установки'
@@ -126,15 +122,9 @@ const OrderForm: React.FC = () => {
             value={formData.product}
             onChange={(e) => handleChange('product', e.target.value)}
             required>
-            <SelectItem key='tion' >
-              Бризер Tion
-            </SelectItem>
-            <SelectItem key='ballu' >
-              Бризер Ballu
-            </SelectItem>
-            <SelectItem key='vakio' >
-              Бризер Vakio
-            </SelectItem>
+            <SelectItem key='tion'>Бризер Tion</SelectItem>
+            <SelectItem key='ballu'>Бризер Ballu</SelectItem>
+            <SelectItem key='vakio'>Бризер Vakio</SelectItem>
           </Select>
 
           <Select
@@ -142,12 +132,8 @@ const OrderForm: React.FC = () => {
             variant='bordered'
             value={formData.installation}
             onChange={(e) => handleChange('installation', e.target.value)}>
-            <SelectItem key='yes' >
-              Да, нужна установка
-            </SelectItem>
-            <SelectItem key='no' >
-              Нет, только оборудование
-            </SelectItem>
+            <SelectItem key='yes'>Да, нужна установка</SelectItem>
+            <SelectItem key='no'>Нет, только оборудование</SelectItem>
           </Select>
 
           <Input

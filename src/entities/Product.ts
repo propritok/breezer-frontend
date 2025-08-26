@@ -2,6 +2,7 @@ export interface Product {
   id?: string;
   modelNameEn?: string;
   modelNameRu?: string;
+  description?: string; // Описание товара
   rating?: number; // 0..5
   inStock?: boolean;
   price?: string;

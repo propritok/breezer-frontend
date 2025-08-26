@@ -9,16 +9,5 @@ README.md
 .env.test.local
 .env.production.local
 .next
-.vercel
 .DS_Store
 *.tsbuildinfo
-coverage
-.nyc_output
-.vscode
-.idea
-*.log
-dist
-build
-.cache
-.parcel-cache
-.turbo

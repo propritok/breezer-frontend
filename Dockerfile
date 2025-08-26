@@ -4,18 +4,23 @@ FROM node:alpine
 # Set working directory
 WORKDIR /usr/app
 
-# Copy package.json and package-lock.json before other files
-COPY ./package*.json ./
+# Install yarn globally
+RUN npm install --global yarn
 
-# Install dependencies and pm2
-RUN npm install
-RUN npm install --global pm2
+# Copy package.json and yarn.lock before other files
+COPY ./package.json ./yarn.lock* ./
+
+# Install dependencies using yarn
+RUN yarn install --frozen-lockfile
+
+# Install pm2 globally
+RUN yarn global add pm2
 
 # Copy all files
 COPY ./ ./
 
-# Build the app
-RUN npm run build
+# Build the app using yarn
+RUN yarn build
 
 # Ensure the `.next` cache directories exist and have correct permissions
 RUN mkdir -p /usr/app/.next/cache/images && chown -R node:node /usr/app/.next
@@ -26,5 +31,5 @@ EXPOSE 3000
 # Run container as non-root user
 USER node
 
-# Start the application
-CMD [ "pm2-runtime", "npm", "--", "start", "--max_old_space_size=512" ]
+# Start the application using yarn
+CMD [ "pm2-runtime", "yarn", "--", "start", "--max_old_space_size=512" ]

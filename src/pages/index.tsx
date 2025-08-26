@@ -1,6 +1,6 @@
 import { mockProductsShort } from '@/api/products';
 import { ProductCard } from '@/widgets';
-import { Button, Card, CardBody, Input } from "@heroui/react";
+import { Button, Card, CardBody, Input } from '@heroui/react';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 
@@ -97,6 +97,93 @@ export default function Home() {
             </div>
           </div>
 
+          {/* Гарантия */}
+          <div className='max-w-7xl mx-auto px-4 py-12'>
+            <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 items-center'>
+              <div>
+                <h2 className='text-3xl font-bold mb-6'>Гарантия</h2>
+                <h3 className='text-xl font-semibold mb-4 text-[#A0E7E5]'>
+                  Дышите спокойно: 5 лет гарантии на монтаж вашего бризера!
+                </h3>
+                <p className='text-gray-700 leading-relaxed'>
+                  Мы понимаем, насколько важно, чтобы система вентиляции работала безупречно. Наша
+                  команда квалифицированных специалистов выполняет монтаж бризеров в строгом
+                  соответствии с техническими нормами и рекомендациями производителей. Мы настолько
+                  уверены в качестве нашей работы, что предоставляем расширенную гарантию 5 лет на
+                  монтаж. Это значит, что в течение 5 лет вы можете быть спокойны за надежную работу
+                  вашего бризера, а мы возьмем на себя ответственность за любые возможные проблемы,
+                  связанные с установкой.
+                </p>
+              </div>
+              <div className='bg-gradient-to-br from-[#A0E7E5] to-[#B8F0EE] p-8 rounded-lg'>
+                <div className='text-center text-white'>
+                  <div className='text-6xl font-bold mb-4'>5</div>
+                  <div className='text-xl font-semibold mb-2'>лет гарантии</div>
+                  <div className='text-sm opacity-90'>на монтаж бризера</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Монтаж и стоимость */}
+          <div className='max-w-7xl mx-auto px-4 py-12 bg-gray-50'>
+            <div className='text-center mb-12'>
+              <h2 className='text-3xl font-bold mb-4'>Монтаж и стоимость</h2>
+              <p className='text-lg text-gray-600 max-w-3xl mx-auto'>
+                Доверьте монтаж бризера профессионалам, которые используют только лучшее
+                оборудование!
+              </p>
+            </div>
+
+            <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12'>
+              <div>
+                <h3 className='text-xl font-semibold mb-4'>Профессиональное оборудование HILTI</h3>
+                <p className='text-gray-700 leading-relaxed mb-4'>
+                  Наша команда имеет многолетний опыт работы с системами вентиляции и использует
+                  профессиональный инструмент HILTI с пылеудалением, известный своей надежностью и
+                  производительностью. Это позволяет нам выполнять монтаж бризеров максимально
+                  аккуратно и чисто.
+                </p>
+                <p className='text-gray-700 leading-relaxed mb-4'>
+                  Мы минимизируем количество пыли и строительного мусора во время работы, заботясь о
+                  вашем комфорте и чистоте вашего дома.
+                </p>
+                <p className='text-gray-700 leading-relaxed'>
+                  Благодаря современным технологиям HILTI, мы также снижаем уровень шума при
+                  сверлении, делая процесс монтажа максимально комфортным для вас и ваших соседей.
+                </p>
+              </div>
+              <div className='bg-white p-6 rounded-lg shadow-lg'>
+                <h3 className='text-xl font-semibold mb-4 text-[#A0E7E5]'>Основные позиции</h3>
+                <div className='space-y-4'>
+                  <div className='flex justify-between items-center p-3 bg-gray-50 rounded'>
+                    <span className='font-medium'>Монтаж Стандарт</span>
+                    <span className='font-bold text-lg'>9 500 ₽</span>
+                  </div>
+                  <div className='flex justify-between items-center p-3 bg-gray-50 rounded'>
+                    <span className='font-medium'>Монтаж с улучшенным утеплением канала</span>
+                    <span className='font-bold text-lg'>11 000 ₽</span>
+                  </div>
+                  <div className='flex justify-between items-center p-3 bg-gray-50 rounded'>
+                    <span className='font-medium'>Монтаж с выводом в откос</span>
+                    <span className='font-bold text-lg'>14 000 ₽</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Акция */}
+            <div className='bg-gradient-to-r from-[#A0E7E5] to-[#B8F0EE] p-8 rounded-lg text-center'>
+              <h3 className='text-2xl font-bold text-white mb-4'>Специальное предложение!</h3>
+              <p className='text-xl text-white mb-6'>
+                При покупке бризера - <span className='font-bold'>30% скидка на монтаж</span>
+              </p>
+              <Button size='lg' className='bg-white text-[#A0E7E5] font-semibold'>
+                Получить скидку
+              </Button>
+            </div>
+          </div>
+
           {/* Популярные товары */}
           <div className='max-w-7xl mx-auto px-4 py-12'>
             <div className='flex items-center justify-center mb-8'>
@@ -106,6 +193,135 @@ export default function Home() {
               {mockProductsShort.slice(0, 3).map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
+            </div>
+          </div>
+
+          {/* Ответы на вопросы */}
+          <div className='max-w-7xl mx-auto px-4 py-12 bg-gray-50'>
+            <div className='text-center mb-12'>
+              <h2 className='text-3xl font-bold mb-4'>Ответы на вопросы</h2>
+              <p className='text-lg text-gray-600'>
+                Самые частые вопросы о бризерах и их установке
+              </p>
+            </div>
+
+            <div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
+              <div className='space-y-6'>
+                <Card className='shadow-sm'>
+                  <CardBody>
+                    <h3 className='text-lg font-semibold mb-3 text-[#A0E7E5]'>
+                      Что такое бризер и зачем он нужен?
+                    </h3>
+                    <p className='text-gray-700'>
+                      Бризер — это компактная система приточной вентиляции, которая подает свежий
+                      воздух в помещение, очищая его от пыли, аллергенов и вредных веществ. Он
+                      особенно важен в современных герметичных домах, где естественная вентиляция
+                      недостаточна.
+                    </p>
+                  </CardBody>
+                </Card>
+
+                <Card className='shadow-sm'>
+                  <CardBody>
+                    <h3 className='text-lg font-semibold mb-3 text-[#A0E7E5]'>
+                      Какой бризер выбрать для квартиры?
+                    </h3>
+                    <p className='text-gray-700'>
+                      Выбор зависит от площади помещения, количества жильцов и бюджета. Для
+                      однокомнатной квартиры подойдет компактная модель, для больших помещений —
+                      более мощная. Наши специалисты помогут подобрать оптимальный вариант.
+                    </p>
+                  </CardBody>
+                </Card>
+
+                <Card className='shadow-sm'>
+                  <CardBody>
+                    <h3 className='text-lg font-semibold mb-3 text-[#A0E7E5]'>
+                      Сколько времени занимает установка?
+                    </h3>
+                    <p className='text-gray-700'>
+                      Стандартная установка занимает 2-3 часа. Мы используем профессиональное
+                      оборудование HILTI с пылеудалением, что позволяет минимизировать загрязнение и
+                      шум. После установки бризер сразу готов к работе.
+                    </p>
+                  </CardBody>
+                </Card>
+
+                <Card className='shadow-sm'>
+                  <CardBody>
+                    <h3 className='text-lg font-semibold mb-3 text-[#A0E7E5]'>
+                      Нужно ли разрешение на установку?
+                    </h3>
+                    <p className='text-gray-700'>
+                      В большинстве случаев разрешение не требуется, так как мы устанавливаем бризер
+                      в существующее вентиляционное отверстие или делаем небольшое отверстие в
+                      стене. Но в некоторых случаях (памятники архитектуры, несущие стены) может
+                      потребоваться согласование.
+                    </p>
+                  </CardBody>
+                </Card>
+              </div>
+
+              <div className='space-y-6'>
+                <Card className='shadow-sm'>
+                  <CardBody>
+                    <h3 className='text-lg font-semibold mb-3 text-[#A0E7E5]'>
+                      Как часто нужно менять фильтры?
+                    </h3>
+                    <p className='text-gray-700'>
+                      Частота замены зависит от качества воздуха и интенсивности использования.
+                      Обычно фильтры меняют раз в 3-6 месяцев. Наши специалисты напомнят о
+                      необходимости замены и помогут с обслуживанием.
+                    </p>
+                  </CardBody>
+                </Card>
+
+                <Card className='shadow-sm'>
+                  <CardBody>
+                    <h3 className='text-lg font-semibold mb-3 text-[#A0E7E5]'>
+                      Бризер работает от электричества?
+                    </h3>
+                    <p className='text-gray-700'>
+                      Да, бризер потребляет электроэнергию, но очень экономно — примерно как
+                      лампочка. Современные модели оснащены энергосберегающими вентиляторами и могут
+                      работать в автоматическом режиме.
+                    </p>
+                  </CardBody>
+                </Card>
+
+                <Card className='shadow-sm'>
+                  <CardBody>
+                    <h3 className='text-lg font-semibold mb-3 text-[#A0E7E5]'>
+                      Можно ли установить зимой?
+                    </h3>
+                    <p className='text-gray-700'>
+                      Да, установка возможна в любое время года. Бризеры оснащены системой подогрева
+                      воздуха, поэтому зимой в помещение будет поступать теплый воздух. Мы работаем
+                      круглый год.
+                    </p>
+                  </CardBody>
+                </Card>
+
+                <Card className='shadow-sm'>
+                  <CardBody>
+                    <h3 className='text-lg font-semibold mb-3 text-[#A0E7E5]'>
+                      Что входит в гарантию?
+                    </h3>
+                    <p className='text-gray-700'>
+                      Мы предоставляем 5 лет гарантии на монтаж и 2 года на оборудование. Гарантия
+                      покрывает все работы по установке, а также возможные проблемы, связанные с
+                      качеством монтажа.
+                    </p>
+                  </CardBody>
+                </Card>
+              </div>
+            </div>
+
+            <div className='text-center mt-12'>
+              <p className='text-gray-600 mb-4'>Не нашли ответ на свой вопрос?</p>
+              <Button size='lg' className='bg-[#A0E7E5] text-white font-semibold'>
+                Задать вопрос специалисту
+              </Button>
             </div>
           </div>
 

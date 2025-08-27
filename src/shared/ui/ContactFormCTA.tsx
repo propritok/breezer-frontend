@@ -1,8 +1,9 @@
 'use client';
 
+import { handleCallbackForm } from '@/app/api/send-email/route';
 import { Button, Input } from '@heroui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { PhoneInput } from './PhoneInput';
@@ -16,18 +17,48 @@ const contactFormSchema = z.object({
 
 type ContactFormData = z.infer<typeof contactFormSchema>;
 
-const ContactFormCTA: React.FC = () => {
+interface ContactFormCTAProps {
+  action?: string;
+  onSuccess?: () => void;
+}
+
+const ContactFormCTA: React.FC<ContactFormCTAProps> = ({ action, onSuccess }) => {
   const {
     register,
     handleSubmit,
     control,
+    reset,
     formState: { errors },
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactFormSchema),
   });
 
-  const onSubmit = (data: ContactFormData) => {
-    console.log('✅ Form submitted:', data);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isError, setIsError] = useState<string | null>(null);
+
+  const onSubmit = async (data: ContactFormData) => {
+    setIsLoading(true);
+    setIsError(null);
+    try {
+      const result = await handleCallbackForm(
+        { name: data.name, phone: data.phone },
+        action || 'Хочет обратный звонок',
+      );
+
+      if (result?.success) {
+        setIsSuccess(true);
+        reset();
+        onSuccess?.();
+      } else {
+        setIsError((result as any)?.message || 'Не удалось отправить заявку');
+      }
+    } catch (e) {
+      setIsError('Ошибка отправки. Попробуйте позже.');
+    } finally {
+      setIsLoading(false);
+      setTimeout(() => setIsSuccess(false), 5000);
+    }
   };
 
   return (
@@ -43,9 +74,18 @@ const ContactFormCTA: React.FC = () => {
 
       <PhoneInput control={control} name='phone' error={errors.phone?.message} />
 
-      <Button type='submit' color='primary' className='w-full bg-[#A0E7E5] text-white'>
+      <Button
+        type='submit'
+        isLoading={isLoading}
+        color='primary'
+        className='w-full bg-[#A0E7E5] text-white'>
         Отправить заявку
       </Button>
+
+      {isSuccess && (
+        <p className='text-success text-sm'>Заявка успешно отправлена. Мы свяжемся с вами.</p>
+      )}
+      {isError && <p className='text-danger text-sm'>Ошибка: {isError}</p>}
     </form>
   );
 };

@@ -1,6 +1,5 @@
 'use client';
 
-import { handleCallbackForm } from '@/app/api/actions/send-email';
 import { Button, Input } from '@heroui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import React, { useState } from 'react';
@@ -41,17 +40,26 @@ const ContactFormCTA: React.FC<ContactFormCTAProps> = ({ action, onSuccess }) =>
     setIsLoading(true);
     setIsError(null);
     try {
-      const result = await handleCallbackForm(
-        { name: data.name, phone: data.phone },
-        action || 'Хочет обратный звонок',
-      );
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: data.name,
+          phone: data.phone,
+          action: action || 'Хочет обратный звонок',
+        }),
+      });
+
+      const result = await response.json();
 
       if (result?.success) {
         setIsSuccess(true);
         reset();
         onSuccess?.();
       } else {
-        setIsError((result as any)?.message || 'Не удалось отправить заявку');
+        setIsError(result?.message || 'Не удалось отправить заявку');
       }
     } catch (e) {
       setIsError('Ошибка отправки. Попробуйте позже.');

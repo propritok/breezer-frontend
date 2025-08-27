@@ -7,6 +7,7 @@ jobs:
   build:
     name: compose
     runs-on: [self-hosted]
+    environment: production
     steps:
       - name: 🚚 Get latest code
         uses: actions/checkout@v3
@@ -15,6 +16,11 @@ jobs:
           echo "Build Started..."
           docker build --pull --rm -f "Dockerfile" -t breezer-frontend:latest "."
       - name: Docker Compose
+        env:
+          MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+          MAIL_USER: ${{ secrets.MAIL_USER }}
+          NEXT_PUBLIC_MAIL_ADDRESS: ${{ secrets.NEXT_PUBLIC_MAIL_ADDRESS }}
+          NEXT_PUBLIC_MAIL_RECIPIENTS: ${{ secrets.NEXT_PUBLIC_MAIL_RECIPIENTS }}
         run: |
           echo "Compose Started..."
           docker-compose up -d

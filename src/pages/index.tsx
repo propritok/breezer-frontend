@@ -1,7 +1,18 @@
 import { mockProductsShort } from '@/api/products';
-import { CustomerWorksSlider, ProductCard } from '@/widgets';
+import { CustomerWorksSlider } from '@/widgets';
 import { Button, Card, CardBody, Input } from '@heroui/react';
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
+
+// Динамический импорт ProductCard для избежания проблем с гидратацией
+const ProductCard = dynamic(() => import('@/widgets/ProductCard'), {
+  ssr: false,
+  loading: () => (
+    <div className='h-64 bg-gray-200 animate-pulse rounded-lg flex items-center justify-center'>
+      <span className='text-gray-500'>Загрузка...</span>
+    </div>
+  ),
+});
 
 export default function Home() {
   return (

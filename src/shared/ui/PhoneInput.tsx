@@ -2,6 +2,7 @@ import { Input } from '@heroui/react';
 import React, { useEffect, useState } from 'react';
 import { Control, Controller } from 'react-hook-form';
 import InputMask from 'react-input-mask';
+const InputMaskComponent = InputMask as any;
 
 interface PhoneInputProps {
   control: Control<any>;
@@ -26,7 +27,10 @@ export const PhoneInput: React.FC<PhoneInputProps> = ({ control, name, error }) 
       name={name}
       control={control}
       render={({ field }) => (
-        <InputMask mask='+7 (999) 999-99-99' value={field.value || ''} onChange={field.onChange}>
+        <InputMaskComponent
+          mask='+7 (999) 999-99-99'
+          value={field.value || ''}
+          onChange={field.onChange}>
           {(inputProps: any) => (
             <Input
               {...inputProps}
@@ -37,7 +41,7 @@ export const PhoneInput: React.FC<PhoneInputProps> = ({ control, name, error }) 
               errorMessage={error}
             />
           )}
-        </InputMask>
+        </InputMaskComponent>
       )}
     />
   );

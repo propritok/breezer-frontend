@@ -2,39 +2,8 @@ import { mockProductsShort } from '@/api/products';
 import { ProductCard } from '@/widgets';
 import { Button, Card, CardBody, Input } from '@heroui/react';
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
-
-const mockProducts = [
-  {
-    id: 'xiaomi-mijia-airfresh-1c',
-    name: 'Xiaomi Mijia AirFresh 1C',
-    description: 'Компактный бризер с HEPA-фильтрацией и Wi-Fi управлением',
-    price: 'от 22 900 ₽',
-    image: 'https://dummyimage.com/600x400/d6d6d6/ffffff',
-  },
-  {
-    id: 'xiaomi-mijia-airfresh-2',
-    name: 'Xiaomi Mijia AirFresh 2',
-    description: 'Бризер с автоматическим контролем качества воздуха',
-    price: 'от 27 900 ₽',
-    image: 'https://dummyimage.com/600x400/d6d6d6/ffffff',
-  },
-  {
-    id: 'tion-o2-standard',
-    name: 'Tion O2 Standard',
-    description: 'Популярный бризер с трёхступенчатой системой фильтрации',
-    price: 'от 31 990 ₽',
-    image: 'https://dummyimage.com/600x400/d6d6d6/ffffff',
-  },
-];
 
 export default function Home() {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
   return (
     <>
       <Head>
@@ -397,30 +366,15 @@ export default function Home() {
                     Получайте первыми информацию о новых моделях, акциях и полезных статьях
                   </p>
 
-                  {mounted ? (
-                    <form className='flex flex-col sm:flex-row gap-4 max-w-md mx-auto'>
-                      <Input
-                        type='email'
-                        placeholder='Введите ваш email'
-                        variant='bordered'
-                        className='flex-grow'
-                      />
-                      <Button className='bg-white text-[#A0E7E5] font-semibold'>Подписаться</Button>
-                    </form>
-                  ) : (
-                    <div className='flex flex-col sm:flex-row gap-4 max-w-md mx-auto'>
-                      <Input
-                        type='email'
-                        placeholder='Введите ваш email'
-                        variant='bordered'
-                        className='flex-grow'
-                        disabled
-                      />
-                      <Button className='bg-white text-[#A0E7E5] font-semibold' disabled>
-                        Подписаться
-                      </Button>
-                    </div>
-                  )}
+                  <form className='flex flex-col sm:flex-row gap-4 max-w-md mx-auto'>
+                    <Input
+                      type='email'
+                      placeholder='Введите ваш email'
+                      variant='bordered'
+                      className='flex-grow'
+                    />
+                    <Button className='bg-white text-[#A0E7E5] font-semibold'>Подписаться</Button>
+                  </form>
 
                   <p className='text-xs text-white mt-4 opacity-80'>
                     Мы не будем спамить. Отписаться можно в любой момент.

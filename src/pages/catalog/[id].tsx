@@ -13,49 +13,19 @@ import { getSpecsRows, SpecsTable } from '@/widgets/SpecsTable';
 import { Card, CardBody } from '@heroui/react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { mockProducts } from '../../api/products';
 
 export default function CatalogItemPage() {
   const router = useRouter();
   const { id } = router.query;
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const product: Product | undefined = useMemo(() => {
-    if (!mounted || !id) return undefined;
+    if (!id) return undefined;
     return mockProducts.find((p) => p.id === id);
-  }, [id, mounted]);
+  }, [id]);
 
   const pageTitle = `${product?.modelNameEn || ''} — купить в Propritok`;
-
-  // Показываем загрузку пока не смонтирован
-  if (!mounted) {
-    return (
-      <div className='min-h-screen flex flex-col'>
-        <main className='flex-grow'>
-          <div className='max-w-7xl mx-auto px-4 py-8'>
-            <div className='animate-pulse'>
-              <div className='h-8 bg-gray-200 rounded mb-4'></div>
-              <div className='grid grid-cols-1 lg:grid-cols-12 gap-8'>
-                <div className='lg:col-span-6'>
-                  <div className='h-96 bg-gray-200 rounded'></div>
-                </div>
-                <div className='lg:col-span-6'>
-                  <div className='h-8 bg-gray-200 rounded mb-4'></div>
-                  <div className='h-4 bg-gray-200 rounded mb-2'></div>
-                  <div className='h-4 bg-gray-200 rounded mb-4'></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </main>
-      </div>
-    );
-  }
 
   return (
     <>

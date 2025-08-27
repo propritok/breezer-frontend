@@ -10,8 +10,8 @@
       "postbuild": "next-sitemap"
    },
    "dependencies": {
-      "@hookform/resolvers": "^5.2.1",
       "@heroui/react": "2.8.2",
+      "@hookform/resolvers": "^5.2.1",
       "@pbe/react-yandex-maps": "^1.2.5",
       "@types/react-input-mask": "^3.0.6",
       "embla-carousel": "^8.1.6",
@@ -20,7 +20,7 @@
       "embla-carousel-react": "^8.1.6",
       "framer-motion": "^11.2.12",
       "intersection-observer": "^0.12.2",
-      "next": "14.2.4",
+      "next": "^15.5.2",
       "next-sitemap": "^4.2.3",
       "next-themes": "^0.3.0",
       "react": "^18",

@@ -1,6 +1,6 @@
-import { BreadcrumbItem, Breadcrumbs } from "@heroui/react";
+import { BreadcrumbItem, Breadcrumbs } from '@heroui/react';
 import { useRouter } from 'next/router';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 
 const segmentTitleMap: Record<string, string> = {
   catalog: 'Каталог',
@@ -17,11 +17,6 @@ function toTitle(segment: string): string {
 
 const SiteBreadcrumbs: React.FC = () => {
   const router = useRouter();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const pathOnly = (router.asPath || '/').split('?')[0].split('#')[0];
 
@@ -43,11 +38,6 @@ const SiteBreadcrumbs: React.FC = () => {
 
     return items;
   }, [pathOnly]);
-
-  // Не рендерим на сервере
-  if (!mounted) {
-    return null;
-  }
 
   if (pathOnly === '/') {
     return null;

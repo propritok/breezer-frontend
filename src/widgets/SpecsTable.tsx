@@ -1,6 +1,6 @@
 import { Product } from "@/entities";
 import { Button } from "@heroui/react";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 interface SpecsTableProps {
   rows: SpecRow[];
@@ -134,11 +134,6 @@ export function getSpecsRows(product?: Product): SpecRow[] {
 
 export const SpecsTable: React.FC<SpecsTableProps> = ({ rows }) => {
   const [showAll, setShowAll] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const visible = showAll ? rows : rows.slice(0, 8);
 
@@ -155,23 +150,13 @@ export const SpecsTable: React.FC<SpecsTableProps> = ({ rows }) => {
 
       {rows.length > 8 && (
         <div className="mt-4">
-          {mounted ? (
-            <Button
-              size="sm"
-              variant="bordered"
-              onPress={() => setShowAll((v) => !v)}
-            >
-              {showAll ? "Скрыть" : "Показать ещё"}
-            </Button>
-          ) : (
-            <Button
-              size="sm"
-              variant="bordered"
-              disabled
-            >
-              Показать ещё
-            </Button>
-          )}
+          <Button
+            size="sm"
+            variant="bordered"
+            onPress={() => setShowAll((v) => !v)}
+          >
+            {showAll ? "Скрыть" : "Показать ещё"}
+          </Button>
         </div>
       )}
     </div>

@@ -1,6 +1,8 @@
+'use client';
+
 import { Button, Input } from '@heroui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { PhoneInput } from './PhoneInput';
@@ -15,12 +17,6 @@ const contactFormSchema = z.object({
 type ContactFormData = z.infer<typeof contactFormSchema>;
 
 const ContactFormCTA: React.FC = () => {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
   const {
     register,
     handleSubmit,
@@ -33,19 +29,6 @@ const ContactFormCTA: React.FC = () => {
   const onSubmit = (data: ContactFormData) => {
     console.log('✅ Form submitted:', data);
   };
-
-  // Не рендерим форму на сервере
-  if (!mounted) {
-    return (
-      <div className='space-y-4'>
-        <Input label='Имя' placeholder='Введите ваше имя' variant='bordered' disabled />
-        <Input label='Телефон' placeholder='+7 (999) 123-45-67' variant='bordered' disabled />
-        <Button type='submit' color='primary' className='w-full bg-[#A0E7E5] text-white' disabled>
-          Отправить заявку
-        </Button>
-      </div>
-    );
-  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='space-y-4'>

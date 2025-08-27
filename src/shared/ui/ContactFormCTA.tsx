@@ -1,6 +1,6 @@
 'use client';
 
-import { handleCallbackForm } from '@/app/api/send-email/route';
+import { handleCallbackForm } from '@/app/api/actions/send-email';
 import { Button, Input } from '@heroui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import React, { useState } from 'react';

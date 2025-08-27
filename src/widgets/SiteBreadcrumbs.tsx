@@ -6,6 +6,7 @@ const segmentTitleMap: Record<string, string> = {
   catalog: 'Каталог',
   about: 'О нас',
   contact: 'Контакты',
+  certificates: 'Сертификаты',
 };
 
 function toTitle(segment: string): string {

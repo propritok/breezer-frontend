@@ -1,4 +1,4 @@
-import { Button } from "@heroui/react";
+import { Button } from '@heroui/react';
 import Link from 'next/link';
 import React from 'react';
 
@@ -25,6 +25,11 @@ const Header: React.FC = () => {
             </Link>
             <Link href='/contact' className='text-gray-700 hover:text-[#A0E7E5] transition-colors'>
               Контакты
+            </Link>
+            <Link
+              href='/certificates'
+              className='text-gray-700 hover:text-[#A0E7E5] transition-colors'>
+              Сертификаты
             </Link>
           </nav>
 

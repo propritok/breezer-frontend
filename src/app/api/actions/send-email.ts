@@ -37,7 +37,7 @@ export async function handleCallbackForm(
     //   Телефон: ${data.phone}`,
     // });
 
-    return { success: true };
+    return { success: true, message: 'Ваша заявка успешно отправлена!' };
   } catch (error) {
     console.error('Ошибка отправки email:', error);
     return { success: false, error: 'Ошибка сервера' };

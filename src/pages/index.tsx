@@ -1,5 +1,5 @@
 import { mockProductsShort } from '@/api/products';
-import { ProductCard } from '@/widgets';
+import { CustomerWorksSlider, ProductCard } from '@/widgets';
 import { Button, Card, CardBody, Input } from '@heroui/react';
 import Head from 'next/head';
 
@@ -156,6 +156,9 @@ export default function Home() {
               </Button>
             </div>
           </div>
+
+          {/* Слайдер работ заказчика */}
+          <CustomerWorksSlider />
 
           {/* Популярные товары */}
           <div className='max-w-7xl mx-auto px-4 py-12'>

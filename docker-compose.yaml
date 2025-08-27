@@ -2,9 +2,7 @@ version: '3'
 services:
   frontend:
     hostname: frontend
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: breezer-frontend:latest
     container_name: breezer-frontend
     restart: unless-stopped
     ports:

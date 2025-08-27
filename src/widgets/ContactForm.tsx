@@ -1,7 +1,7 @@
 import { PhoneInput } from '@/shared/ui/PhoneInput';
 import { Button, Card, CardBody, Input, Textarea } from '@heroui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -21,12 +21,6 @@ const contactFormSchema = z.object({
 type ContactFormData = z.infer<typeof contactFormSchema>;
 
 const ContactForm: React.FC = () => {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
   const {
     register,
     handleSubmit,
@@ -39,38 +33,6 @@ const ContactForm: React.FC = () => {
   const onSubmit = (data: ContactFormData) => {
     console.log('✅ Form submitted:', data);
   };
-
-  // Не рендерим форму на сервере
-  if (!mounted) {
-    return (
-      <Card>
-        <CardBody>
-          <h3 className='text-xl font-semibold mb-4'>Оставить заявку</h3>
-          <div className='space-y-4'>
-            <Input label='Имя' placeholder='Введите ваше имя' variant='bordered' disabled />
-            <Input label='Телефон' placeholder='+7 (999) 123-45-67' variant='bordered' disabled />
-            <Input
-              label='Email'
-              placeholder='example@mail.com'
-              type='email'
-              variant='bordered'
-              disabled
-            />
-            <Textarea
-              label='Сообщение'
-              placeholder='Опишите ваши потребности'
-              variant='bordered'
-              minRows={3}
-              disabled
-            />
-            <Button color='primary' className='w-full bg-[#A0E7E5] text-white' disabled>
-              Отправить заявку
-            </Button>
-          </div>
-        </CardBody>
-      </Card>
-    );
-  }
 
   return (
     <Card>

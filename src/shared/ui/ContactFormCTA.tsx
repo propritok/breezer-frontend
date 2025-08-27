@@ -1,6 +1,9 @@
+'use client';
+
+import { handleCallbackForm } from '@/app/api/actions/send-email';
 import { Button, Input } from '@heroui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { PhoneInput } from './PhoneInput';
@@ -14,38 +17,49 @@ const contactFormSchema = z.object({
 
 type ContactFormData = z.infer<typeof contactFormSchema>;
 
-const ContactFormCTA: React.FC = () => {
-  const [mounted, setMounted] = useState(false);
+interface ContactFormCTAProps {
+  action?: string;
+  onSuccess?: () => void;
+}
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
+const ContactFormCTA: React.FC<ContactFormCTAProps> = ({ action, onSuccess }) => {
   const {
     register,
     handleSubmit,
     control,
+    reset,
     formState: { errors },
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactFormSchema),
   });
 
-  const onSubmit = (data: ContactFormData) => {
-    console.log('✅ Form submitted:', data);
-  };
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isError, setIsError] = useState<string | null>(null);
 
-  // Не рендерим форму на сервере
-  if (!mounted) {
-    return (
-      <div className='space-y-4'>
-        <Input label='Имя' placeholder='Введите ваше имя' variant='bordered' disabled />
-        <Input label='Телефон' placeholder='+7 (999) 123-45-67' variant='bordered' disabled />
-        <Button type='submit' color='primary' className='w-full bg-[#A0E7E5] text-white' disabled>
-          Отправить заявку
-        </Button>
-      </div>
-    );
-  }
+  const onSubmit = async (data: ContactFormData) => {
+    setIsLoading(true);
+    setIsError(null);
+    try {
+      const result = await handleCallbackForm(
+        { name: data.name, phone: data.phone },
+        action || 'Хочет обратный звонок',
+      );
+
+      if (result?.success) {
+        setIsSuccess(true);
+        reset();
+        onSuccess?.();
+      } else {
+        setIsError((result as any)?.message || 'Не удалось отправить заявку');
+      }
+    } catch (e) {
+      setIsError('Ошибка отправки. Попробуйте позже.');
+    } finally {
+      setIsLoading(false);
+      setTimeout(() => setIsSuccess(false), 5000);
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='space-y-4'>
@@ -60,9 +74,18 @@ const ContactFormCTA: React.FC = () => {
 
       <PhoneInput control={control} name='phone' error={errors.phone?.message} />
 
-      <Button type='submit' color='primary' className='w-full bg-[#A0E7E5] text-white'>
+      <Button
+        type='submit'
+        isLoading={isLoading}
+        color='primary'
+        className='w-full bg-[#A0E7E5] text-white'>
         Отправить заявку
       </Button>
+
+      {isSuccess && (
+        <p className='text-success text-sm'>Заявка успешно отправлена. Мы свяжемся с вами.</p>
+      )}
+      {isError && <p className='text-danger text-sm'>Ошибка: {isError}</p>}
     </form>
   );
 };

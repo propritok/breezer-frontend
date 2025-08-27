@@ -1,8 +1,7 @@
 import { Button, Card, CardBody, Input, Select, SelectItem, Textarea } from '@heroui/react';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 const OrderForm: React.FC = () => {
-  const [mounted, setMounted] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -12,10 +11,6 @@ const OrderForm: React.FC = () => {
     address: '',
     message: '',
   });
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,58 +24,6 @@ const OrderForm: React.FC = () => {
       [field]: value,
     }));
   };
-
-  // Не рендерим форму на сервере
-  if (!mounted) {
-    return (
-      <Card>
-        <CardBody>
-          <h3 className='text-xl font-semibold mb-4'>Оформить заказ</h3>
-          <div className='space-y-4'>
-            <Input label='Имя' placeholder='Введите ваше имя' variant='bordered' disabled />
-            <Input label='Телефон' placeholder='+7 (999) 123-45-67' variant='bordered' disabled />
-            <Input
-              label='Email'
-              placeholder='example@mail.com'
-              variant='bordered'
-              type='email'
-              disabled
-            />
-            <Select
-              label='Выберите бризер'
-              placeholder='Выберите модель'
-              variant='bordered'
-              disabled>
-              <SelectItem key='tion'>Бризер Tion</SelectItem>
-            </Select>
-            <Select label='Нужна ли установка?' variant='bordered' disabled>
-              <SelectItem key='yes'>Да, нужна установка</SelectItem>
-            </Select>
-            <Input
-              label='Адрес установки'
-              placeholder='Введите адрес'
-              variant='bordered'
-              disabled
-            />
-            <Textarea
-              label='Дополнительная информация'
-              placeholder='Укажите дополнительные требования'
-              variant='bordered'
-              minRows={3}
-              disabled
-            />
-            <Button
-              type='submit'
-              color='primary'
-              className='w-full bg-[#A0E7E5] text-white'
-              disabled>
-              Отправить заказ
-            </Button>
-          </div>
-        </CardBody>
-      </Card>
-    );
-  }
 
   return (
     <Card>

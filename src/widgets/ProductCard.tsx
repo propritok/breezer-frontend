@@ -1,7 +1,7 @@
 import { ProductShort } from '@/entities/Product';
-import { Button, Card, CardBody, CardFooter, Image } from "@heroui/react";
+import { Button, Card, CardBody, CardFooter, Image } from '@heroui/react';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 interface ProductCardProps {
   product: ProductShort;
@@ -9,11 +9,6 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const router = useRouter();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   if (!product) return null;
 
@@ -24,7 +19,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   };
 
   return (
-    <Card isPressable={mounted} onPress={mounted ? handleOpen : undefined} className='h-full'>
+    <Card isPressable onPress={handleOpen} className='h-full'>
       <CardBody className='p-0 flex flex-col'>
         {images ? (
           <Image
@@ -48,11 +43,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </div>
       </CardBody>
       <CardFooter className='pt-0 px-6 pb-6'>
-        <Button
-          color='primary'
-          className='bg-[#A0E7E5] text-white w-full'
-          onPress={mounted ? handleOpen : undefined}
-          disabled={!mounted}>
+        <Button color='primary' className='bg-[#A0E7E5] text-white w-full' onPress={handleOpen}>
           Смотреть
         </Button>
       </CardFooter>

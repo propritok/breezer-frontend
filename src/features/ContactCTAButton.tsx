@@ -1,52 +1,38 @@
 import { ContactFormCTA } from '@/shared';
-import {
-  Button,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalHeader,
-  useDisclosure,
-} from "@heroui/react";
-import React, { useEffect, useState } from 'react';
+import { Button, Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from '@heroui/react';
+import React from 'react';
 
 type ButtonProps = React.ComponentProps<typeof Button>;
 
 interface ContactCTAButtonProps extends Omit<ButtonProps, 'children' | 'onPress'> {
   label?: string;
   modalTitle?: string;
+  action?: string;
+  onSuccess?: () => void;
 }
 
 const ContactCTAButton: React.FC<ContactCTAButtonProps> = ({
   label = 'Связаться с нами',
   modalTitle = 'Оставить заявку',
+  action,
+  onSuccess,
   ...buttonProps
 }) => {
-  const [mounted, setMounted] = useState(false);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   return (
     <>
-      <Button
-        onPress={mounted ? onOpen : undefined}
-        className='bg-[#A0E7E5] text-white'
-        disabled={!mounted}
-        {...buttonProps}>
+      <Button onPress={onOpen} className='bg-[#A0E7E5] text-white' {...buttonProps}>
         {label}
       </Button>
-      {mounted && (
-        <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement='center'>
-          <ModalContent className='p-2'>
-            <ModalHeader className='flex flex-col gap-1'>{modalTitle}</ModalHeader>
-            <ModalBody>
-              <ContactFormCTA />
-            </ModalBody>
-          </ModalContent>
-        </Modal>
-      )}
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement='center'>
+        <ModalContent className='p-2'>
+          <ModalHeader className='flex flex-col gap-1'>{modalTitle}</ModalHeader>
+          <ModalBody>
+            <ContactFormCTA action={action} onSuccess={onSuccess} />
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </>
   );
 };

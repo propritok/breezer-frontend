@@ -1,4 +1,4 @@
-import React from 'react';
+// Утилиты для работы с данными
 
 // Утилиты для работы с данными
 
@@ -36,34 +36,4 @@ export const debounce = <T extends (...args: any[]) => any>(
     clearTimeout(timeout);
     timeout = setTimeout(() => func(...args), wait);
   };
-};
-
-/**
- * Хук для проверки, что компонент смонтирован на клиенте
- * Используется для предотвращения ошибок гидратации
- */
-export const useIsMounted = () => {
-  const [mounted, setMounted] = React.useState(false);
-
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  return mounted;
-};
-
-/**
- * Хук для безопасного использования react-hook-form
- * Предотвращает ошибки гидратации с формами
- */
-export const useSafeForm = <T extends Record<string, any>>(config: any) => {
-  const mounted = useIsMounted();
-
-  const form = React.useMemo(() => {
-    if (!mounted) return null;
-    // Здесь можно добавить дополнительную логику для форм
-    return config;
-  }, [mounted, config]);
-
-  return { form, mounted };
 };

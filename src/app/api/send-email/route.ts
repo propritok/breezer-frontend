@@ -3,6 +3,16 @@ import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 import Mail from 'nodemailer/lib/mailer';
 
+const transporter = nodemailer.createTransport({
+  host: 'smtp.yandex.ru',
+  port: 587,
+  secure: false,
+  auth: {
+    user: process.env.MAIL_USER,
+    pass: process.env.MAIL_PASSWORD,
+  },
+});
+
 // Безопасный парсинг recipients с fallback
 const getRecipients = (): Mail.Address[] => {
   try {
@@ -51,16 +61,6 @@ export async function POST(request: NextRequest) {
         { status: 200 },
       );
     }
-
-    const transporter = nodemailer.createTransport({
-      host: 'smtp.yandex.ru',
-      port: 587,
-      secure: false,
-      auth: {
-        user: process.env.MAIL_USER,
-        pass: process.env.MAIL_PASSWORD,
-      },
-    });
 
     await transporter.sendMail({
       from: process.env.NEXT_PUBLIC_MAIL_ADDRESS,

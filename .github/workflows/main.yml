@@ -21,6 +21,7 @@ jobs:
           MAIL_USER: ${{ secrets.MAIL_USER }}
           NEXT_PUBLIC_MAIL_ADDRESS: ${{ secrets.NEXT_PUBLIC_MAIL_ADDRESS }}
           NEXT_PUBLIC_MAIL_RECIPIENTS: ${{ secrets.NEXT_PUBLIC_MAIL_RECIPIENTS }}
+          NEXT_PUBLIC_TELEPHONE: ${{ secrets.NEXT_PUBLIC_TELEPHONE }}
         run: |
           echo "Compose Started..."
           docker-compose up -d

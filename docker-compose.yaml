@@ -2,9 +2,7 @@ version: '3'
 services:
   frontend:
     hostname: frontend
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: breezer-frontend:latest
     container_name: breezer-frontend
     restart: unless-stopped
     ports:
@@ -16,3 +14,4 @@ services:
       - MAIL_USER=${MAIL_USER}
       - NEXT_PUBLIC_MAIL_ADDRESS=${NEXT_PUBLIC_MAIL_ADDRESS}
       - NEXT_PUBLIC_MAIL_RECIPIENTS=${NEXT_PUBLIC_MAIL_RECIPIENTS}
+      - NEXT_PUBLIC_TELEPHONE=${NEXT_PUBLIC_TELEPHONE}

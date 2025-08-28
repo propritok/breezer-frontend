@@ -50,7 +50,7 @@ const ContactPage: React.FC = () => {
                 variant='bordered'
                 minRows={3}
               />
-              <Button color='primary' className='w-full bg-[#A0E7E5] text-white'>
+              <Button color='primary' className='w-full bg-[var(--secondary-color)] text-white'>
                 Отправить заявку
               </Button>
             </form>

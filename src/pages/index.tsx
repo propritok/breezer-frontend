@@ -29,7 +29,7 @@ export default function Home() {
 
       <div className='min-h-screen flex flex-col'>
         <main className='flex-grow'>
-          <section className='bg-gradient-to-r from-[#A0E7E5] to-[#B8F0EE] py-20'>
+          <section className='bg-gradient-to-r from-[var(--secondary-color)] to-[#B8F0EE] py-20'>
             <div className='max-w-7xl mx-auto px-4'>
               <div className='text-center'>
                 <h1 className='text-5xl font-bold text-white mb-6'>Свежий воздух в каждом доме</h1>
@@ -38,7 +38,9 @@ export default function Home() {
                   гарантией качества.
                 </p>
                 <div className='flex flex-col sm:flex-row gap-4 justify-center'>
-                  <Button size='lg' className='bg-white text-[#A0E7E5] font-semibold'>
+                  <Button
+                    size='lg'
+                    className='bg-white text-[var(--secondary-color)] font-semibold'>
                     Перейти в каталог
                   </Button>
                   <Button size='lg' variant='bordered' className='border-white text-white'>
@@ -82,7 +84,7 @@ export default function Home() {
             <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 items-center'>
               <div>
                 <h2 className='text-3xl font-bold mb-6'>Гарантия</h2>
-                <h3 className='text-xl font-semibold mb-4 text-[#A0E7E5]'>
+                <h3 className='text-xl font-semibold mb-4 text-[var(--secondary-color)]'>
                   Дышите спокойно: 5 лет гарантии на монтаж вашего бризера!
                 </h3>
                 <p className='text-gray-700 leading-relaxed'>
@@ -95,7 +97,7 @@ export default function Home() {
                   связанные с установкой.
                 </p>
               </div>
-              <div className='bg-gradient-to-br from-[#A0E7E5] to-[#B8F0EE] p-8 rounded-lg'>
+              <div className='bg-gradient-to-br from-[var(--secondary-color)] to-[#B8F0EE] p-8 rounded-lg'>
                 <div className='text-center text-white'>
                   <div className='text-6xl font-bold mb-4'>5</div>
                   <div className='text-xl font-semibold mb-2'>лет гарантии</div>
@@ -134,7 +136,9 @@ export default function Home() {
                 </p>
               </div>
               <div className='bg-white p-6 rounded-lg shadow-lg'>
-                <h3 className='text-xl font-semibold mb-4 text-[#A0E7E5]'>Основные позиции</h3>
+                <h3 className='text-xl font-semibold mb-4 text-[var(--secondary-color)]'>
+                  Основные позиции
+                </h3>
                 <div className='space-y-4'>
                   <div className='flex justify-between items-center p-3 bg-gray-50 rounded'>
                     <span className='font-medium'>Монтаж Стандарт</span>
@@ -157,12 +161,12 @@ export default function Home() {
             </div>
 
             {/* Акция */}
-            <div className='bg-gradient-to-r from-[#A0E7E5] to-[#B8F0EE] p-8 rounded-lg text-center'>
+            <div className='bg-gradient-to-r from-[var(--secondary-color)] to-[#B8F0EE] p-8 rounded-lg text-center'>
               <h3 className='text-2xl font-bold text-white mb-4'>Специальное предложение!</h3>
               <p className='text-xl text-white mb-6'>
                 При покупке бризера - <span className='font-bold'>30% скидка на монтаж</span>
               </p>
-              <Button size='lg' className='bg-white text-[#A0E7E5] font-semibold'>
+              <Button size='lg' className='bg-white text-[var(--secondary-color)] font-semibold'>
                 Получить скидку
               </Button>
             </div>
@@ -196,7 +200,7 @@ export default function Home() {
               <div className='space-y-6'>
                 <Card className='shadow-sm'>
                   <CardBody>
-                    <h3 className='text-lg font-semibold mb-3 text-[#A0E7E5]'>
+                    <h3 className='text-lg font-semibold mb-3 text-[var(--secondary-color)]'>
                       Что такое бризер и зачем он нужен?
                     </h3>
                     <p className='text-gray-700'>
@@ -210,7 +214,7 @@ export default function Home() {
 
                 <Card className='shadow-sm'>
                   <CardBody>
-                    <h3 className='text-lg font-semibold mb-3 text-[#A0E7E5]'>
+                    <h3 className='text-lg font-semibold mb-3 text-[var(--secondary-color)]'>
                       Какой бризер выбрать для квартиры?
                     </h3>
                     <p className='text-gray-700'>
@@ -223,7 +227,7 @@ export default function Home() {
 
                 <Card className='shadow-sm'>
                   <CardBody>
-                    <h3 className='text-lg font-semibold mb-3 text-[#A0E7E5]'>
+                    <h3 className='text-lg font-semibold mb-3 text-[var(--secondary-color)]'>
                       Сколько времени занимает установка?
                     </h3>
                     <p className='text-gray-700'>
@@ -236,7 +240,7 @@ export default function Home() {
 
                 <Card className='shadow-sm'>
                   <CardBody>
-                    <h3 className='text-lg font-semibold mb-3 text-[#A0E7E5]'>
+                    <h3 className='text-lg font-semibold mb-3 text-[var(--secondary-color)]'>
                       Нужно ли разрешение на установку?
                     </h3>
                     <p className='text-gray-700'>
@@ -252,7 +256,7 @@ export default function Home() {
               <div className='space-y-6'>
                 <Card className='shadow-sm'>
                   <CardBody>
-                    <h3 className='text-lg font-semibold mb-3 text-[#A0E7E5]'>
+                    <h3 className='text-lg font-semibold mb-3 text-[var(--secondary-color)]'>
                       Как часто нужно менять фильтры?
                     </h3>
                     <p className='text-gray-700'>
@@ -265,7 +269,7 @@ export default function Home() {
 
                 <Card className='shadow-sm'>
                   <CardBody>
-                    <h3 className='text-lg font-semibold mb-3 text-[#A0E7E5]'>
+                    <h3 className='text-lg font-semibold mb-3 text-[var(--secondary-color)]'>
                       Бризер работает от электричества?
                     </h3>
                     <p className='text-gray-700'>
@@ -278,7 +282,7 @@ export default function Home() {
 
                 <Card className='shadow-sm'>
                   <CardBody>
-                    <h3 className='text-lg font-semibold mb-3 text-[#A0E7E5]'>
+                    <h3 className='text-lg font-semibold mb-3 text-[var(--secondary-color)]'>
                       Можно ли установить зимой?
                     </h3>
                     <p className='text-gray-700'>
@@ -291,7 +295,7 @@ export default function Home() {
 
                 <Card className='shadow-sm'>
                   <CardBody>
-                    <h3 className='text-lg font-semibold mb-3 text-[#A0E7E5]'>
+                    <h3 className='text-lg font-semibold mb-3 text-[var(--secondary-color)]'>
                       Что входит в гарантию?
                     </h3>
                     <p className='text-gray-700'>
@@ -306,7 +310,7 @@ export default function Home() {
 
             <div className='text-center mt-12'>
               <p className='text-gray-600 mb-4'>Не нашли ответ на свой вопрос?</p>
-              <Button size='lg' className='bg-[#A0E7E5] text-white font-semibold'>
+              <Button size='lg' className='bg-[var(--secondary-color)] text-white font-semibold'>
                 Задать вопрос специалисту
               </Button>
             </div>
@@ -317,7 +321,7 @@ export default function Home() {
             <div className='space-y-6'>
               <div className='flex items-center justify-between'>
                 <h3 className='text-2xl font-semibold'>Отзывы клиентов</h3>
-                <Button color='primary' className='bg-[#A0E7E5] text-white'>
+                <Button color='primary' className='bg-[var(--secondary-color)] text-white'>
                   Оставить отзыв
                 </Button>
               </div>
@@ -370,7 +374,7 @@ export default function Home() {
 
           {/* Подписка на рассылку */}
           <div className='max-w-7xl mx-auto px-4 py-12'>
-            <Card className='bg-gradient-to-r from-[#A0E7E5] to-[#B8F0EE]'>
+            <Card className='bg-gradient-to-r from-[var(--secondary-color)] to-[#B8F0EE]'>
               <CardBody>
                 <div className='text-center'>
                   <h3 className='text-2xl font-semibold text-white mb-2'>
@@ -387,7 +391,9 @@ export default function Home() {
                       variant='bordered'
                       className='flex-grow'
                     />
-                    <Button className='bg-white text-[#A0E7E5] font-semibold'>Подписаться</Button>
+                    <Button className='bg-white text-[var(--secondary-color)] font-semibold'>
+                      Подписаться
+                    </Button>
                   </form>
 
                   <p className='text-xs text-white mt-4 opacity-80'>

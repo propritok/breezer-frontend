@@ -26,7 +26,7 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({ images = [], title = ''
               key={src}
               onClick={() => setSelectedImageIdx(idx)}
               className={`border rounded-medium overflow-hidden focus:outline-none ${
-                idx === selectedImageIdx ? 'border-[#A0E7E5]' : 'border-transparent'
+                idx === selectedImageIdx ? 'border-[var(--secondary-color)]' : 'border-transparent'
               }`}>
               <Image
                 removeWrapper

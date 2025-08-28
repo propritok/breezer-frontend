@@ -1,10 +1,10 @@
-import { Button } from "@heroui/react";
+import { Button } from '@heroui/react';
 import Link from 'next/link';
 import React from 'react';
 
 const HeroSection: React.FC = () => {
   return (
-    <section className='bg-gradient-to-r from-[#A0E7E5] to-[#B8F0EE] py-20'>
+    <section className='bg-gradient-to-r from-[var(--secondary-color)] to-[#B8F0EE] py-20'>
       <div className='max-w-7xl mx-auto px-4'>
         <div className='text-center'>
           <h1 className='text-5xl font-bold text-white mb-6'>Свежий воздух в каждом доме</h1>
@@ -14,7 +14,7 @@ const HeroSection: React.FC = () => {
           </p>
           <div className='flex flex-col sm:flex-row gap-4 justify-center'>
             <Link href='/catalog'>
-              <Button size='lg' className='bg-white text-[#A0E7E5] font-semibold'>
+              <Button size='lg' className='bg-white text-[var(--secondary-color)] font-semibold'>
                 Перейти в каталог
               </Button>
             </Link>

@@ -5,7 +5,10 @@ interface LoadingSpinnerProps {
   color?: string;
 }
 
-const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ size = 'md', color = '#A0E7E5' }) => {
+const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
+  size = 'md',
+  color = 'var(--secondary-color)',
+}) => {
   const sizeClasses = {
     sm: 'w-4 h-4',
     md: 'w-8 h-8',
@@ -15,7 +18,7 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ size = 'md', color = '#
   return (
     <div className='flex justify-center items-center'>
       <div
-        className={`${sizeClasses[size]} border-2 border-gray-300 border-t-[#A0E7E5] rounded-full animate-spin`}
+        className={`${sizeClasses[size]} border-2 border-gray-300 border-t-[var(--secondary-color)] rounded-full animate-spin`}
         style={{ borderTopColor: color }}
       />
     </div>

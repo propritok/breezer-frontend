@@ -18,7 +18,7 @@ export const config = {
   theme: {
     colors: {
       primary: '#FFFFFF',
-      secondary: '#A0E7E5',
+      secondary: 'var(--secondary-color)',
       text: '#1a1a1a',
       textSecondary: '#666666',
       background: '#FFFFFF',

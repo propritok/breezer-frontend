@@ -22,7 +22,7 @@ const ContactCTAButton: React.FC<ContactCTAButtonProps> = ({
 
   return (
     <>
-      <Button onPress={onOpen} className='bg-[#A0E7E5] text-white' {...buttonProps}>
+      <Button onPress={onOpen} className='bg-[var(--secondary-color)] text-white' {...buttonProps}>
         {label}
       </Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement='center'>

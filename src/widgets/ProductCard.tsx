@@ -39,11 +39,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           {/* {description && (
             <p className="text-gray-600 text-sm">{description}</p>
           )} */}
-          <span className='mt-2 text-2xl font-bold text-[#A0E7E5]'>{price}</span>
+          <span className='mt-2 text-2xl font-bold text-[var(--secondary-color)]'>{price}</span>
         </div>
       </CardBody>
       <CardFooter className='pt-0 px-6 pb-6'>
-        <Button color='primary' className='bg-[#A0E7E5] text-white w-full' onPress={handleOpen}>
+        <Button
+          color='primary'
+          className='bg-[var(--secondary-color)] text-white w-full'
+          onPress={handleOpen}>
           Смотреть
         </Button>
       </CardFooter>

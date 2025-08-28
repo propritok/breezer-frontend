@@ -33,7 +33,7 @@ const Header: React.FC = () => {
         <div className='flex items-center justify-between'>
           {/* Logo */}
           <div className='flex items-center'>
-            <Link href='/' className='text-2xl font-bold text-[#A0E7E5]'>
+            <Link href='/' className='text-2xl font-bold text-[var(--secondary-color)]'>
               Propritok
             </Link>
           </div>
@@ -44,7 +44,7 @@ const Header: React.FC = () => {
               <Link
                 key={item.href}
                 href={item.href}
-                className='text-gray-700 hover:text-[#A0E7E5] transition-colors'>
+                className='text-gray-700 hover:text-[var(--secondary-color)] transition-colors'>
                 {item.label}
               </Link>
             ))}
@@ -52,14 +52,16 @@ const Header: React.FC = () => {
 
           {/* CTA + Burger */}
           <div className='flex items-center space-x-4'>
-            <Button color='primary' className='hidden md:inline-flex bg-[#A0E7E5] text-white'>
+            <Button
+              color='primary'
+              className='hidden md:inline-flex bg-[var(--secondary-color)] text-white'>
               Заказать звонок
             </Button>
 
             {/* Burger (mobile) */}
             <button
               type='button'
-              className='md:hidden inline-flex h-10 w-10 items-center justify-center rounded-md border border-gray-200 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#A0E7E5]'
+              className='md:hidden inline-flex h-10 w-10 items-center justify-center rounded-md border border-gray-200 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[var(--secondary-color)]'
               aria-label='Открыть меню'
               aria-expanded={open}
               onClick={() => setOpen(true)}>
@@ -90,7 +92,10 @@ const Header: React.FC = () => {
         <DrawerContent>
           <DrawerHeader className='border-b'>
             <div className='flex w-full items-center justify-between'>
-              <Link href='/' className='text-xl font-bold text-[#A0E7E5]' onClick={closeMenu}>
+              <Link
+                href='/'
+                className='text-xl font-bold text-[var(--secondary-color)]'
+                onClick={closeMenu}>
                 Propritok
               </Link>
               <Button
@@ -117,7 +122,7 @@ const Header: React.FC = () => {
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className='block rounded-md px-3 py-2 text-gray-800 hover:bg-gray-50 hover:text-[#A0E7E5] transition-colors'
+                      className='block rounded-md px-3 py-2 text-gray-800 hover:bg-gray-50 hover:text-[var(--secondary-color)] transition-colors'
                       onClick={closeMenu}>
                       {item.label}
                     </Link>
@@ -129,7 +134,7 @@ const Header: React.FC = () => {
             <div className='mt-4'>
               <Button
                 color='primary'
-                className='w-full bg-[#A0E7E5] text-white'
+                className='w-full bg-[var(--secondary-color)] text-white'
                 onPress={closeMenu}>
                 Заказать звонок
               </Button>

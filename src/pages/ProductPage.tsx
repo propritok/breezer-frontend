@@ -1,4 +1,4 @@
-import { Button, Card, CardBody } from "@heroui/react";
+import { Button, Card, CardBody } from '@heroui/react';
 import React from 'react';
 
 const ProductPage: React.FC = () => {
@@ -22,7 +22,7 @@ const ProductPage: React.FC = () => {
             </ul>
           </div>
 
-          <Button color='primary' size='lg' className='bg-[#A0E7E5] text-white'>
+          <Button color='primary' size='lg' className='bg-[var(--secondary-color)] text-white'>
             Заказать установку
           </Button>
         </div>
@@ -30,11 +30,11 @@ const ProductPage: React.FC = () => {
         <Card>
           <CardBody>
             <h3 className='text-xl font-semibold mb-4'>Стоимость установки</h3>
-            <p className='text-2xl font-bold text-[#A0E7E5] mb-4'>от 45 000 ₽</p>
+            <p className='text-2xl font-bold text-[var(--secondary-color)] mb-4'>от 45 000 ₽</p>
             <p className='text-gray-600 mb-4'>
               В стоимость входит: бризер, установка, настройка, гарантия
             </p>
-            <Button color='primary' className='w-full bg-[#A0E7E5] text-white'>
+            <Button color='primary' className='w-full bg-[var(--secondary-color)] text-white'>
               Получить консультацию
             </Button>
           </CardBody>

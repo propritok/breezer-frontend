@@ -96,7 +96,10 @@ const OrderForm: React.FC = () => {
             onChange={(e) => handleChange('message', e.target.value)}
           />
 
-          <Button type='submit' color='primary' className='w-full bg-[#A0E7E5] text-white'>
+          <Button
+            type='submit'
+            color='primary'
+            className='w-full bg-[var(--secondary-color)] text-white'>
             Отправить заказ
           </Button>
         </form>

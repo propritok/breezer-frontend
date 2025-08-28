@@ -9,7 +9,7 @@ import '../app/styles/globals.css';
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <HeroUIProvider>
-      <div>
+      <div className='pt-16'>
         <Header />
         <SiteBreadcrumbs />
         <Component {...pageProps} />

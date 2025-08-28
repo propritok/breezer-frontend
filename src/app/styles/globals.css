@@ -13,6 +13,9 @@
   /* стили для Swiper (слайдер) */
   --swiper-pagination-color: var(--secondary-color) !important;
   --swiper-navigation-color: var(--secondary-color) !important;
+  --cable-1-move: -3px; /* Первый кабель: движение влево на 8px */
+  --cable-2-move: 2px; /* Второй кабель: движение вправо на 6px */
+  --cable-3-move: -3px;
 }
 
 * {
@@ -86,5 +89,98 @@ a {
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 180 100% 85%;
+  }
+}
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Анимация при загрузке - один раз */
+.propeller {
+  animation: rotate 2s ease-in-out 1;
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+
+.logo-container:hover .propeller {
+  animation: rotate 2s ease-in-out infinite;
+}
+
+/* Анимация при скролле - когда логотип в поле зрения */
+.logo-container.in-viewport .propeller {
+  animation: rotate 2s ease-in-out 1;
+}
+
+.logo-container.in-viewport .cable-1 {
+  animation: cableMove1 1.5s ease-in-out 1;
+}
+
+.logo-container.in-viewport .cable-2 {
+  animation: cableMove2 1.8s ease-in-out 1;
+}
+
+.logo-container.in-viewport .cable-3 {
+  animation: cableMove3 2.1s ease-in-out 1;
+}
+
+/* Анимация кабелей при загрузке - один раз */
+.cable-1 {
+  animation: cableMove1 1.5s ease-in-out 1;
+}
+
+.cable-2 {
+  animation: cableMove2 1.8s ease-in-out 1;
+}
+
+.cable-3 {
+  animation: cableMove3 2.1s ease-in-out 1;
+}
+
+/* Анимация кабелей при наведении - заново */
+.logo-container:hover .cable-1 {
+  animation: cableMove1 1.5s ease-in-out infinite;
+}
+
+.logo-container:hover .cable-2 {
+  animation: cableMove2 1.8s ease-in-out infinite;
+}
+
+.logo-container:hover .cable-3 {
+  animation: cableMove3 2.1s ease-in-out infinite;
+}
+
+/* Индивидуальные анимации для каждого кабеля */
+@keyframes cableMove1 {
+  0%,
+  100% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(var(--cable-1-move));
+  }
+}
+
+@keyframes cableMove2 {
+  0%,
+  100% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(var(--cable-2-move));
+  }
+}
+
+@keyframes cableMove3 {
+  0%,
+  100% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(var(--cable-3-move));
   }
 }

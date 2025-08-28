@@ -27,6 +27,14 @@ export default function CatalogItemPage() {
 
   const pageTitle = `${product?.modelNameEn || ''} — купить в Propritok`;
 
+  const actionBuy = `хочет купить id-[${product?.id}]-${
+    product?.modelNameEn || product?.modelNameRu
+  }`;
+
+  const actionConsult = `хочет консультацию по id-[${product?.id}]-${
+    product?.modelNameEn || product?.modelNameRu
+  }`;
+
   return (
     <>
       <Head>
@@ -54,8 +62,18 @@ export default function CatalogItemPage() {
                 <ProductStatusChips inStock={product?.inStock} />
 
                 <ProductPurchaseSection price={product?.price}>
-                  <ContactCTAButton label='Купить' size='lg' variant='flat' />
-                  <ContactCTAButton label='Получить консультацию' size='lg' variant='flat' />
+                  <ContactCTAButton
+                    action={actionBuy}
+                    label='Купить'
+                    size='lg'
+                    ctaVariant='accent'
+                  />
+                  <ContactCTAButton
+                    size='lg'
+                    action={actionConsult}
+                    label='Получить консультацию'
+                    ctaVariant='secondary'
+                  />
                 </ProductPurchaseSection>
 
                 <Card>

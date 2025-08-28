@@ -1,5 +1,7 @@
 'use client';
 
+import { ContactCTAButton } from '@/features';
+import { PhoneNumber } from '@/shared';
 import { Button, Drawer, DrawerBody, DrawerContent, DrawerHeader } from '@heroui/react';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
@@ -52,11 +54,11 @@ const Header: React.FC = () => {
 
           {/* CTA + Burger */}
           <div className='flex items-center space-x-4'>
-            <Button
+            <ContactCTAButton
+              label='Заказать звонок'
               color='primary'
-              className='hidden md:inline-flex bg-[var(--secondary-color)] text-white'>
-              Заказать звонок
-            </Button>
+              className='w-full bg-[var(--secondary-color)] text-white'
+            />
 
             {/* Burger (mobile) */}
             <button
@@ -92,12 +94,10 @@ const Header: React.FC = () => {
         <DrawerContent>
           <DrawerHeader className='border-b'>
             <div className='flex w-full items-center justify-between'>
-              <Link
-                href='/'
+              <PhoneNumber
                 className='text-xl font-bold text-[var(--secondary-color)]'
-                onClick={closeMenu}>
-                Propritok
-              </Link>
+                onClick={closeMenu}
+              />
               <Button
                 variant='flat'
                 onPress={closeMenu}
@@ -132,12 +132,11 @@ const Header: React.FC = () => {
             </nav>
 
             <div className='mt-4'>
-              <Button
+              <ContactCTAButton
+                label='Заказать звонок'
                 color='primary'
                 className='w-full bg-[var(--secondary-color)] text-white'
-                onPress={closeMenu}>
-                Заказать звонок
-              </Button>
+              />
             </div>
           </DrawerBody>
         </DrawerContent>

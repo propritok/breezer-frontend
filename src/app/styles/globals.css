@@ -4,11 +4,15 @@
 
 :root {
   --primary-color: #ffffff;
-  --secondary-color: #a0e7e5;
+  --secondary-color: #33dd41e8;
   --text-primary: #1a1a1a;
   --text-secondary: #666666;
   --background-primary: #ffffff;
   --background-secondary: #f8f9fa;
+
+  /* стили для Swiper (слайдер) */
+  --swiper-pagination-color: var(--secondary-color) !important;
+  --swiper-navigation-color: var(--secondary-color) !important;
 }
 
 * {

@@ -1,4 +1,4 @@
-import { Button, Card, CardBody } from "@heroui/react";
+import { Button, Card, CardBody } from '@heroui/react';
 import React from 'react';
 
 const CatalogPage: React.FC = () => {
@@ -11,7 +11,7 @@ const CatalogPage: React.FC = () => {
           <CardBody>
             <h3 className='text-xl font-semibold mb-2'>Бризер Tion</h3>
             <p className='text-gray-600 mb-4'>Профессиональная система вентиляции</p>
-            <Button color='primary' className='bg-[#A0E7E5] text-white'>
+            <Button color='primary' className='bg-[var(--secondary-color)] text-white'>
               Подробнее
             </Button>
           </CardBody>
@@ -21,7 +21,7 @@ const CatalogPage: React.FC = () => {
           <CardBody>
             <h3 className='text-xl font-semibold mb-2'>Бризер Ballu</h3>
             <p className='text-gray-600 mb-4'>Компактная система очистки воздуха</p>
-            <Button color='primary' className='bg-[#A0E7E5] text-white'>
+            <Button color='primary' className='bg-[var(--secondary-color)] text-white'>
               Подробнее
             </Button>
           </CardBody>
@@ -31,7 +31,7 @@ const CatalogPage: React.FC = () => {
           <CardBody>
             <h3 className='text-xl font-semibold mb-2'>Бризер Vakio</h3>
             <p className='text-gray-600 mb-4'>Умная система вентиляции</p>
-            <Button color='primary' className='bg-[#A0E7E5] text-white'>
+            <Button color='primary' className='bg-[var(--secondary-color)] text-white'>
               Подробнее
             </Button>
           </CardBody>

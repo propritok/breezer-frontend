@@ -41,7 +41,10 @@ const ProductSearch: React.FC = () => {
             <option value='vakio'>Vakio</option>
           </select>
 
-          <Button color='primary' className='w-full bg-[#A0E7E5] text-white' onPress={handleSearch}>
+          <Button
+            color='primary'
+            className='w-full bg-[var(--secondary-color)] text-white'
+            onPress={handleSearch}>
             Найти
           </Button>
         </div>

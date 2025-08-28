@@ -2,6 +2,7 @@
 
 import { ContactCTAButton } from '@/features';
 import { PhoneNumber } from '@/shared';
+import Logo from '@/shared/ui/Logo';
 import { Button, Drawer, DrawerBody, DrawerContent, DrawerHeader } from '@heroui/react';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
@@ -35,6 +36,9 @@ const Header: React.FC = () => {
         <div className='flex items-center justify-between'>
           {/* Logo */}
           <div className='flex items-center'>
+            <Link href='/' className='text-2xl font-bold text-[var(--secondary-color)]'>
+              <Logo />
+            </Link>
             <Link href='/' className='text-2xl font-bold text-[var(--secondary-color)]'>
               Propritok
             </Link>

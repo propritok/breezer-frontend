@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
       <div className='max-w-7xl mx-auto px-4 py-12'>
         <div className='grid grid-cols-1 md:grid-cols-4 gap-8'>
           <div>
-            <h3 className='text-xl font-bold text-[#A0E7E5] mb-4'>Propritok</h3>
+            <h3 className='text-xl font-bold text-[var(--secondary-color)] mb-4'>Propritok</h3>
             <p className='text-gray-400'>
               Профессиональные бризеры для вашего дома. Качество, надежность, комфорт.
             </p>
@@ -17,22 +17,22 @@ const Footer: React.FC = () => {
             <h4 className='font-semibold mb-4'>Услуги</h4>
             <ul className='space-y-2 text-gray-400'>
               <li>
-                <Link href='/catalog' className='hover:text-[#A0E7E5]'>
+                <Link href='/catalog' className='hover:text-[var(--secondary-color)]'>
                   Каталог бризеров
                 </Link>
               </li>
               <li>
-                <Link href='/installation' className='hover:text-[#A0E7E5]'>
+                <Link href='/installation' className='hover:text-[var(--secondary-color)]'>
                   Установка
                 </Link>
               </li>
               <li>
-                <Link href='/service' className='hover:text-[#A0E7E5]'>
+                <Link href='/service' className='hover:text-[var(--secondary-color)]'>
                   Обслуживание
                 </Link>
               </li>
               <li>
-                <Link href='/warranty' className='hover:text-[#A0E7E5]'>
+                <Link href='/warranty' className='hover:text-[var(--secondary-color)]'>
                   Гарантия
                 </Link>
               </li>
@@ -43,22 +43,22 @@ const Footer: React.FC = () => {
             <h4 className='font-semibold mb-4'>Компания</h4>
             <ul className='space-y-2 text-gray-400'>
               <li>
-                <Link href='/about' className='hover:text-[#A0E7E5]'>
+                <Link href='/about' className='hover:text-[var(--secondary-color)]'>
                   О нас
                 </Link>
               </li>
               <li>
-                <Link href='/contact' className='hover:text-[#A0E7E5]'>
+                <Link href='/contact' className='hover:text-[var(--secondary-color)]'>
                   Контакты
                 </Link>
               </li>
               <li>
-                <Link href='/reviews' className='hover:text-[#A0E7E5]'>
+                <Link href='/reviews' className='hover:text-[var(--secondary-color)]'>
                   Отзывы
                 </Link>
               </li>
               <li>
-                <Link href='/blog' className='hover:text-[#A0E7E5]'>
+                <Link href='/blog' className='hover:text-[var(--secondary-color)]'>
                   Блог
                 </Link>
               </li>

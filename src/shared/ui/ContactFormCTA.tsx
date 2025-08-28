@@ -86,7 +86,7 @@ const ContactFormCTA: React.FC<ContactFormCTAProps> = ({ action, onSuccess }) =>
         type='submit'
         isLoading={isLoading}
         color='primary'
-        className='w-full bg-[#A0E7E5] text-white'>
+        className='w-full bg-[var(--secondary-color)] text-white'>
         Отправить заявку
       </Button>
 

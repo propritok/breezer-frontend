@@ -1,4 +1,4 @@
-import { Button, ButtonProps } from "@heroui/react";
+import { Button, ButtonProps } from '@heroui/react';
 import React from 'react';
 
 interface CustomButtonProps extends Omit<ButtonProps, 'variant'> {
@@ -14,13 +14,13 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   const getVariantClasses = () => {
     switch (variant) {
       case 'primary':
-        return 'bg-[#A0E7E5] text-white hover:bg-[#8DD8D6]';
+        return 'bg-[var(--secondary-color)] text-white hover:bg-[#8DD8D6]';
       case 'secondary':
         return 'bg-gray-200 text-gray-800 hover:bg-gray-300';
       case 'outline':
-        return 'border-2 border-[#A0E7E5] text-[#A0E7E5] hover:bg-[#A0E7E5] hover:text-white';
+        return 'border-2 border-[var(--secondary-color)] text-[var(--secondary-color)] hover:bg-[var(--secondary-color)] hover:text-white';
       default:
-        return 'bg-[#A0E7E5] text-white hover:bg-[#8DD8D6]';
+        return 'bg-[var(--secondary-color)] text-white hover:bg-[#8DD8D6]';
     }
   };
 

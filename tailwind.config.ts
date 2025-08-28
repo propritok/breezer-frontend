@@ -33,7 +33,7 @@ const config: Config = {
       },
       colors: {
         primary: '#FFFFFF',
-        secondary: '#A0E7E5',
+        secondary: 'var(--secondary-color)',
         'text-primary': '#1a1a1a',
         'text-secondary': '#666666',
         'background-primary': '#FFFFFF',

@@ -1,6 +1,8 @@
-import { mockProductsShort } from '@/api/products';
+import { ProductShort } from '@/entities/Product';
+import { productsApi } from '@/shared/api/products';
 import { CustomerWorksSlider } from '@/widgets';
 import { Button, Card, CardBody, Input } from '@heroui/react';
+import { GetServerSideProps } from 'next';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 
@@ -14,7 +16,31 @@ const ProductCard = dynamic(() => import('@/widgets/ProductCard'), {
   ),
 });
 
-export default function Home() {
+interface HomeProps {
+  popularProducts: ProductShort[];
+}
+
+export const getServerSideProps: GetServerSideProps<HomeProps> = async () => {
+  try {
+    const allProducts = await productsApi.getAllShort();
+    const popularProducts = allProducts.slice(0, 3); // Берем первые 3 продукта как популярные
+
+    return {
+      props: {
+        popularProducts,
+      },
+    };
+  } catch (error) {
+    console.error('Error fetching popular products:', error);
+    return {
+      props: {
+        popularProducts: [],
+      },
+    };
+  }
+};
+
+export default function Home({ popularProducts }: HomeProps) {
   return (
     <>
       <Head>
@@ -180,11 +206,17 @@ export default function Home() {
             <div className='flex items-center justify-center mb-8'>
               <h2 className='text-3xl font-bold'>Популярные товары</h2>
             </div>
-            <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
-              {mockProductsShort.slice(0, 3).map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
+            {popularProducts.length > 0 ? (
+              <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
+                {popularProducts.map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
+              </div>
+            ) : (
+              <div className='text-center py-12'>
+                <p className='text-gray-500 text-lg'>Товары временно недоступны</p>
+              </div>
+            )}
           </div>
 
           {/* Ответы на вопросы */}

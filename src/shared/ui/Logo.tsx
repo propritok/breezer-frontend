@@ -19,7 +19,7 @@ const Logo: React.FC<any> = () => {
           rx='3.25'
           fill='#2FB3B2'
           stroke='#129E95'
-          stroke-width='0.5'
+          strokeWidth='0.5'
         />
         <rect
           className='cable-2'
@@ -30,7 +30,7 @@ const Logo: React.FC<any> = () => {
           rx='3.25'
           fill='#2FB3B2'
           stroke='#129E95'
-          stroke-width='0.5'
+          strokeWidth='0.5'
         />
         <rect
           className='cable-3'
@@ -41,7 +41,7 @@ const Logo: React.FC<any> = () => {
           rx='3.25'
           fill='#2FB3B2'
           stroke='#129E95'
-          stroke-width='0.5'
+          strokeWidth='0.5'
         />
         <mask id='path-4-inside-1_100_5' fill='white'>
           <path d='M165.29 12C181.858 12.0003 195.29 25.4317 195.29 42V121.309C195.29 137.877 181.858 151.309 165.289 151.309H75.2891C58.7207 151.308 45.29 137.877 45.29 121.309V42C45.2901 25.4315 58.7215 12 75.29 12H165.29ZM120.29 20.6143C86.5784 20.6143 59.2492 47.9427 59.249 81.6543C59.249 115.366 86.5783 142.695 120.29 142.695C154.002 142.695 181.33 115.366 181.33 81.6543C181.33 47.9428 154.001 20.6145 120.29 20.6143Z' />

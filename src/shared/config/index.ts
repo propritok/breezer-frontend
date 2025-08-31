@@ -14,6 +14,14 @@ export const config = {
     timeout: 10000,
   },
 
+  // PocketBase настройки
+  pocketbase: {
+    baseUrl: 'https://bp.propritok.ru/api',
+    collections: {
+      breezers: 'pbc_1529214369',
+    },
+  },
+
   // Настройки темы
   theme: {
     colors: {

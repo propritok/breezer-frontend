@@ -1,19 +1,22 @@
-import { Chip } from "@heroui/react";
-import React from "react";
+import { Product } from '@/entities/Product';
+import { Chip } from '@heroui/react';
+import React from 'react';
 
 interface ProductStatusChipsProps {
-  inStock?: boolean;
+  product?: Product;
 }
 
-const ProductStatusChips: React.FC<ProductStatusChipsProps> = ({ inStock }) => {
+const ProductStatusChips: React.FC<ProductStatusChipsProps> = ({ product }) => {
+  const inStock = product?.inStock;
+
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className='flex flex-wrap gap-2'>
       {inStock ? (
-        <Chip color="success" variant="flat">
+        <Chip color='success' variant='flat'>
           В наличии
         </Chip>
       ) : (
-        <Chip color="warning" variant="flat">
+        <Chip color='warning' variant='flat'>
           Ожидается
         </Chip>
       )}

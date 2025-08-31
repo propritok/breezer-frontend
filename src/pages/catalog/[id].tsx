@@ -1,5 +1,6 @@
 import { Product } from '@/entities';
 import { ContactCTAButton } from '@/features';
+import { productsApi } from '@/shared/api/products';
 import {
   ProductDescription,
   ProductGallery,
@@ -11,19 +12,72 @@ import {
 } from '@/widgets';
 import { getSpecsRows, SpecsTable } from '@/widgets/SpecsTable';
 import { Card, CardBody } from '@heroui/react';
+import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useMemo } from 'react';
-import { mockProducts } from '../../api/products';
 
-export default function CatalogItemPage() {
+interface CatalogItemPageProps {
+  product: Product;
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  try {
+    const products = await productsApi.getAll();
+    const paths = products.map((product) => ({
+      params: { id: product.id },
+    }));
+
+    return {
+      paths,
+      fallback: 'blocking',
+    };
+  } catch (error) {
+    console.error('Error generating static paths:', error);
+    return {
+      paths: [],
+      fallback: 'blocking',
+    };
+  }
+};
+
+export const getStaticProps: GetStaticProps<CatalogItemPageProps> = async ({ params }) => {
+  try {
+    const id = params?.id as string;
+    if (!id) {
+      return {
+        notFound: true,
+      };
+    }
+
+    const product = await productsApi.getById(id);
+
+    return {
+      props: {
+        product,
+      },
+      revalidate: 3600, // Revalidate every hour
+    };
+  } catch (error) {
+    console.error('Error fetching product:', error);
+    return {
+      notFound: true,
+    };
+  }
+};
+
+export default function CatalogItemPage({ product }: CatalogItemPageProps) {
   const router = useRouter();
-  const { id } = router.query;
-
-  const product: Product | undefined = useMemo(() => {
-    if (!id) return undefined;
-    return mockProducts.find((p) => p.id === id);
-  }, [id]);
+  // Show loading state while fallback is being generated
+  if (router.isFallback) {
+    return (
+      <div className='min-h-screen flex items-center justify-center'>
+        <div className='text-center'>
+          <div className='animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900 mx-auto'></div>
+          <p className='mt-4 text-gray-600'>Загрузка...</p>
+        </div>
+      </div>
+    );
+  }
 
   const pageTitle = `${product?.modelNameEn || ''} — купить в Propritok`;
 
@@ -39,29 +93,27 @@ export default function CatalogItemPage() {
     <>
       <Head>
         <title>{pageTitle}</title>
-        <meta
-          name='description'
-          content={`Купить ${product?.modelNameEn}. Описание, характеристики и заказ.`}
-        />
+        <meta name='description' content={product?.description?.substring(0, 160) || ''} />
+        <meta property='og:title' content={pageTitle} />
+        <meta property='og:description' content={product?.description?.substring(0, 160) || ''} />
+        {product?.images?.[0] && <meta property='og:image' content={product.images[0]} />}
       </Head>
 
       <div className='min-h-screen flex flex-col'>
         <main className='flex-grow'>
           <div className='max-w-7xl mx-auto px-4 py-8'>
-            {/* Основной блок с товаром */}
-            <div className='grid grid-cols-1 lg:grid-cols-12 gap-8 mb-10'>
-              {/* Галерея слева */}
-              <div className='lg:col-span-6'>
-                <ProductGallery images={product?.images} title={product?.modelNameEn} />
+            <div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
+              {/* Левая колонка - галерея */}
+              <div>
+                <ProductGallery images={product?.images || []} />
               </div>
 
-              {/* Информация справа */}
-              <div className='lg:col-span-6 flex flex-col gap-4'>
-                <ProductHeader title={product?.modelNameEn} rating={product?.rating || 0} />
-
-                <ProductStatusChips inStock={product?.inStock} />
-
-                <ProductPurchaseSection price={product?.price}>
+              {/* Правая колонка - информация о продукте */}
+              <div className='space-y-6'>
+                <ProductHeader product={product} />
+                <ProductInfoBadges />
+                <ProductStatusChips product={product} />
+                <ProductPurchaseSection product={product}>
                   <ContactCTAButton
                     action={actionBuy}
                     label='Купить'
@@ -76,32 +128,26 @@ export default function CatalogItemPage() {
                   />
                 </ProductPurchaseSection>
 
-                <Card>
-                  <CardBody>
-                    <div className='flex items-center gap-3'>
-                      <span className='text-2xl'>🚚</span>
-                      <div>
-                        <div className='font-semibold'>Установим завтра</div>
-                        <div className='text-sm text-gray-600'>
-                          Быстрая доставка и монтаж по городу
-                        </div>
-                      </div>
-                    </div>
-                  </CardBody>
-                </Card>
-
-                <ProductInfoBadges />
+                <PromoConsultationCard />
               </div>
             </div>
 
-            <ProductDescription description={product?.description} />
-
-            <div className='mb-10'>
-              <h2 className='text-2xl font-bold mb-4'>Характеристики</h2>
-              <SpecsTable rows={getSpecsRows(product)} />
+            {/* Описание продукта */}
+            <div className='mt-12'>
+              <ProductDescription product={product} />
             </div>
 
-            <PromoConsultationCard />
+            {/* Характеристики */}
+            {product?.specs && (
+              <div className='mt-12'>
+                <Card>
+                  <CardBody>
+                    <h2 className='text-2xl font-bold mb-6'>Характеристики</h2>
+                    <SpecsTable rows={getSpecsRows(product)} />
+                  </CardBody>
+                </Card>
+              </div>
+            )}
           </div>
         </main>
       </div>

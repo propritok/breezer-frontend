@@ -1,14 +1,17 @@
+import { Product } from '@/entities/Product';
 import React from 'react';
 
 interface ProductDescriptionProps {
-  description?: string;
+  product?: Product;
   title?: string;
 }
 
 export const ProductDescription: React.FC<ProductDescriptionProps> = ({
-  description,
+  product,
   title = 'Описание',
 }) => {
+  const description = product?.description;
+
   if (!description) {
     return null;
   }

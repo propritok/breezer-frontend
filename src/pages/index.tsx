@@ -1,4 +1,6 @@
 import { ProductShort } from '@/entities/Product';
+import { Reviews } from '@/features';
+import { PocketBaseReview, reviewsApi } from '@/shared';
 import { productsApi } from '@/shared/api/products';
 import { CustomerWorksSlider } from '@/widgets';
 import { Button, Card, CardBody } from '@heroui/react';
@@ -18,16 +20,22 @@ const ProductCard = dynamic(() => import('@/widgets/ProductCard'), {
 
 interface HomeProps {
   popularProducts: ProductShort[];
+  reviews: PocketBaseReview[];
 }
 
 export const getServerSideProps: GetServerSideProps<HomeProps> = async () => {
   try {
-    const allProducts = await productsApi.getAllShort();
+    const [allProducts, reviews] = await Promise.all([
+      productsApi.getAllShort(),
+      reviewsApi.getAll(),
+    ]);
+
     const popularProducts = allProducts.slice(0, 3); // Берем первые 3 продукта как популярные
 
     return {
       props: {
         popularProducts,
+        reviews,
       },
     };
   } catch (error) {
@@ -35,12 +43,13 @@ export const getServerSideProps: GetServerSideProps<HomeProps> = async () => {
     return {
       props: {
         popularProducts: [],
+        reviews: [],
       },
     };
   }
 };
 
-export default function Home({ popularProducts }: HomeProps) {
+export default function Home({ popularProducts, reviews }: HomeProps) {
   return (
     <>
       <Head>
@@ -345,61 +354,7 @@ export default function Home({ popularProducts }: HomeProps) {
             </div>
           </div>
 
-          {/* Отзывы */}
-          <div className='max-w-7xl mx-auto px-4 py-12'>
-            <div className='space-y-6'>
-              <div className='flex items-center justify-between'>
-                <h3 className='text-2xl font-semibold'>Отзывы клиентов</h3>
-                <Button color='primary' className='bg-[var(--secondary-color)] text-white'>
-                  Оставить отзыв
-                </Button>
-              </div>
-
-              <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
-                <Card>
-                  <CardBody>
-                    <div className='flex items-center justify-between mb-2'>
-                      <h4 className='font-semibold'>Анна Петрова</h4>
-                      <span className='text-yellow-400 text-sm'>★★★★★</span>
-                    </div>
-                    <p className='text-sm text-gray-600 mb-2'>Бризер Tion O2</p>
-                    <p className='text-gray-700 mb-3'>
-                      Отличный бризер! Установили в спальне, теперь спим как младенцы.
-                    </p>
-                    <p className='text-xs text-gray-500'>2024-01-15</p>
-                  </CardBody>
-                </Card>
-
-                <Card>
-                  <CardBody>
-                    <div className='flex items-center justify-between mb-2'>
-                      <h4 className='font-semibold'>Михаил Иванов</h4>
-                      <span className='text-yellow-400 text-sm'>★★★★★</span>
-                    </div>
-                    <p className='text-sm text-gray-600 mb-2'>Бризер Ballu Air Master</p>
-                    <p className='text-gray-700 mb-3'>
-                      Профессиональная установка, все сделали быстро и качественно.
-                    </p>
-                    <p className='text-xs text-gray-500'>2024-01-10</p>
-                  </CardBody>
-                </Card>
-
-                <Card>
-                  <CardBody>
-                    <div className='flex items-center justify-between mb-2'>
-                      <h4 className='font-semibold'>Елена Сидорова</h4>
-                      <span className='text-yellow-400 text-sm'>★★★★☆</span>
-                    </div>
-                    <p className='text-sm text-gray-600 mb-2'>Бризер Vakio Base</p>
-                    <p className='text-gray-700 mb-3'>
-                      Хороший бризер, но немного шумный. В целом довольна покупкой.
-                    </p>
-                    <p className='text-xs text-gray-500'>2024-01-05</p>
-                  </CardBody>
-                </Card>
-              </div>
-            </div>
-          </div>
+          <Reviews reviews={reviews} />
 
           {/* Подписка на рассылку
           //TODO Мб понадобится позже

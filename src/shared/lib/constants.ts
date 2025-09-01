@@ -1,7 +1,7 @@
 // Константы приложения
 
 export const APP_NAME = 'Propritok';
-export const APP_DESCRIPTION = 'Профессиональные бризеры для вашего дома';
+export const APP_DESCRIPTION = 'Бризеры для вашего дома';
 
 export const COLORS = {
   primary: '#FFFFFF',

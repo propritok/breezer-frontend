@@ -29,7 +29,9 @@ const config: Config = {
         },
       },
       fontFamily: {
-        Montserrat: ['Montserrat'],
+        Montserrat: ['Montserrat', 'sans-serif'],
+        Manrope: ['Manrope', 'sans-serif'],
+        sans: ['Manrope', 'sans-serif'],
       },
       colors: {
         primary: '#FFFFFF',

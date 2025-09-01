@@ -5,6 +5,7 @@ import { PhoneNumber } from '@/shared';
 import Logo from '@/shared/ui/Logo';
 import { Button, Drawer, DrawerBody, DrawerContent, DrawerHeader } from '@heroui/react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
 type NavItem = { href: string; label: string };
@@ -19,6 +20,7 @@ const navItems: NavItem[] = [
 
 const Header: React.FC = () => {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   // Блокируем скролл боди, когда открыт Drawer
   useEffect(() => {
@@ -30,6 +32,15 @@ const Header: React.FC = () => {
 
   const closeMenu = () => setOpen(false);
 
+  // Функция для проверки активного пункта меню
+  const isActive = (href: string) => {
+    if (!pathname) return false;
+    if (href === '/') {
+      return pathname === '/';
+    }
+    return pathname.startsWith(href);
+  };
+
   return (
     <header className='fixed top-0 left-0 right-0 z-50 bg-white shadow-sm border-b'>
       <div className='max-w-7xl mx-auto px-4 py-4'>
@@ -39,20 +50,27 @@ const Header: React.FC = () => {
             <Link href='/' className='text-2xl font-bold text-[var(--secondary-color)]'>
               <Logo />
             </Link>
-            <Link href='/' className='text-2xl font-bold text-[var(--secondary-color)] uppercase'>
-              Propritok
+            <Link
+              href='/'
+              className='text-2xl font-Montserrat font-bold text-[var(--secondary-color)]'>
+              PROPRITOK
             </Link>
           </div>
 
           {/* Desktop nav */}
           <nav className='hidden md:flex items-center space-x-8'>
             {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className='text-gray-700 hover:text-[var(--secondary-color)] transition-colors'>
-                {item.label}
-              </Link>
+              <div key={item.href} className='relative'>
+                <Link
+                  href={item.href}
+                  className={`transition-colors relative ${
+                    isActive(item.href)
+                      ? 'text-[var(--secondary-color)] font-semibold'
+                      : 'text-gray-700 hover:text-[var(--secondary-color)]'
+                  }`}>
+                  {item.label}
+                </Link>
+              </div>
             ))}
           </nav>
 
@@ -126,7 +144,11 @@ const Header: React.FC = () => {
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className='block rounded-md px-3 py-2 text-gray-800 hover:bg-gray-50 hover:text-[var(--secondary-color)] transition-colors'
+                      className={`block rounded-md px-3 py-2 transition-colors font-medium ${
+                        isActive(item.href)
+                          ? 'bg-[var(--secondary-color)] text-white shadow-sm'
+                          : 'text-gray-800 hover:bg-gray-50 hover:text-[var(--secondary-color)]'
+                      }`}
                       onClick={closeMenu}>
                       {item.label}
                     </Link>

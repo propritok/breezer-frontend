@@ -9,6 +9,7 @@ import {
   ProductPurchaseSection,
   ProductStatusChips,
   PromoConsultationCard,
+  SiteBreadcrumbs,
 } from '@/widgets';
 import { getSpecsRows, SpecsTable } from '@/widgets/SpecsTable';
 import { Card, CardBody } from '@heroui/react';
@@ -98,8 +99,9 @@ export default function CatalogItemPage({ product }: CatalogItemPageProps) {
         <meta property='og:description' content={product?.description?.substring(0, 160) || ''} />
         {product?.images?.[0] && <meta property='og:image' content={product.images[0]} />}
       </Head>
-
+      <SiteBreadcrumbs pageTitle={product?.modelNameEn} />
       <div className='min-h-screen flex flex-col'>
+      
         <main className='flex-grow'>
           <div className='max-w-7xl mx-auto px-4 py-8'>
             <div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>

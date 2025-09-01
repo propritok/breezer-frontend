@@ -7,10 +7,9 @@ const HeroSection: React.FC = () => {
     <section className='bg-gradient-to-r from-[var(--secondary-color)] to-[#B8F0EE] py-20'>
       <div className='max-w-7xl mx-auto px-4'>
         <div className='text-center'>
-          <h1 className='text-5xl font-bold text-white mb-6'>Свежий воздух в каждом доме</h1>
+          <h1 className='text-5xl font-bold text-white mb-6'>Чистый воздух в каждый дом</h1>
           <p className='text-xl text-white mb-8 max-w-2xl mx-auto'>
-            Профессиональные бризеры для здорового микроклимата. Установка под ключ с гарантией
-            качества.
+            Профессиональный монтаж и продажа Бризеров для здорового микроклимата
           </p>
           <div className='flex flex-col sm:flex-row gap-4 justify-center'>
             <Link href='/catalog'>

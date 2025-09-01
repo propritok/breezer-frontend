@@ -39,7 +39,7 @@ const Header: React.FC = () => {
             <Link href='/' className='text-2xl font-bold text-[var(--secondary-color)]'>
               <Logo />
             </Link>
-            <Link href='/' className='text-2xl font-bold text-[var(--secondary-color)]'>
+            <Link href='/' className='text-2xl font-bold text-[var(--secondary-color)] uppercase'>
               Propritok
             </Link>
           </div>

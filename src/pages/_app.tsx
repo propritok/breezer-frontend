@@ -11,7 +11,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <HeroUIProvider>
       <div className='pt-16'>
         <Header />
-        <SiteBreadcrumbs />
+        
         <Component {...pageProps} />
         <Footer />
       </div>

@@ -7,9 +7,11 @@ const Footer: React.FC = () => {
       <div className='max-w-7xl mx-auto px-4 py-12'>
         <div className='grid grid-cols-1 md:grid-cols-4 gap-8'>
           <div>
-            <h3 className='text-xl font-bold text-[var(--secondary-color)] mb-4'>Propritok</h3>
+            <h3 className='text-xl font-bold text-[var(--secondary-color)] mb-4 uppercase'>
+              Propritok
+            </h3>
             <p className='text-gray-400'>
-              Профессиональные бризеры для вашего дома. Качество, надежность, комфорт.
+              Профессиональный монтаж и продажа Бризеров для здорового микроклимата.
             </p>
           </div>
 
@@ -23,12 +25,7 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <Link href='/installation' className='hover:text-[var(--secondary-color)]'>
-                  Установка
-                </Link>
-              </li>
-              <li>
-                <Link href='/service' className='hover:text-[var(--secondary-color)]'>
-                  Обслуживание
+                  Монтаж
                 </Link>
               </li>
               <li>
@@ -55,11 +52,6 @@ const Footer: React.FC = () => {
               <li>
                 <Link href='/reviews' className='hover:text-[var(--secondary-color)]'>
                   Отзывы
-                </Link>
-              </li>
-              <li>
-                <Link href='/blog' className='hover:text-[var(--secondary-color)]'>
-                  Блог
                 </Link>
               </li>
             </ul>

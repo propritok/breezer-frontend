@@ -1,7 +1,7 @@
 import { ProductShort } from '@/entities/Product';
 import { productsApi } from '@/shared/api/products';
 import { CustomerWorksSlider } from '@/widgets';
-import { Button, Card, CardBody, Input } from '@heroui/react';
+import { Button, Card, CardBody } from '@heroui/react';
 import { GetServerSideProps } from 'next';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
@@ -44,7 +44,7 @@ export default function Home({ popularProducts }: HomeProps) {
   return (
     <>
       <Head>
-        <title>Propritok - Профессиональные бризеры для вашего дома</title>
+        <title>Propritok - Бризеры для вашего дома</title>
         <meta
           name='description'
           content='Купить и установить бризер для дома. Качественная вентиляция с гарантией.'
@@ -58,10 +58,9 @@ export default function Home({ popularProducts }: HomeProps) {
           <section className='bg-gradient-to-r from-[var(--secondary-color)] to-[#B8F0EE] py-20'>
             <div className='max-w-7xl mx-auto px-4'>
               <div className='text-center'>
-                <h1 className='text-5xl font-bold text-white mb-6'>Свежий воздух в каждом доме</h1>
+                <h1 className='text-5xl font-bold text-white mb-6'>Чистый воздух в каждый дом</h1>
                 <p className='text-xl text-white mb-8 max-w-2xl mx-auto'>
-                  Профессиональные бризеры для здорового микроклимата. Установка под ключ с
-                  гарантией качества.
+                  Бризеры для здорового микроклимата. Установка под ключ с гарантией качества.
                 </p>
                 <div className='flex flex-col sm:flex-row gap-4 justify-center'>
                   <Button
@@ -80,7 +79,7 @@ export default function Home({ popularProducts }: HomeProps) {
           <div className='max-w-7xl mx-auto px-4 py-8'>
             <div className='text-center mb-12'>
               <h1 className='text-4xl font-bold mb-4'>Propritok</h1>
-              <p className='text-lg mb-6 text-gray-600'>Профессиональные бризеры для вашего дома</p>
+              <p className='text-lg mb-6 text-gray-600'>Бризеры для вашего дома</p>
             </div>
 
             <div className='grid grid-cols-1 md:grid-cols-3 gap-6 mb-12'>
@@ -118,9 +117,7 @@ export default function Home({ popularProducts }: HomeProps) {
                   команда квалифицированных специалистов выполняет монтаж бризеров в строгом
                   соответствии с техническими нормами и рекомендациями производителей. Мы настолько
                   уверены в качестве нашей работы, что предоставляем расширенную гарантию 5 лет на
-                  монтаж. Это значит, что в течение 5 лет вы можете быть спокойны за надежную работу
-                  вашего бризера, а мы возьмем на себя ответственность за любые возможные проблемы,
-                  связанные с установкой.
+                  монтаж.
                 </p>
               </div>
               <div className='bg-gradient-to-br from-[var(--secondary-color)] to-[#B8F0EE] p-8 rounded-lg'>
@@ -166,21 +163,21 @@ export default function Home({ popularProducts }: HomeProps) {
                   Основные позиции
                 </h3>
                 <div className='space-y-4'>
-                  <div className='flex justify-between items-center p-3 bg-gray-50 rounded'>
+                  <div className='flex flex-col items-start sm:flex-row sm:justify-between sm:items-center gap-1 p-3 bg-gray-50 rounded'>
                     <span className='font-medium'>Монтаж Стандарт</span>
-                    <span className='font-bold text-lg'>9 500 ₽</span>
+                    <span className='font-bold text-lg whitespace-nowrap'>9 500 ₽</span>
                   </div>
-                  <div className='flex justify-between items-center p-3 bg-gray-50 rounded'>
+                  <div className='flex flex-col items-start sm:flex-row sm:justify-between sm:items-center gap-1 p-3 bg-gray-50 rounded'>
                     <span className='font-medium'>Монтаж с улучшенным утеплением канала</span>
-                    <span className='font-bold text-lg'>11 000 ₽</span>
+                    <span className='font-bold text-lg whitespace-nowrap'>11 000 ₽</span>
                   </div>
-                  <div className='flex justify-between items-center p-3 bg-gray-50 rounded'>
+                  <div className='flex flex-col items-start sm:flex-row sm:justify-between sm:items-center gap-1 p-3 bg-gray-50 rounded'>
                     <span className='font-medium'>Монтаж с выводом в откос</span>
-                    <span className='font-bold text-lg'>14 000 ₽</span>
+                    <span className='font-bold text-lg whitespace-nowrap'>14 000 ₽</span>
                   </div>
-                  <div className='flex justify-between items-center p-3 bg-gray-50 rounded'>
+                  <div className='flex flex-col items-start sm:flex-row sm:justify-between sm:items-center gap-1 p-3 bg-gray-50 rounded'>
                     <span className='font-medium'>Монтаж бризера на готовое отверстие</span>
-                    <span className='font-bold text-lg'>6 000 ₽</span>
+                    <span className='font-bold text-lg whitespace-nowrap'>6 000 ₽</span>
                   </div>
                 </div>
               </div>
@@ -404,7 +401,8 @@ export default function Home({ popularProducts }: HomeProps) {
             </div>
           </div>
 
-          {/* Подписка на рассылку */}
+          {/* Подписка на рассылку
+          //TODO Мб понадобится позже
           <div className='max-w-7xl mx-auto px-4 py-12'>
             <Card className='bg-gradient-to-r from-[var(--secondary-color)] to-[#B8F0EE]'>
               <CardBody>
@@ -434,7 +432,7 @@ export default function Home({ popularProducts }: HomeProps) {
                 </div>
               </CardBody>
             </Card>
-          </div>
+          </div> */}
         </main>
       </div>
     </>

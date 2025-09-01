@@ -6,7 +6,7 @@ const HomePage: React.FC = () => {
     <div className='max-w-7xl mx-auto px-4 py-8'>
       <div className='text-center mb-12'>
         <h1 className='text-4xl font-bold mb-4'>Propritok</h1>
-        <p className='text-lg mb-6 text-gray-600'>Профессиональные бризеры для вашего дома</p>
+        <p className='text-lg mb-6 text-gray-600'>Бризеры для вашего дома</p>
         <Button color='primary' size='lg' className='bg-[var(--secondary-color)] text-white'>
           Перейти в каталог
         </Button>

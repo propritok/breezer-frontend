@@ -2,7 +2,7 @@ import { ProductShort } from '@/entities/Product';
 import { Reviews } from '@/features';
 import { PocketBaseReview, reviewsApi } from '@/shared';
 import { productsApi } from '@/shared/api/products';
-import { CustomerWorksSlider } from '@/widgets';
+import { CustomerWorksSlider, FAQSection } from '@/widgets';
 import { Button, Card, CardBody } from '@heroui/react';
 import { GetServerSideProps } from 'next';
 import dynamic from 'next/dynamic';
@@ -225,134 +225,8 @@ export default function Home({ popularProducts, reviews }: HomeProps) {
             )}
           </div>
 
-          {/* Ответы на вопросы */}
-          <div className='max-w-7xl mx-auto px-4 py-12 bg-gray-50'>
-            <div className='text-center mb-12'>
-              <h2 className='text-3xl font-bold mb-4'>Ответы на вопросы</h2>
-              <p className='text-lg text-gray-600'>
-                Самые частые вопросы о бризерах и их установке
-              </p>
-            </div>
-
-            <div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
-              <div className='space-y-6'>
-                <Card className='shadow-sm'>
-                  <CardBody>
-                    <h3 className='text-lg font-semibold mb-3 text-[var(--secondary-color)]'>
-                      Что такое бризер и зачем он нужен?
-                    </h3>
-                    <p className='text-gray-700'>
-                      Бризер — это компактная система приточной вентиляции, которая подает свежий
-                      воздух в помещение, очищая его от пыли, аллергенов и вредных веществ. Он
-                      особенно важен в современных герметичных домах, где естественная вентиляция
-                      недостаточна.
-                    </p>
-                  </CardBody>
-                </Card>
-
-                <Card className='shadow-sm'>
-                  <CardBody>
-                    <h3 className='text-lg font-semibold mb-3 text-[var(--secondary-color)]'>
-                      Какой бризер выбрать для квартиры?
-                    </h3>
-                    <p className='text-gray-700'>
-                      Выбор зависит от площади помещения, количества жильцов и бюджета. Для
-                      однокомнатной квартиры подойдет компактная модель, для больших помещений —
-                      более мощная. Наши специалисты помогут подобрать оптимальный вариант.
-                    </p>
-                  </CardBody>
-                </Card>
-
-                <Card className='shadow-sm'>
-                  <CardBody>
-                    <h3 className='text-lg font-semibold mb-3 text-[var(--secondary-color)]'>
-                      Сколько времени занимает установка?
-                    </h3>
-                    <p className='text-gray-700'>
-                      Стандартная установка занимает 2-3 часа. Мы используем профессиональное
-                      оборудование HILTI с пылеудалением, что позволяет минимизировать загрязнение и
-                      шум. После установки бризер сразу готов к работе.
-                    </p>
-                  </CardBody>
-                </Card>
-
-                <Card className='shadow-sm'>
-                  <CardBody>
-                    <h3 className='text-lg font-semibold mb-3 text-[var(--secondary-color)]'>
-                      Нужно ли разрешение на установку?
-                    </h3>
-                    <p className='text-gray-700'>
-                      В большинстве случаев разрешение не требуется, так как мы устанавливаем бризер
-                      в существующее вентиляционное отверстие или делаем небольшое отверстие в
-                      стене. Но в некоторых случаях (памятники архитектуры, несущие стены) может
-                      потребоваться согласование.
-                    </p>
-                  </CardBody>
-                </Card>
-              </div>
-
-              <div className='space-y-6'>
-                <Card className='shadow-sm'>
-                  <CardBody>
-                    <h3 className='text-lg font-semibold mb-3 text-[var(--secondary-color)]'>
-                      Как часто нужно менять фильтры?
-                    </h3>
-                    <p className='text-gray-700'>
-                      Частота замены зависит от качества воздуха и интенсивности использования.
-                      Обычно фильтры меняют раз в 3-6 месяцев. Наши специалисты напомнят о
-                      необходимости замены и помогут с обслуживанием.
-                    </p>
-                  </CardBody>
-                </Card>
-
-                <Card className='shadow-sm'>
-                  <CardBody>
-                    <h3 className='text-lg font-semibold mb-3 text-[var(--secondary-color)]'>
-                      Бризер работает от электричества?
-                    </h3>
-                    <p className='text-gray-700'>
-                      Да, бризер потребляет электроэнергию, но очень экономно — примерно как
-                      лампочка. Современные модели оснащены энергосберегающими вентиляторами и могут
-                      работать в автоматическом режиме.
-                    </p>
-                  </CardBody>
-                </Card>
-
-                <Card className='shadow-sm'>
-                  <CardBody>
-                    <h3 className='text-lg font-semibold mb-3 text-[var(--secondary-color)]'>
-                      Можно ли установить зимой?
-                    </h3>
-                    <p className='text-gray-700'>
-                      Да, установка возможна в любое время года. Бризеры оснащены системой подогрева
-                      воздуха, поэтому зимой в помещение будет поступать теплый воздух. Мы работаем
-                      круглый год.
-                    </p>
-                  </CardBody>
-                </Card>
-
-                <Card className='shadow-sm'>
-                  <CardBody>
-                    <h3 className='text-lg font-semibold mb-3 text-[var(--secondary-color)]'>
-                      Что входит в гарантию?
-                    </h3>
-                    <p className='text-gray-700'>
-                      Мы предоставляем 5 лет гарантии на монтаж и 2 года на оборудование. Гарантия
-                      покрывает все работы по установке, а также возможные проблемы, связанные с
-                      качеством монтажа.
-                    </p>
-                  </CardBody>
-                </Card>
-              </div>
-            </div>
-
-            <div className='text-center mt-12'>
-              <p className='text-gray-600 mb-4'>Не нашли ответ на свой вопрос?</p>
-              <Button size='lg' className='bg-[var(--secondary-color)] text-white font-semibold'>
-                Задать вопрос специалисту
-              </Button>
-            </div>
-          </div>
+          {/* FAQ секция */}
+          <FAQSection title='Ответы на вопросы' maxQuestions={8} className='py-12 bg-gray-50' />
 
           <Reviews reviews={reviews} />
 

@@ -15,7 +15,7 @@ const navItems: NavItem[] = [
   { href: '/catalog', label: 'Каталог' },
   { href: '/about', label: 'О нас' },
   { href: '/contact', label: 'Контакты' },
-  { href: '/certificates', label: 'Сертификаты' },
+  { href: '/workprocess', label: 'Процесс работы' },
 ];
 
 const Header: React.FC = () => {
@@ -52,7 +52,7 @@ const Header: React.FC = () => {
             </Link>
             <Link
               href='/'
-              className='text-2xl font-Montserrat font-bold text-[var(--secondary-color)]'>
+              className='hidden md:block text-2xl font-Montserrat font-bold text-[var(--secondary-color)]'>
               PROPRITOK
             </Link>
           </div>

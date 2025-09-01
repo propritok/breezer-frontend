@@ -8,7 +8,7 @@ const segmentTitleMap: Record<string, string> = {
   catalog: 'Каталог',
   about: 'О нас',
   contact: 'Контакты',
-  certificates: 'Сертификаты',
+  workprocess: 'Процесс работы',
   work: 'Работы',
   products: 'Продукты',
   services: 'Услуги',

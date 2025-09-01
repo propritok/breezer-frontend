@@ -1,10 +1,12 @@
-import { Card, CardBody } from "@heroui/react";
+import { Card, CardBody } from '@heroui/react';
 import React from 'react';
 
 const AboutPage: React.FC = () => {
   return (
     <div className='max-w-7xl mx-auto px-4 py-8'>
-      <h1 className='text-3xl font-bold mb-8'>О компании Propritok</h1>
+      <h1 className='text-3xl font-bold mb-8'>
+        О компании <span className='uppercase'>Propritok</span>
+      </h1>
 
       <div className='mb-8'>
         <p className='text-lg text-gray-600 mb-4'>

@@ -1,74 +1,74 @@
+// pages/reviews.tsx
+import { PocketBaseReview } from '@/shared/api/reviews';
 import { Button, Card, CardBody } from '@heroui/react';
-import React from 'react';
+import { NextPage } from 'next';
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-interface Review {
-  id: string;
-  name: string;
-  rating: number;
-  text: string;
-  date: string;
-  product: string;
+interface ReviewsPageProps {
+  reviews: PocketBaseReview[];
 }
 
-const Reviews: React.FC = () => {
-  const reviews: Review[] = [
-    {
-      id: '1',
-      name: 'Анна Петрова',
-      rating: 5,
-      text: 'Отличный бризер! Установили в спальне, теперь спим как младенцы. Воздух стал намного чище.',
-      date: '2024-01-15',
-      product: 'Бризер Tion O2',
-    },
-    {
-      id: '2',
-      name: 'Михаил Иванов',
-      rating: 5,
-      text: 'Профессиональная установка, все сделали быстро и качественно. Рекомендую!',
-      date: '2024-01-10',
-      product: 'Бризер Ballu Air Master',
-    },
-    {
-      id: '3',
-      name: 'Елена Сидорова',
-      rating: 4,
-      text: 'Хороший бризер, но немного шумный. В целом довольна покупкой.',
-      date: '2024-01-05',
-      product: 'Бризер Vakio Base',
-    },
-  ];
+const renderStars = (rating: number) => {
+  const r = Math.max(0, Math.min(5, Math.round(rating)));
+  return '★'.repeat(r) + '☆'.repeat(5 - r);
+};
 
-  const renderStars = (rating: number) => {
-    return '★'.repeat(rating) + '☆'.repeat(5 - rating);
-  };
-
+const ReviewsPage: NextPage<ReviewsPageProps> = ({ reviews = [] }) => {
   return (
-    <div className='space-y-6'>
-      <div className='flex items-center justify-between'>
-        <h3 className='text-2xl font-semibold'>Отзывы клиентов</h3>
-        <Button color='primary' className='bg-[var(--secondary-color)] text-white'>
-          Оставить отзыв
-        </Button>
-      </div>
+    <div className='max-w-7xl mx-auto px-4 py-12'>
+      <div className='space-y-6'>
+        <div className='flex items-center justify-between'>
+          <h3 className='text-2xl font-semibold'>Отзывы клиентов</h3>
+          <Button color='primary' className='bg-[var(--secondary-color)] text-white'>
+            Оставить отзыв
+          </Button>
+        </div>
 
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
-        {reviews.map((review) => (
-          <Card key={review.id}>
-            <CardBody>
-              <div className='flex items-center justify-between mb-2'>
-                <h4 className='font-semibold'>{review.name}</h4>
-                <span className='text-yellow-400 text-sm'>{renderStars(review.rating)}</span>
+        <Swiper
+          modules={[Navigation, Pagination, Autoplay]}
+          navigation
+          pagination={{ clickable: true }}
+          autoplay={{ delay: 5000, disableOnInteraction: false }}
+          loop={reviews.length > 3}
+          spaceBetween={16}
+          breakpoints={{
+            0: { slidesPerView: 1 },
+            640: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
+          }}
+          className='w-full'>
+          {reviews.length > 0 ? (
+            reviews.map((review) => (
+              <SwiperSlide key={review.id}>
+                <Card className='shadow-sm h-full'>
+                  <CardBody>
+                    <div className='flex items-center justify-between mb-2'>
+                      <h4 className='font-semibold'>{review.customer}</h4>
+                      <span className='text-yellow-400 text-sm'>{renderStars(review.mark)}</span>
+                    </div>
+                    {review.service && (
+                      <p className='text-sm text-gray-600 mb-2'>{review.service}</p>
+                    )}
+                    <p className='text-gray-700 mb-3'>{review.review}</p>
+                    <p className='text-xs text-gray-500'>
+                      {new Date(review.date || '').toLocaleDateString('ru-RU')}
+                    </p>
+                  </CardBody>
+                </Card>
+              </SwiperSlide>
+            ))
+          ) : (
+            <SwiperSlide>
+              <div className='text-center py-12'>
+                <p className='text-gray-500 text-lg'>Пока нет отзывов</p>
               </div>
-
-              <p className='text-sm text-gray-600 mb-2'>{review.product}</p>
-              <p className='text-gray-700 mb-3'>{review.text}</p>
-              <p className='text-xs text-gray-500'>{review.date}</p>
-            </CardBody>
-          </Card>
-        ))}
+            </SwiperSlide>
+          )}
+        </Swiper>
       </div>
     </div>
   );
 };
 
-export default Reviews;
+export default ReviewsPage;

@@ -4,7 +4,7 @@ export const config = {
   // Основные настройки
   app: {
     name: 'Propritok',
-    description: 'Профессиональные бризеры для вашего дома',
+    description: 'Бризеры для вашего дома',
     version: '1.0.0',
   },
 
@@ -36,7 +36,7 @@ export const config = {
 
   // Настройки SEO
   seo: {
-    defaultTitle: 'Propritok - Профессиональные бризеры',
+    defaultTitle: 'Propritok - Бризеры',
     defaultDescription: 'Купить и установить бризер для дома. Качественная вентиляция с гарантией.',
     siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
   },

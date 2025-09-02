@@ -1,4 +1,4 @@
-import { config } from '../config';
+import { config } from "../config";
 
 // Интерфейс для ответа PocketBase
 interface PocketBaseResponse<T> {
@@ -27,7 +27,9 @@ export interface PocketBaseReview {
 export const reviewsApi = {
   // Получить все отзывы
   async getAll(): Promise<PocketBaseReview[]> {
-    const response = await fetch(`${config.pocketbase.baseUrl}/collections/reviews/records`);
+    const response = await fetch(
+      `${config.pocketbase.baseUrl}/collections/reviews/records`
+    );
     if (!response.ok) {
       throw new Error(`Failed to fetch reviews: ${response.status}`);
     }

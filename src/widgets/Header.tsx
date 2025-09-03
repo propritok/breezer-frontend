@@ -1,21 +1,27 @@
-'use client';
+"use client";
 
-import { ContactCTAButton } from '@/features';
-import { PhoneNumber } from '@/shared';
-import Logo from '@/shared/ui/Logo';
-import { Button, Drawer, DrawerBody, DrawerContent, DrawerHeader } from '@heroui/react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import { ContactCTAButton } from "@/features";
+import { PhoneNumber } from "@/shared";
+import Logo from "@/shared/ui/Logo";
+import {
+  Button,
+  Drawer,
+  DrawerBody,
+  DrawerContent,
+  DrawerHeader,
+} from "@heroui/react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
 type NavItem = { href: string; label: string };
 
 const navItems: NavItem[] = [
-  { href: '/', label: 'Главная' },
-  { href: '/catalog', label: 'Каталог' },
-  { href: '/about', label: 'О нас' },
-  { href: '/contact', label: 'Контакты' },
-  { href: '/workprocess', label: 'Процесс работы' },
+  { href: "/", label: "Главная" },
+  { href: "/catalog", label: "Каталог" },
+  { href: "/about", label: "О нас" },
+  { href: "/contact", label: "Контакты" },
+  { href: "/workprocess", label: "Процесс работы" },
 ];
 
 const Header: React.FC = () => {
@@ -24,9 +30,9 @@ const Header: React.FC = () => {
 
   // Блокируем скролл боди, когда открыт Drawer
   useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : '';
+    document.body.style.overflow = open ? "hidden" : "";
     return () => {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     };
   }, [open]);
 
@@ -35,39 +41,44 @@ const Header: React.FC = () => {
   // Функция для проверки активного пункта меню
   const isActive = (href: string) => {
     if (!pathname) return false;
-    if (href === '/') {
-      return pathname === '/';
+    if (href === "/") {
+      return pathname === "/";
     }
     return pathname.startsWith(href);
   };
 
   return (
-    <header className='fixed top-0 left-0 right-0 z-50 bg-white shadow-sm border-b'>
-      <div className='max-w-7xl mx-auto px-4 py-4'>
-        <div className='flex items-center justify-between'>
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm border-b">
+      <div className="max-w-7xl mx-auto px-4 py-4">
+        <div className="flex items-center justify-between">
           {/* Logo */}
-          <div className='flex items-center'>
-            <Link href='/' className='text-2xl font-bold text-[var(--secondary-color)]'>
+          <div className="flex items-center">
+            <Link
+              href="/"
+              className="text-2xl font-bold text-[var(--secondary-color)]"
+            >
               <Logo />
             </Link>
             <Link
-              href='/'
-              className='hidden md:block text-2xl font-Montserrat font-bold text-[var(--secondary-color)]'>
+              href="/"
+              className="hidden md:block text-2xl font-Montserrat font-bold text-[var(--secondary-color)]"
+            >
               PROPRITOK
             </Link>
           </div>
 
           {/* Desktop nav */}
-          <nav className='hidden md:flex items-center space-x-8'>
+          <nav className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
-              <div key={item.href} className='relative'>
+              <div key={item.href} className="relative">
                 <Link
                   href={item.href}
                   className={`transition-colors relative ${
                     isActive(item.href)
-                      ? 'text-[var(--secondary-color)] font-semibold'
-                      : 'text-gray-700 hover:text-[var(--secondary-color)]'
-                  }`}>
+                      ? "text-[var(--secondary-color)] font-semibold"
+                      : "text-gray-700 hover:text-[var(--secondary-color)]"
+                  }`}
+                >
                   {item.label}
                 </Link>
               </div>
@@ -75,30 +86,33 @@ const Header: React.FC = () => {
           </nav>
 
           {/* CTA + Burger */}
-          <div className='flex items-center space-x-4'>
+          <div className="flex items-center space-x-4">
             <ContactCTAButton
-              label='Заказать звонок'
-              color='primary'
-              className='w-full bg-[var(--secondary-color)] text-white'
+              label="Заказать звонок"
+              color="primary"
+              formButtonLabel="Заказать звонок"
+              className="w-full bg-[var(--secondary-color)] text-white"
             />
 
             {/* Burger (mobile) */}
             <button
-              type='button'
-              className='md:hidden inline-flex h-10 w-10 items-center justify-center rounded-md border border-gray-200 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[var(--secondary-color)]'
-              aria-label='Открыть меню'
+              type="button"
+              className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-md border border-gray-200 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[var(--secondary-color)]"
+              aria-label="Открыть меню"
               aria-expanded={open}
-              onClick={() => setOpen(true)}>
-              <span className='sr-only'>Toggle menu</span>
+              onClick={() => setOpen(true)}
+            >
+              <span className="sr-only">Toggle menu</span>
               <svg
-                className='h-5 w-5'
-                viewBox='0 0 24 24'
-                fill='none'
-                stroke='currentColor'
-                strokeWidth='2'>
-                <path d='M3 6h18' />
-                <path d='M3 12h18' />
-                <path d='M3 18h18' />
+                className="h-5 w-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path d="M3 6h18" />
+                <path d="M3 12h18" />
+                <path d="M3 18h18" />
               </svg>
             </button>
           </div>
@@ -110,46 +124,50 @@ const Header: React.FC = () => {
         closeButton={<>{null}</>}
         isOpen={open}
         onOpenChange={setOpen}
-        placement='right'
-        size='sm'
-        className='md:hidden rounded-none'>
+        placement="right"
+        size="sm"
+        className="md:hidden rounded-none"
+      >
         <DrawerContent>
-          <DrawerHeader className='border-b'>
-            <div className='flex w-full items-center justify-between'>
+          <DrawerHeader className="border-b">
+            <div className="flex w-full items-center justify-between">
               <PhoneNumber
-                className='text-xl font-bold text-[var(--secondary-color)]'
+                className="text-xl font-bold text-[var(--secondary-color)]"
                 onClick={closeMenu}
               />
               <Button
-                variant='flat'
+                variant="flat"
                 onPress={closeMenu}
-                className='min-w-0 h-9 w-9 p-0'
-                aria-label='Закрыть меню'>
+                className="min-w-0 h-9 w-9 p-0"
+                aria-label="Закрыть меню"
+              >
                 <svg
-                  className='h-5 w-5'
-                  viewBox='0 0 24 24'
-                  fill='none'
-                  stroke='currentColor'
-                  strokeWidth='2'>
-                  <path d='M6 18L18 6M6 6l12 12' />
+                  className="h-5 w-5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </Button>
             </div>
           </DrawerHeader>
 
-          <DrawerBody className='px-4 py-3'>
+          <DrawerBody className="px-4 py-3">
             <nav>
-              <ul className='space-y-1'>
+              <ul className="space-y-1">
                 {navItems.map((item) => (
                   <li key={item.href}>
                     <Link
                       href={item.href}
                       className={`block rounded-md px-3 py-2 transition-colors font-medium ${
                         isActive(item.href)
-                          ? 'bg-[var(--secondary-color)] text-white shadow-sm'
-                          : 'text-gray-800 hover:bg-gray-50 hover:text-[var(--secondary-color)]'
+                          ? "bg-[var(--secondary-color)] text-white shadow-sm"
+                          : "text-gray-800 hover:bg-gray-50 hover:text-[var(--secondary-color)]"
                       }`}
-                      onClick={closeMenu}>
+                      onClick={closeMenu}
+                    >
                       {item.label}
                     </Link>
                   </li>
@@ -157,11 +175,12 @@ const Header: React.FC = () => {
               </ul>
             </nav>
 
-            <div className='mt-4'>
+            <div className="mt-4">
               <ContactCTAButton
-                label='Заказать звонок'
-                color='primary'
-                className='w-full bg-[var(--secondary-color)] text-white'
+                label="Заказать звонок"
+                color="primary"
+                formButtonLabel="Заказать звонок"
+                className="w-full bg-[var(--secondary-color)] text-white"
               />
             </div>
           </DrawerBody>

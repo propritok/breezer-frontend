@@ -1,5 +1,5 @@
-import { Product, ProductShort } from '../../entities/Product';
-import { config } from '../config';
+import { Product, ProductShort } from "../../entities/Product";
+import { config } from "../config";
 
 // Интерфейс для ответа PocketBase
 interface PocketBaseResponse<T> {
@@ -12,6 +12,7 @@ interface PocketBaseResponse<T> {
 
 // Интерфейс для продукта из PocketBase
 interface PocketBaseProduct {
+  brand: string;
   collectionId: string;
   collectionName: string;
   id: string;
@@ -27,7 +28,11 @@ interface PocketBaseProduct {
 }
 
 // Функция для преобразования изображений PocketBase в полные URL
-const getImageUrl = (collectionId: string, recordId: string, filename: string): string => {
+const getImageUrl = (
+  collectionId: string,
+  recordId: string,
+  filename: string
+): string => {
   return `${config.pocketbase.baseUrl}/files/${collectionId}/${recordId}/${filename}`;
 };
 
@@ -39,11 +44,12 @@ const transformPocketBaseProduct = (pbProduct: PocketBaseProduct): Product => {
     modelNameRu: pbProduct.modelNameRu,
     description: pbProduct.description,
     inStock: pbProduct.inStock,
-    price: `${pbProduct.price.toLocaleString('ru-RU')} руб.`,
+    price: `${pbProduct.price.toLocaleString("ru-RU")} руб.`,
     images: pbProduct.images.map((filename) =>
-      getImageUrl(pbProduct.collectionId, pbProduct.id, filename),
+      getImageUrl(pbProduct.collectionId, pbProduct.id, filename)
     ),
     specs: pbProduct.spec,
+    brand: pbProduct?.brand,
   };
 };
 
@@ -56,6 +62,7 @@ const transformToProductShort = (product: Product): ProductShort => {
     inStock: product.inStock,
     price: product.price,
     images: product.images,
+    brand: product?.brand,
   };
 };
 
@@ -63,7 +70,9 @@ export const productsApi = {
   // Получить все продукты
   async getAll(): Promise<Product[]> {
     try {
-      const response = await fetch(`${config.pocketbase.baseUrl}/collections/breezers/records`);
+      const response = await fetch(
+        `${config.pocketbase.baseUrl}/collections/breezers/records`
+      );
 
       if (!response.ok) {
         throw new Error(`Failed to fetch products: ${response.status}`);
@@ -72,7 +81,7 @@ export const productsApi = {
       const data: PocketBaseResponse<PocketBaseProduct> = await response.json();
       return data.items.map(transformPocketBaseProduct);
     } catch (error) {
-      console.error('Error fetching products:', error);
+      console.error("Error fetching products:", error);
       throw error;
     }
   },
@@ -81,7 +90,7 @@ export const productsApi = {
   async getById(id: string): Promise<Product> {
     try {
       const response = await fetch(
-        `${config.pocketbase.baseUrl}/collections/breezers/records/${id}`,
+        `${config.pocketbase.baseUrl}/collections/breezers/records/${id}`
       );
 
       if (!response.ok) {
@@ -91,7 +100,7 @@ export const productsApi = {
       const pbProduct: PocketBaseProduct = await response.json();
       return transformPocketBaseProduct(pbProduct);
     } catch (error) {
-      console.error('Error fetching product:', error);
+      console.error("Error fetching product:", error);
       throw error;
     }
   },
@@ -102,7 +111,7 @@ export const productsApi = {
       const products = await this.getAll();
       return products.map(transformToProductShort);
     } catch (error) {
-      console.error('Error fetching products short:', error);
+      console.error("Error fetching products short:", error);
       throw error;
     }
   },
@@ -117,10 +126,10 @@ export const productsApi = {
         (product) =>
           product.modelNameEn?.toLowerCase().includes(searchTerm) ||
           product.modelNameRu?.toLowerCase().includes(searchTerm) ||
-          product.description?.toLowerCase().includes(searchTerm),
+          product.description?.toLowerCase().includes(searchTerm)
       );
     } catch (error) {
-      console.error('Error searching products:', error);
+      console.error("Error searching products:", error);
       throw error;
     }
   },

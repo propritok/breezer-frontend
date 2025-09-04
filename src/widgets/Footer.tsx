@@ -1,3 +1,4 @@
+import { Adress, MailAdress, PhoneNumber } from "@/shared";
 import Link from "next/link";
 import React from "react";
 
@@ -27,22 +28,6 @@ const Footer: React.FC = () => {
                   Каталог бризеров
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="/installation"
-                  className="hover:text-[var(--secondary-color)]"
-                >
-                  Монтаж
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/warranty"
-                  className="hover:text-[var(--secondary-color)]"
-                >
-                  Гарантия
-                </Link>
-              </li>
             </ul>
           </div>
 
@@ -67,7 +52,7 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <Link
-                  href="/reviews"
+                  href="/#reviews"
                   className="hover:text-[var(--secondary-color)]"
                 >
                   Отзывы
@@ -79,9 +64,15 @@ const Footer: React.FC = () => {
           <div>
             <h4 className="font-semibold mb-4">Контакты</h4>
             <div className="space-y-2 text-gray-400">
-              <p>+79295850880</p>
-              <p>info@propritok.ru</p>
-              <p>г. Москва, ул. Примерная, д. 123</p>
+              <p>
+                <PhoneNumber />
+              </p>
+              <p>
+                <MailAdress />
+              </p>
+              <p>
+                <Adress />
+              </p>
             </div>
           </div>
         </div>

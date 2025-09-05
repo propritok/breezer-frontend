@@ -1,4 +1,4 @@
-import { Product, ProductShort } from '../../entities/Product';
+import { Product, ProductBrand, ProductShort } from '../../entities/Product';
 import { config } from '../config';
 
 // Интерфейс для ответа PocketBase
@@ -12,6 +12,7 @@ interface PocketBaseResponse<T> {
 
 // Интерфейс для продукта из PocketBase
 interface PocketBaseProduct {
+  brand: string;
   collectionId: string;
   collectionName: string;
   id: string;
@@ -39,11 +40,12 @@ const transformPocketBaseProduct = (pbProduct: PocketBaseProduct): Product => {
     modelNameRu: pbProduct.modelNameRu,
     description: pbProduct.description,
     inStock: pbProduct.inStock,
-    price: `${pbProduct.price.toLocaleString('ru-RU')} руб.`,
+    price: `${pbProduct.price} руб.`,
     images: pbProduct.images.map((filename) =>
       getImageUrl(pbProduct.collectionId, pbProduct.id, filename),
     ),
     specs: pbProduct.spec,
+    brand: pbProduct?.brand,
   };
 };
 
@@ -56,6 +58,7 @@ const transformToProductShort = (product: Product): ProductShort => {
     inStock: product.inStock,
     price: product.price,
     images: product.images,
+    brand: product?.brand,
   };
 };
 
@@ -101,6 +104,25 @@ export const productsApi = {
     try {
       const products = await this.getAll();
       return products.map(transformToProductShort);
+    } catch (error) {
+      console.error('Error fetching products short:', error);
+      throw error;
+    }
+  },
+
+  // Получить все бренды
+  async getAllBrands(): Promise<ProductBrand[]> {
+    try {
+      const response = await fetch(
+        `${config.pocketbase.baseUrl}/collections/breezers/records?fields=brand`,
+      );
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch products: ${response.status}`);
+      }
+
+      const data: PocketBaseResponse<ProductBrand> = await response.json();
+      return data.items;
     } catch (error) {
       console.error('Error fetching products short:', error);
       throw error;

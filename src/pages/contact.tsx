@@ -1,5 +1,5 @@
 import { Card, CardBody } from "@heroui/react";
-import { ContactFormCTA } from "@/shared/ui";
+import { Adress, ContactFormCTA, MailAdress, PhoneNumber } from "@/shared/ui";
 import Head from "next/head";
 
 export default function Contact() {
@@ -23,28 +23,28 @@ export default function Contact() {
                 <div className="space-y-4 mb-8">
                   <div>
                     <h3 className="font-semibold mb-2">Телефон:</h3>
-                    <p className="text-gray-600">+79295850880</p>
+                    <p className="text-gray-600">
+                      <PhoneNumber />
+                    </p>
                   </div>
 
                   <div>
                     <h3 className="font-semibold mb-2">Email:</h3>
-                    <p className="text-gray-600">info@propritok.ru</p>
+                    <p className="text-gray-600">
+                      <MailAdress />
+                    </p>
                   </div>
 
                   <div>
                     <h3 className="font-semibold mb-2">Адрес:</h3>
                     <p className="text-gray-600">
-                      г. Москва, ул. Примерная, д. 123
+                      <Adress />
                     </p>
                   </div>
 
                   <div>
                     <h3 className="font-semibold mb-2">Режим работы:</h3>
-                    <p className="text-gray-600">
-                      Пн-Пт: 9:00 - 18:00
-                      <br />
-                      Сб-Вс: 10:00 - 16:00
-                    </p>
+                    <p className="text-gray-600">Пн-Вс: 10:00 - 18:00</p>
                   </div>
 
                   <div>
@@ -66,7 +66,7 @@ export default function Contact() {
                 </div>
                 <CardBody>
                   <ContactFormCTA
-                    showMessageField
+                    showMessageField={5}
                     action="Заявка со страницы Контакты"
                   />
                 </CardBody>

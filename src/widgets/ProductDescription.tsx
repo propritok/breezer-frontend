@@ -9,6 +9,7 @@ interface ProductDescriptionProps {
 export const ProductDescription: React.FC<ProductDescriptionProps> = ({
   product,
   title = 'Описание',
+  
 }) => {
   const description = product?.description;
 

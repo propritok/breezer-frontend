@@ -19,7 +19,7 @@ type ContactFormData = z.infer<typeof contactFormSchema>;
 
 interface ContactFormCTAProps {
   action?: string;
-  showMessageField?: boolean;
+  showMessageField?: boolean | number;
   buttonLabel?: string;
   onSuccess?: () => void;
 }
@@ -103,7 +103,7 @@ const ContactFormCTA: React.FC<ContactFormCTAProps> = ({
             label="Сообщение"
             placeholder="Можно оставить пустым"
             variant="bordered"
-            minRows={3}
+            minRows={showMessageField ? (showMessageField as number) : 3}
           />
         )}
 

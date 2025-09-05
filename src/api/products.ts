@@ -16,7 +16,6 @@ export const mockProducts: Product[] = [
       'https://fresh-air.moscow/wa-data/public/shop/products/00/webp/46/27/2746/images/8199/8199.750x350.webp',
     ],
     specs: {
-      brand: 'Tion',
       view: 'Проветриватель',
       type: 'Бризер',
       modifications: ['Bio X Standard', 'Bio X SM Base', 'Bio X SM Standard'],
@@ -109,7 +108,6 @@ export const mockProducts: Product[] = [
       'https://fresh-air.moscow/wa-data/public/shop/products/00/webp/45/27/2745/images/8194/8194.750x350.webp',
     ],
     specs: {
-      brand: 'Tion',
       view: 'Проветриватель',
       type: 'Бризер',
       modifications: ['Bio X Base', 'Bio X SM Base', 'Bio X SM Standard'],
@@ -202,7 +200,6 @@ export const mockProducts: Product[] = [
       'https://fresh-air.moscow/wa-data/public/shop/products/00/webp/43/27/2743/images/8177/8177.750x350.webp',
     ],
     specs: {
-      brand: 'Tion',
       view: 'Проветриватель',
       type: 'Бризер',
       modifications: ['Bio X Base', 'Bio X SM Base', 'Bio X Standard'],
@@ -295,7 +292,6 @@ export const mockProducts: Product[] = [
       'https://fresh-air.moscow/wa-data/public/shop/products/00/webp/44/27/2744/images/8192/8192.750x350.webp',
     ],
     specs: {
-      brand: 'Tion',
       view: 'Проветриватель',
       type: 'Бризер',
       modifications: ['Bio X Base', 'Bio X SM Standard'],
@@ -388,7 +384,6 @@ export const mockProducts: Product[] = [
       'https://fresh-air.moscow/wa-data/public/shop/products/14/webp/data/public/site/img/Reshetki/Colors.webp',
     ],
     specs: {
-      brand: 'Tion',
       view: 'Проветриватель',
       type: 'Бризер',
       modifications: ['Base', 'Family', 'Magic'],
@@ -472,7 +467,6 @@ export const mockProducts: Product[] = [
       'https://fresh-air.moscow/wa-data/public/shop/products/14/webp/data/public/site/img/Reshetki/Colors.webp',
     ],
     specs: {
-      brand: 'Tion',
       view: 'Проветриватель',
       type: 'Бризер',
       modifications: ['Base', 'Family', 'Plus', 'Magic'],
@@ -557,7 +551,6 @@ export const mockProducts: Product[] = [
       'https://fresh-air.moscow/wa-data/public/shop/products/14/webp/data/public/site/img/Reshetki/Colors.webp',
     ],
     specs: {
-      brand: 'Tion',
       view: 'Проветриватель',
       type: 'Бризер',
       modifications: ['Base', 'Family', 'Plus', 'Magic'],
@@ -640,7 +633,6 @@ export const mockProducts: Product[] = [
       'https://fresh-air.moscow/wa-data/public/shop/products/14/webp/data/public/site/img/Reshetki/Colors.webp',
     ],
     specs: {
-      brand: 'Tion',
       view: 'Проветриватель',
       type: 'Бризер',
       modifications: ['Base', 'Family', 'Magic'],
@@ -725,7 +717,6 @@ export const mockProducts: Product[] = [
       'https://fresh-air.moscow/wa-data/public/shop/products/14/webp/data/public/site/img/Reshetki/Colors.webp',
     ],
     specs: {
-      brand: 'Tion',
       view: 'Бризер',
       dimensionsMm: '514 × 454 × 163',
       airflowM3h: [120],
@@ -798,7 +789,6 @@ export const mockProducts: Product[] = [
       'https://fresh-air.moscow/wa-data/public/shop/products/14/webp/data/public/site/img/Reshetki/Colors.webp',
     ],
     specs: {
-      brand: 'Tion',
       view: 'Проветриватель',
       type: 'Бризер',
       modifications: ['Lite', 'base', 'standart', 'mac', 'top'],
@@ -887,7 +877,6 @@ export const mockProducts: Product[] = [
       'https://fresh-air.moscow/wa-data/public/shop/products/14/webp/data/public/site/img/Reshetki/Colors.webp',
     ],
     specs: {
-      brand: 'Tion',
       type: 'Бризер',
       modifications: ['Standart'],
       dimensionsMm: '514х454х163',
@@ -949,7 +938,6 @@ export const mockProducts: Product[] = [
       'https://fresh-air.moscow/wa-data/public/shop/products/14/webp/data/public/site/img/Reshetki/Colors.webp',
     ],
     specs: {
-      brand: 'Tion',
       dimensionsMm: '514 × 454 × 163',
       airflowM3h: [120],
       noiseLevelDb: {
@@ -1004,7 +992,6 @@ export const mockProducts: Product[] = [
       'https://fresh-air.moscow/wa-data/public/shop/products/14/webp/data/public/site/img/Reshetki/Colors.webp',
     ],
     specs: {
-      brand: 'Tion',
       view: 'Проветриватель',
       type: 'Бризер',
       modifications: ['ECO'],
@@ -1093,7 +1080,6 @@ export const mockProducts: Product[] = [
       'https://fresh-air.moscow/wa-data/public/shop/products/00/webp/62/26/2662/images/8554/8554.750x350.webp',
     ],
     specs: {
-      brand: 'Ballu',
       view: 'Бризер',
       modifications: ['Белый или серый цвет'],
       dimensionsMm: '264х352х160',
@@ -1172,7 +1158,6 @@ export const mockProducts: Product[] = [
       'https://fresh-air.moscow/wa-data/public/shop/products/14/webp/data/public/site/img/Reshetki/Colors.webp',
     ],
     specs: {
-      brand: 'Ballu',
       view: 'Бризер',
       dimensionsMm: '575х445х190',
       airflowM3h: [200],
@@ -1245,7 +1230,6 @@ export const mockProducts: Product[] = [
       'https://fresh-air.moscow/wa-data/public/shop/products/14/webp/data/public/site/img/Reshetki/Colors.webp',
     ],
     specs: {
-      brand: 'Ballu',
       view: 'Бризер',
       dimensionsMm: '358х262х140',
       airflowM3h: [],
@@ -1337,7 +1321,6 @@ export const mockProducts: Product[] = [
       'https://fresh-air.moscow/wa-data/public/shop/products/14/webp/data/public/site/img/Reshetki/Colors.webp',
     ],
     specs: {
-      brand: 'Royal Clima',
       view: 'Приточная установка',
       type: 'Аэрогивер',
       dimensionsMm: '620х400х135',
@@ -1459,7 +1442,6 @@ export const mockProducts: Product[] = [
       airflowM3h: [40, 58, 75],
       noiseLevelDb: { min: 24, max: 36 },
       type: 'децентрализованная',
-      brand: 'Royal Clima Brezza',
       filterClasses: ['Pre-filter', 'F7', 'угольный'],
       outdoorTempRange: '-40...+50',
       voltage: 230,

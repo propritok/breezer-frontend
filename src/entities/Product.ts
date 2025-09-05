@@ -7,8 +7,8 @@ export interface Product {
   inStock?: boolean;
   price?: string;
   images?: string[];
+  brand?: string;
   specs?: {
-    brand?: string;
     view?: string;
     type?: string;
     modifications?: string[];
@@ -84,20 +84,6 @@ export interface Product {
   };
 }
 
-export interface ProductCategory {
-  id: string;
-  name: string;
-  description: string;
-  slug: string;
-}
-
-export interface ProductBrand {
-  id: string;
-  name: string;
-  logo: string;
-  description: string;
-}
-
 export interface ProductShort {
   id?: string;
   modelNameEn?: string;
@@ -106,4 +92,9 @@ export interface ProductShort {
   inStock?: boolean;
   price?: string;
   images?: string[];
+  brand?: string;
+}
+
+export interface ProductBrand {
+  brand: string;
 }

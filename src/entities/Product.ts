@@ -84,20 +84,6 @@ export interface Product {
   };
 }
 
-export interface ProductCategory {
-  id: string;
-  name: string;
-  description: string;
-  slug: string;
-}
-
-export interface ProductBrand {
-  id: string;
-  name: string;
-  logo: string;
-  description: string;
-}
-
 export interface ProductShort {
   id?: string;
   modelNameEn?: string;
@@ -107,4 +93,8 @@ export interface ProductShort {
   price?: string;
   images?: string[];
   brand?: string;
+}
+
+export interface ProductBrand {
+  brand: string;
 }

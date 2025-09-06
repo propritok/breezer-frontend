@@ -1,9 +1,9 @@
 import { ProductShort } from "@/entities/Product";
-import { Reviews } from "@/features";
+import { ContactCTAButton, Reviews } from "@/features";
 import { PocketBaseReview, reviewsApi } from "@/shared";
 import { productsApi } from "@/shared/api/products";
 import { CustomerWorksSlider, FAQSection } from "@/widgets";
-import { Button, Card, CardBody } from "@heroui/react";
+import { Button, Card, CardBody, Link } from "@heroui/react";
 import { GetServerSideProps } from "next";
 import dynamic from "next/dynamic";
 import Head from "next/head";
@@ -75,19 +75,21 @@ export default function Home({ popularProducts, reviews }: HomeProps) {
                   гарантией качества.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button
-                    size="lg"
-                    className="bg-white text-[var(--secondary-color)] font-semibold"
-                  >
-                    Перейти в каталог
-                  </Button>
-                  <Button
+                  <Link href="/catalog">
+                    <Button
+                      size="lg"
+                      className="bg-white text-[var(--secondary-color)] font-semibold"
+                    >
+                      Перейти в каталог
+                    </Button>
+                  </Link>
+
+                  <ContactCTAButton
+                    label="Получить консультацию"
                     size="lg"
                     variant="bordered"
                     className="border-white text-white"
-                  >
-                    Получить консультацию
-                  </Button>
+                  />
                 </div>
               </div>
             </div>

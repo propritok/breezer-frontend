@@ -1,15 +1,19 @@
 FROM node:18-alpine
 WORKDIR /app
 
-# build args для клиентских переменных (используются во время yarn build)
+# build-args (получают значения из compose -> build.args)
 ARG NEXT_PUBLIC_MAIL_ADDRESS
 ARG NEXT_PUBLIC_MAIL_RECIPIENTS
 ARG NEXT_PUBLIC_TELEPHONE
+ARG NEXT_PUBLIC_API_URL
+ARG NEXT_PUBLIC_SITE_URL
 
-# Сделаем их доступными как ENV в процессе сборки
+# делаем их ENV в процессе сборки, чтобы Next видела их при `yarn build`
 ENV NEXT_PUBLIC_MAIL_ADDRESS=${NEXT_PUBLIC_MAIL_ADDRESS}
 ENV NEXT_PUBLIC_MAIL_RECIPIENTS=${NEXT_PUBLIC_MAIL_RECIPIENTS}
 ENV NEXT_PUBLIC_TELEPHONE=${NEXT_PUBLIC_TELEPHONE}
+ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+ENV NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL}
 
 COPY package.json yarn.lock* ./
 RUN yarn install --frozen-lockfile

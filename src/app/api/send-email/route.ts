@@ -32,17 +32,23 @@ const getRecipients = (): Mail.Address[] => {
 export async function POST(request: NextRequest) {
   try {
     // Отладочные логи для проверки переменных окружения
-    console.log('=== Environment Variables Debug ===');
-    console.log('MAIL_USER:', process.env.MAIL_USER ? 'SET' : 'NOT SET');
-    console.log('NEXT_PUBLIC_MAIL_ADDRESS:', process.env.NEXT_PUBLIC_MAIL_ADDRESS);
-    console.log('NEXT_PUBLIC_MAIL_RECIPIENTS:', process.env.NEXT_PUBLIC_MAIL_RECIPIENTS);
-    console.log('NEXT_PUBLIC_TELEPHONE:', process.env.NEXT_PUBLIC_TELEPHONE);
-    console.log('NEXT_PUBLIC_API_URL:', process.env.NEXT_PUBLIC_API_URL);
-    console.log('NEXT_PUBLIC_SITE_URL:', process.env.NEXT_PUBLIC_SITE_URL);
-    console.log('=====================================');
+    console.log("=== Environment Variables Debug ===");
+    console.log("MAIL_USER:", process.env.MAIL_USER ? "SET" : "NOT SET");
+    console.log(
+      "NEXT_PUBLIC_MAIL_ADDRESS:",
+      process.env.NEXT_PUBLIC_MAIL_ADDRESS
+    );
+    console.log(
+      "NEXT_PUBLIC_MAIL_RECIPIENTS:",
+      process.env.NEXT_PUBLIC_MAIL_RECIPIENTS
+    );
+    console.log("NEXT_PUBLIC_TELEPHONE:", process.env.NEXT_PUBLIC_TELEPHONE);
+    console.log("NEXT_PUBLIC_API_URL:", process.env.NEXT_PUBLIC_API_URL);
+    console.log("NEXT_PUBLIC_SITE_URL:", process.env.NEXT_PUBLIC_SITE_URL);
+    console.log("=====================================");
 
     const body = await request.json();
-    const { name, phone, message, action = 'Хочет обратный звонок' } = body;
+    const { name, phone, message, action = "Хочет обратный звонок" } = body;
 
     if (!phone) {
       return NextResponse.json(
@@ -52,11 +58,8 @@ export async function POST(request: NextRequest) {
     }
 
     // Проверяем наличие необходимых переменных окружения
-    if (
-      !process.env.MAIL_USER ||
-      !process.env.MAIL_PASSWORD 
-    ) {
-      console.warn('Email переменные окружения не настроены');
+    if (!process.env.MAIL_USER || !process.env.MAIL_PASSWORD) {
+      console.warn("Email переменные окружения не настроены");
       return NextResponse.json(
         { success: true, message: "Ваша заявка успешно отправлена!" },
         { status: 200 }
@@ -65,22 +68,22 @@ export async function POST(request: NextRequest) {
 
     const recipients = ["propritok@yandex.ru"];
     if (recipients.length === 0) {
-      console.warn('Получатели email не настроены');
+      console.warn("Получатели email не настроены");
       return NextResponse.json(
-        { success: true, message: 'Ваша заявка успешно отправлена!' },
-        { status: 200 },
+        { success: true, message: "Ваша заявка успешно отправлена!" },
+        { status: 200 }
       );
     }
 
     await transporter.sendMail({
       from: process.env.NEXT_PUBLIC_MAIL_ADDRESS,
       to: recipients,
-      subject: 'Заявка с сайта Propritok',
+      subject: "Заявка с сайта Propritok",
       text: `
-      Заявка от ${format(new Date(), 'dd.MM.yyyy HH:mm')}
+      Заявка от ${format(new Date(), "dd.MM.yyyy HH:mm")}
 
       Действие: ${action}
-      Имя: ${name || 'Не указано'}
+      Имя: ${name || "Не указано"}
       Телефон: ${phone}
       Сообщение: ${message}`,
     });
@@ -88,11 +91,14 @@ export async function POST(request: NextRequest) {
     await leadsApi.createLead({ name, phone, message, action });
 
     return NextResponse.json(
-      { success: true, message: 'Ваша заявка успешно отправлена!' },
-      { status: 200 },
+      { success: true, message: "Ваша заявка успешно отправлена!" },
+      { status: 200 }
     );
   } catch (error) {
-    console.error('Ошибка отправки email:', error);
-    return NextResponse.json({ success: false, error: 'Ошибка сервера' }, { status: 500 });
+    console.error("Ошибка отправки email:", error);
+    return NextResponse.json(
+      { success: false, error: "Ошибка сервера" },
+      { status: 500 }
+    );
   }
 }

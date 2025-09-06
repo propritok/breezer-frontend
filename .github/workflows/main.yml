@@ -14,7 +14,13 @@ jobs:
       - name: Docker Build image
         run: |
           echo "Build Started..."
-          docker build --pull --rm -f "Dockerfile" -t breezer-frontend:latest "."
+          docker build --pull --rm -f "Dockerfile" -t breezer-frontend:latest \
+            --build-arg NEXT_PUBLIC_MAIL_ADDRESS="$NEXT_PUBLIC_MAIL_ADDRESS" \
+            --build-arg NEXT_PUBLIC_MAIL_RECIPIENTS="$NEXT_PUBLIC_MAIL_RECIPIENTS" \
+            --build-arg NEXT_PUBLIC_TELEPHONE="$NEXT_PUBLIC_TELEPHONE" \
+            --build-arg MAIL_PASSWORD="$MAIL_PASSWORD" \
+            --build-arg MAIL_PASSWORD="$MAIL_PASSWORD" \
+            .
       - name: Docker Compose
         env:
           MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}

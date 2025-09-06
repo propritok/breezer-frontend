@@ -11,16 +11,34 @@ jobs:
     steps:
       - name: 🚚 Get latest code
         uses: actions/checkout@v3
+      - name: Create .env file
+        env:
+          MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+          MAIL_USER: ${{ secrets.MAIL_USER }}
+          NEXT_PUBLIC_MAIL_ADDRESS: ${{ secrets.NEXT_PUBLIC_MAIL_ADDRESS }}
+          NEXT_PUBLIC_MAIL_RECIPIENTS: ${{ secrets.NEXT_PUBLIC_MAIL_RECIPIENTS }}
+          NEXT_PUBLIC_TELEPHONE: ${{ secrets.NEXT_PUBLIC_TELEPHONE }}
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+          NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
+          SITE_URL: ${{ secrets.SITE_URL }}
+        run: |
+          echo "Creating .env file..."
+          cat > .env << EOF
+          MAIL_PASSWORD=$MAIL_PASSWORD
+          MAIL_USER=$MAIL_USER
+          NEXT_PUBLIC_MAIL_ADDRESS=$NEXT_PUBLIC_MAIL_ADDRESS
+          NEXT_PUBLIC_MAIL_RECIPIENTS=$NEXT_PUBLIC_MAIL_RECIPIENTS
+          NEXT_PUBLIC_TELEPHONE=$NEXT_PUBLIC_TELEPHONE
+          NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
+          NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
+          SITE_URL=$SITE_URL
+          EOF
+          echo ".env file created successfully"
+          cat .env
       - name: Docker Build image
         run: |
           echo "Build Started..."
-          docker build --pull --rm -f "Dockerfile" -t breezer-frontend:latest \
-            --build-arg NEXT_PUBLIC_MAIL_ADDRESS="$NEXT_PUBLIC_MAIL_ADDRESS" \
-            --build-arg NEXT_PUBLIC_MAIL_RECIPIENTS="$NEXT_PUBLIC_MAIL_RECIPIENTS" \
-            --build-arg NEXT_PUBLIC_TELEPHONE="$NEXT_PUBLIC_TELEPHONE" \
-            --build-arg MAIL_PASSWORD="$MAIL_PASSWORD" \
-            --build-arg MAIL_PASSWORD="$MAIL_PASSWORD" \
-            .
+          docker build --pull --rm -f "Dockerfile" -t breezer-frontend:latest .
       - name: Docker Compose
         env:
           MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
@@ -34,4 +52,4 @@ jobs:
       - name: Check environment variables
         run: |
           echo "Checking env vars in container..."
-          docker run --rm -e NEXT_PUBLIC_MAIL_ADDRESS="${{ secrets.NEXT_PUBLIC_MAIL_ADDRESS }}" breezer-frontend:latest printenv | grep NEXT_PUBLIC      
+          docker run --rm -e NEXT_PUBLIC_MAIL_ADDRESS="${{ secrets.NEXT_PUBLIC_MAIL_ADDRESS }}" breezer-frontend:latest printenv | grep NEXT_PUBLIC

@@ -31,3 +31,7 @@ jobs:
         run: |
           echo "Compose Started..."
           docker-compose up -d
+      - name: Check environment variables
+        run: |
+          echo "Checking env vars in container..."
+          docker run --rm -e NEXT_PUBLIC_MAIL_ADDRESS="${{ secrets.NEXT_PUBLIC_MAIL_ADDRESS }}" breezer-frontend:latest printenv | grep NEXT_PUBLIC      

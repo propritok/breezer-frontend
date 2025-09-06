@@ -1,17 +1,21 @@
-version: '3'
+version: "3"
 services:
   frontend:
+    container_name: breezer-frontend
     hostname: frontend
     image: breezer-frontend:latest
-    container_name: breezer-frontend
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_MAIL_ADDRESS: ${NEXT_PUBLIC_MAIL_ADDRESS}
+        NEXT_PUBLIC_MAIL_RECIPIENTS: ${NEXT_PUBLIC_MAIL_RECIPIENTS}
+        NEXT_PUBLIC_TELEPHONE: ${NEXT_PUBLIC_TELEPHONE}
     restart: unless-stopped
     ports:
-      - '3000:3000'
+      - "3000:3000"
     environment:
-      - NODE_ENV=production
-      - NEXT_TELEMETRY_DISABLED=1
-      - MAIL_PASSWORD=${MAIL_PASSWORD}
-      - MAIL_USER=${MAIL_USER}
-      - NEXT_PUBLIC_MAIL_ADDRESS=${NEXT_PUBLIC_MAIL_ADDRESS}
-      - NEXT_PUBLIC_MAIL_RECIPIENTS=${NEXT_PUBLIC_MAIL_RECIPIENTS}
-      - NEXT_PUBLIC_TELEPHONE=${NEXT_PUBLIC_TELEPHONE}
+      NODE_ENV: production
+      NEXT_TELEMETRY_DISABLED: "1"
+      MAIL_PASSWORD: ${MAIL_PASSWORD}
+      MAIL_USER: ${MAIL_USER}

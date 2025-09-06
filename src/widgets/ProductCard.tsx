@@ -26,7 +26,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             src={images[0]}
             alt={modelNameEn}
             removeWrapper
-            className='w-full h-48 object-contain rounded-t-medium'
+            className='w-full h-48 object-contain rounded-t-medium bg-white'
           />
         ) : (
           <div className='w-full h-48 bg-gray-200 rounded-t-medium flex items-center justify-center'>

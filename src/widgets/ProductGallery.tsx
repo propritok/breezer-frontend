@@ -18,7 +18,7 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({ images = [], title = ''
           removeWrapper
           src={images[selectedImageIdx] || ''}
           alt={title}
-          className='w-full h-[420px] object-cover rounded-t-medium'
+          className='w-full h-[420px] object-contain rounded-t-medium'
         />
         <div className='p-4 grid grid-cols-5 gap-3'>
           {images.map((src, idx) => (
@@ -32,7 +32,7 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({ images = [], title = ''
                 removeWrapper
                 src={src}
                 alt={`${title} ${idx + 1}`}
-                className='w-full h-20 object-cover'
+                className='w-full h-20 object-contain'
               />
             </button>
           ))}

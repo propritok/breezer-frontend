@@ -258,7 +258,7 @@ const CertificatesPage: React.FC = () => {
               size="lg"
               formButtonLabel="Перезвоните мне"
               action="Заявка со страницы Процесс работы"
-              label="Оставить заявку"
+              label="Оставить заявку "
             />
           </div>
         </div>

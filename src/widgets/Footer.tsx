@@ -28,6 +28,22 @@ const Footer: React.FC = () => {
                   Каталог бризеров
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/workprocess"
+                  className="hover:text-[var(--secondary-color)]"
+                >
+                  Процесс работы
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/privacy"
+                  className="hover:text-[var(--secondary-color)]"
+                >
+                  Политика конфиденциальности
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -79,7 +95,7 @@ const Footer: React.FC = () => {
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center md:text-left text-gray-400">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 md:gap-4">
-            <p>&copy; 2024 PROPRITOK. Все права защищены.</p>
+            <p>&copy; 2025 PROPRITOK. Все права защищены.</p>
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 md:gap-4">
               <span>ИП Смирнов Илья Вячеславович</span>
               <span>ОГРНИП: 318774600572015</span>

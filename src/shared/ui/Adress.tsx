@@ -5,7 +5,7 @@ interface AdressProps extends React.HTMLAttributes<HTMLAnchorElement> {
 }
 
 const Adress: React.FC<AdressProps> = ({ className = "" }) => {
-  return <span className={className}>г. Москва, ул. Примерная, д. 123</span>;
+  return <span className={className}>г. Москва</span>;
 };
 
 export default Adress;

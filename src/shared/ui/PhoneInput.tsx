@@ -30,6 +30,10 @@ export const PhoneInput: React.FC<PhoneInputProps> = ({ control, name, error }) 
               variant='bordered'
               isInvalid={!!error}
               errorMessage={error}
+              classNames={{
+                inputWrapper:
+                  'focus-within:!border-[var(--secondary-color)] focus-within:!ring-1 focus-within:!ring-[var(--secondary-color)]',
+              }}
             />
           )}
         </InputMaskComponent>

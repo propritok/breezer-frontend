@@ -21,34 +21,17 @@ jobs:
             --build-arg MAIL_PASSWORD="$MAIL_PASSWORD" \
             --build-arg MAIL_PASSWORD="$MAIL_PASSWORD" \
             .
-      - name: Create .env file
+      - name: Docker Compose
         env:
           MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
           MAIL_USER: ${{ secrets.MAIL_USER }}
           NEXT_PUBLIC_MAIL_ADDRESS: ${{ secrets.NEXT_PUBLIC_MAIL_ADDRESS }}
           NEXT_PUBLIC_MAIL_RECIPIENTS: ${{ secrets.NEXT_PUBLIC_MAIL_RECIPIENTS }}
           NEXT_PUBLIC_TELEPHONE: ${{ secrets.NEXT_PUBLIC_TELEPHONE }}
-          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
-          NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
-          SITE_URL: ${{ secrets.SITE_URL }}
-        run: |
-          echo "Creating .env file..."
-          cat > .env << EOF
-          MAIL_PASSWORD=$MAIL_PASSWORD
-          MAIL_USER=$MAIL_USER
-          NEXT_PUBLIC_MAIL_ADDRESS=$NEXT_PUBLIC_MAIL_ADDRESS
-          NEXT_PUBLIC_MAIL_RECIPIENTS=$NEXT_PUBLIC_MAIL_RECIPIENTS
-          NEXT_PUBLIC_TELEPHONE=$NEXT_PUBLIC_TELEPHONE
-          NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
-          NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
-          SITE_URL=$SITE_URL
-          EOF
-          echo ".env file created successfully"
-      - name: Docker Compose
         run: |
           echo "Compose Started..."
           docker-compose up -d
       - name: Check environment variables
         run: |
           echo "Checking env vars in container..."
-          docker run --rm -e NEXT_PUBLIC_MAIL_ADDRESS="${{ secrets.NEXT_PUBLIC_MAIL_ADDRESS }}" breezer-frontend:latest printenv | grep NEXT_PUBLIC
+          docker run --rm -e NEXT_PUBLIC_MAIL_ADDRESS="${{ secrets.NEXT_PUBLIC_MAIL_ADDRESS }}" breezer-frontend:latest printenv | grep NEXT_PUBLIC      

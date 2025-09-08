@@ -12,9 +12,14 @@ import PhoneNumber from './PhoneNumber';
 const contactFormSchema = z.object({
   name: z.string().min(1, 'Обязательное поле'),
   message: z.string().optional(),
-  phone: z.string().min(11, 'Обязательное поле'),
+  phone: z
+    .string()
+    .regex(
+      /^\+7\s?\(?\d{3}\)?\s?\d{3}-?\d{2}-?\d{2}$/,
+      "Обязательное поле"
+    ),
   privacyConsent: z.boolean().refine((val) => val === true, {
-    message: 'Необходимо согласие на обработку персональных данных',
+    message: 'Обязательное поле',
   }),
 });
 

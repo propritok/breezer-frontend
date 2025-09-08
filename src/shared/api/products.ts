@@ -1,5 +1,5 @@
-import { Product, ProductBrand, ProductShort } from '../../entities/Product';
-import { config } from '../config';
+import { Product, ProductBrand, ProductShort } from "../../entities/Product";
+import { config } from "../config";
 
 // Интерфейс для ответа PocketBase
 interface PocketBaseResponse<T> {
@@ -28,7 +28,11 @@ interface PocketBaseProduct {
 }
 
 // Функция для преобразования изображений PocketBase в полные URL
-const getImageUrl = (collectionId: string, recordId: string, filename: string): string => {
+const getImageUrl = (
+  collectionId: string,
+  recordId: string,
+  filename: string
+): string => {
   return `${config.pocketbase.baseUrl}/files/${collectionId}/${recordId}/${filename}`;
 };
 
@@ -42,7 +46,7 @@ const transformPocketBaseProduct = (pbProduct: PocketBaseProduct): Product => {
     inStock: pbProduct.inStock,
     price: `${pbProduct.price} руб.`,
     images: pbProduct.images.map((filename) =>
-      getImageUrl(pbProduct.collectionId, pbProduct.id, filename),
+      getImageUrl(pbProduct.collectionId, pbProduct.id, filename)
     ),
     specs: pbProduct.spec,
     brand: pbProduct?.brand,
@@ -50,14 +54,16 @@ const transformPocketBaseProduct = (pbProduct: PocketBaseProduct): Product => {
 };
 
 // Функция для преобразования в ProductShort
-const transformToProductShort = (product: Product): ProductShort => {
+const transformToProductShort = (product: PocketBaseProduct): ProductShort => {
   return {
     id: product.id,
     modelNameEn: product.modelNameEn,
     modelNameRu: product.modelNameRu,
     inStock: product.inStock,
-    price: product.price,
-    images: product.images,
+    price: `${product.price} руб.`,
+    images: product.images.map((filename) =>
+      getImageUrl(product.collectionId, product.id, filename)
+    ),
     brand: product?.brand,
   };
 };
@@ -66,7 +72,9 @@ export const productsApi = {
   // Получить все продукты
   async getAll(): Promise<Product[]> {
     try {
-      const response = await fetch(`${config.pocketbase.baseUrl}/collections/breezers/records`);
+      const response = await fetch(
+        `${config.pocketbase.baseUrl}/collections/breezers/records`
+      );
 
       if (!response.ok) {
         throw new Error(`Failed to fetch products: ${response.status}`);
@@ -75,7 +83,7 @@ export const productsApi = {
       const data: PocketBaseResponse<PocketBaseProduct> = await response.json();
       return data.items.map(transformPocketBaseProduct);
     } catch (error) {
-      console.error('Error fetching products:', error);
+      console.error("Error fetching products:", error);
       throw error;
     }
   },
@@ -84,7 +92,7 @@ export const productsApi = {
   async getById(id: string): Promise<Product> {
     try {
       const response = await fetch(
-        `${config.pocketbase.baseUrl}/collections/breezers/records/${id}`,
+        `${config.pocketbase.baseUrl}/collections/breezers/records/${id}`
       );
 
       if (!response.ok) {
@@ -94,7 +102,25 @@ export const productsApi = {
       const pbProduct: PocketBaseProduct = await response.json();
       return transformPocketBaseProduct(pbProduct);
     } catch (error) {
-      console.error('Error fetching product:', error);
+      console.error("Error fetching product:", error);
+      throw error;
+    }
+  },
+
+  async getPopular(): Promise<ProductShort[]> {
+    try {
+      const response = await fetch(
+        `${config.pocketbase.baseUrl}/collections/breezers/records?filter=(isPopular=true)`
+      );
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch products: ${response.status}`);
+      }
+
+      const data: PocketBaseResponse<PocketBaseProduct> = await response.json();
+      return data.items.map((product) => transformToProductShort(product));
+    } catch (error) {
+      console.error("Error fetching product:", error);
       throw error;
     }
   },
@@ -102,10 +128,18 @@ export const productsApi = {
   // Получить короткие данные всех продуктов
   async getAllShort(): Promise<ProductShort[]> {
     try {
-      const products = await this.getAll();
-      return products.map(transformToProductShort);
+      const response = await fetch(
+        `${config.pocketbase.baseUrl}/collections/breezers/records`
+      );
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch products: ${response.status}`);
+      }
+
+      const data: PocketBaseResponse<PocketBaseProduct> = await response.json();
+      return data.items.map(transformToProductShort);
     } catch (error) {
-      console.error('Error fetching products short:', error);
+      console.error("Error fetching products short:", error);
       throw error;
     }
   },
@@ -114,7 +148,7 @@ export const productsApi = {
   async getAllBrands(): Promise<ProductBrand[]> {
     try {
       const response = await fetch(
-        `${config.pocketbase.baseUrl}/collections/breezers/records?fields=brand`,
+        `${config.pocketbase.baseUrl}/collections/breezers/records?fields=brand`
       );
 
       if (!response.ok) {
@@ -124,7 +158,7 @@ export const productsApi = {
       const data: PocketBaseResponse<ProductBrand> = await response.json();
       return data.items;
     } catch (error) {
-      console.error('Error fetching products short:', error);
+      console.error("Error fetching products short:", error);
       throw error;
     }
   },
@@ -139,10 +173,10 @@ export const productsApi = {
         (product) =>
           product.modelNameEn?.toLowerCase().includes(searchTerm) ||
           product.modelNameRu?.toLowerCase().includes(searchTerm) ||
-          product.description?.toLowerCase().includes(searchTerm),
+          product.description?.toLowerCase().includes(searchTerm)
       );
     } catch (error) {
-      console.error('Error searching products:', error);
+      console.error("Error searching products:", error);
       throw error;
     }
   },

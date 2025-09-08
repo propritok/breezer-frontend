@@ -25,12 +25,10 @@ interface HomeProps {
 
 export const getServerSideProps: GetServerSideProps<HomeProps> = async () => {
   try {
-    const [allProducts, reviews] = await Promise.all([
-      productsApi.getAllShort(),
+    const [popularProducts, reviews] = await Promise.all([
+      productsApi.getPopular(),
       reviewsApi.getAll(),
     ]);
-
-    const popularProducts = allProducts.slice(0, 3); // Берем первые 3 продукта как популярные
 
     return {
       props: {

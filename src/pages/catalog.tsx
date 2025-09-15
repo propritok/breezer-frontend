@@ -28,10 +28,13 @@ function getUniqueByBrand(arr: ProductBrand[] = []): ProductBrand[] {
   });
 }
 
-export const getServerSideProps: GetServerSideProps<CatalogProps> = async () => {
+export const getServerSideProps: GetServerSideProps<CatalogProps> = async ({ res }) => {
   try {
     const products = await productsApi.getAllShort();
     const brands = getUniqueByBrand(await productsApi.getAllBrands());
+
+    // Устанавливаем кеширование на 5 минут для снижения нагрузки на API
+    res.setHeader('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=60');
 
     return {
       props: {

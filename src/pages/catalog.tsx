@@ -65,7 +65,7 @@ export default function Catalog({ products, brands }: CatalogProps) {
     <>
       <Head>
         <title>Каталог бризеров - Propritok</title>
-        <meta name='description' content='Каталог профессиональных бризеров для дома' />
+        <meta name='description' content='Каталог бризеров для дома' />
       </Head>
 
       <div className='min-h-screen flex flex-col'>

@@ -1,6 +1,8 @@
 # *
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /test-amocrm/
 
 # Host
 Host: https://propritok.ru

@@ -1,8 +1,18 @@
 import { FAQSection, SiteBreadcrumbs } from '@/widgets';
+import Head from 'next/head';
 import React from 'react';
 
 const AboutPage: React.FC = () => {
   return (
+    <>
+      <Head>
+        <title>О нас - Propritok</title>
+        <meta
+          name='description'
+          content='Наша цель - чистый воздух в каждый дом!'
+        />
+      
+      </Head>
     <div className='min-h-screen bg-white'>
       <SiteBreadcrumbs pageTitle='О компании' />
 
@@ -109,6 +119,7 @@ const AboutPage: React.FC = () => {
         <FAQSection title='Частые вопросы о нас' maxQuestions={4} className='py-12 bg-gray-50' />
       </div>
     </div>
+    </>
   );
 };
 

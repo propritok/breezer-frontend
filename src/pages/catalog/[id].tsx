@@ -50,8 +50,13 @@ export const getServerSideProps: GetServerSideProps<CatalogItemPageProps> = asyn
 };
 
 export default function CatalogItemPage({ product }: CatalogItemPageProps) {
-  const pageTitle = `${product?.modelNameEn || ''} — купить в Propritok`;
-
+  const siteUrl = process.env.SITE_URL || 'https://propritok.ru';
+  const productName = product?.modelNameEn || product?.modelNameRu || 'Бризер';
+  const pageTitle = `${productName} — купить в Propritok`;
+  const description =
+    product?.description?.substring(0, 160) ||
+    `Купить ${productName} в Propritok. Качественная вентиляция для дома.`;
+  const canonicalUrl = `${siteUrl}/catalog/${product?.id}`;
   const actionBuy = `хочет купить id-[${product?.id}]-${
     product?.modelNameEn || product?.modelNameRu
   }`;
@@ -64,10 +69,20 @@ export default function CatalogItemPage({ product }: CatalogItemPageProps) {
     <>
       <Head>
         <title>{pageTitle}</title>
-        <meta name='description' content={product?.description?.substring(0, 160) || ''} />
+        <meta name='description' content={description} />
+        <link rel='canonical' href={canonicalUrl} />
+
+        {/* Open Graph */}
         <meta property='og:title' content={pageTitle} />
-        <meta property='og:description' content={product?.description?.substring(0, 160) || ''} />
+        <meta property='og:description' content={description} />
+        <meta property='og:type' content='product' />
+        <meta property='og:url' content={canonicalUrl} />
+        <meta property='og:site_name' content='Propritok' />
         {product?.images?.[0] && <meta property='og:image' content={product.images[0]} />}
+
+        {/* Robots */}
+        <meta name='robots' content='index, follow' />
+        <meta name='googlebot' content='index, follow' />
       </Head>
       <SiteBreadcrumbs pageTitle={product?.modelNameEn} />
       <div className='min-h-screen flex flex-col'>

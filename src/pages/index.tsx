@@ -3,7 +3,7 @@ import { ContactCTAButton, Reviews } from '@/features';
 import { PocketBaseReview, reviewsApi } from '@/shared';
 import { productsApi } from '@/shared/api/products';
 import { CustomerWorksSlider, FAQSection } from '@/widgets';
-import { Button, Card, CardBody, Link } from '@heroui/react';
+import { Button, Link } from '@heroui/react';
 import { GetServerSideProps } from 'next';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
@@ -202,12 +202,12 @@ export default function Home({ popularProducts, reviews }: HomeProps) {
               <p className='text-xl text-white mb-6'>
                 При покупке бризера - <span className='font-bold'>30% скидка на монтаж</span>
               </p>
-              
+
               <ContactCTAButton
-                    label='Получить скидку'
-                    size='lg'
-                    className='bg-white text-[var(--secondary-color)] font-semibold'
-                  />
+                label='Получить скидку'
+                size='lg'
+                className='bg-white text-[var(--secondary-color)] font-semibold'
+              />
             </div>
           </div>
 

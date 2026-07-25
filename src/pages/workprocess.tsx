@@ -81,7 +81,7 @@ const CertificatesPage: React.FC = () => {
             <div className="bg-white border-2 border-[var(--secondary-color)] p-8 rounded-lg">
               <p className="text-xl text-gray-800 mb-6 font-semibold">
                 С вами связывается наш менеджер и отвечает на все интересующие
-                вас вопросы.
+                вопросы.
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -143,7 +143,7 @@ const CertificatesPage: React.FC = () => {
                 <div className="flex items-start">
                   <span className="text-2xl mr-3">•</span>
                   <p className="text-lg">
-                    Составление технического задания для монтажника
+                    Составление технического задания для мастера
                   </p>
                 </div>
                 <div className="flex items-start">
@@ -178,7 +178,7 @@ const CertificatesPage: React.FC = () => {
                     •
                   </span>
                   <p className="text-lg text-gray-700">
-                    Выезд монтажника на объект в заранее согласованный день и по
+                    Выезд мастера на объект в заранее согласованный день и по
                     предварительному звонку
                   </p>
                 </div>

@@ -1,13 +1,12 @@
-version: '3'
 services:
   frontend:
     container_name: breezer-frontend
     hostname: frontend
     image: breezer-frontend:latest
-    env_file: .env # подтягиваем .env целиком
-    environment: # -> видны в рантайме процесса Node
+    env_file: .env
+    environment:
       NODE_ENV: production
       NEXT_TELEMETRY_DISABLED: '1'
     ports:
-      - '3000:3000'
+      - '127.0.0.1:3000:3000'
     restart: unless-stopped

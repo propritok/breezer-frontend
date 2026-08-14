@@ -46,7 +46,8 @@ const ContactFormCTA: React.FC<ContactFormCTAProps> = ({
     formState: { errors },
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactFormSchema),
-    defaultValues: { name: '', phone: '', message: '', privacyConsent: true },
+    // Чекбокс согласия обязан быть пустым по умолчанию (152-ФЗ, требования с 01.09.2025)
+    defaultValues: { name: '', phone: '', message: '', privacyConsent: false },
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -123,16 +124,23 @@ const ContactFormCTA: React.FC<ContactFormCTAProps> = ({
           {...register('privacyConsent')}
           color='secondary'
           isInvalid={!!errors.privacyConsent}
-          defaultSelected={true}
           className='mb-4'></Checkbox>
         <span className='text-sm text-gray-700'>
-          Я согласен на{' '}
+          Я даю{' '}
+          <a
+            href='/consent'
+            target='_blank'
+            rel='noopener noreferrer'
+            className='underline text-[var(--secondary-color)]'>
+            согласие на обработку персональных данных
+          </a>{' '}
+          и принимаю{' '}
           <a
             href='/privacy'
             target='_blank'
             rel='noopener noreferrer'
-            className='  underline text-[var(--secondary-color)]'>
-            обработку персональных данных
+            className='underline text-[var(--secondary-color)]'>
+            политику конфиденциальности
           </a>
         </span>
 

@@ -1,5 +1,4 @@
 import { leadsApi } from "@/shared";
-import { format } from "date-fns";
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import Mail from "nodemailer/lib/mailer";
@@ -13,6 +12,19 @@ const transporter = nodemailer.createTransport({
     pass: process.env.MAIL_PASSWORD,
   },
 });
+
+// Время в письме всегда по Москве, независимо от таймзоны сервера (в Docker это UTC)
+const formatMoscowTime = (date: Date): string => {
+  const parts = new Intl.DateTimeFormat("ru-RU", {
+    timeZone: "Europe/Moscow",
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(date);
+  return parts.replace(", ", " ");
+};
 
 // Безопасный парсинг recipients с fallback
 const getRecipients = (): Mail.Address[] => {
@@ -80,7 +92,7 @@ export async function POST(request: NextRequest) {
       to: recipients,
       subject: "Заявка с сайта Propritok",
       text: `
-      Заявка от ${format(new Date(), "dd.MM.yyyy HH:mm")}
+      Заявка от ${formatMoscowTime(new Date())}
 
       Действие: ${action}
       Имя: ${name || "Не указано"}

@@ -50,5 +50,10 @@ export const config = {
       weekdays: '9:00 - 18:00',
       weekends: '10:00 - 16:00',
     },
+    socials: {
+      whatsapp: 'https://wa.me/79295850880',
+      telegram: 'https://t.me/+79295850880',
+      max: 'https://max.ru/u/f9LHodD0cOK687ETvXAmHyHNUJZFXr81A_yFYyz6piZ3xmUyVhzNyeld29s',
+    },
   },
 } as const;

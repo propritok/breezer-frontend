@@ -1,4 +1,4 @@
-import { Footer, Header, SiteBreadcrumbs } from '@/widgets';
+import { CookieNotice, FloatingSocialButtons, Footer, Header, SiteBreadcrumbs } from '@/widgets';
 import { HeroUIProvider } from '@heroui/react';
 import type { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
@@ -58,6 +58,8 @@ export default function App({ Component, pageProps }: AppProps) {
 
         <Component {...pageProps} />
         <Footer />
+        <FloatingSocialButtons />
+        <CookieNotice />
       </div>
     </HeroUIProvider>
   );

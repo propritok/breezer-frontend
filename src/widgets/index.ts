@@ -1,7 +1,9 @@
 // Экспорт всех виджетов
 export { default as ContactForm } from './ContactForm';
+export { default as CookieNotice } from './CookieNotice';
 export { default as CustomerWorksSlider } from './CustomerWorksSlider';
 export { default as FAQSection } from './FAQSection';
+export { default as FloatingSocialButtons } from './FloatingSocialButtons';
 export { default as Footer } from './Footer';
 export { default as Header } from './Header';
 export { default as HeroSection } from './HeroSection';

@@ -1,4 +1,4 @@
-import { Adress, MailAdress, PhoneNumber } from "@/shared";
+import { Adress, MailAdress, PhoneNumber, SocialLinks } from "@/shared";
 import Link from "next/link";
 import React from "react";
 
@@ -89,6 +89,7 @@ const Footer: React.FC = () => {
               <p>
                 <Adress />
               </p>
+              <SocialLinks className="pt-2" iconClassName="w-6 h-6" />
             </div>
           </div>
         </div>

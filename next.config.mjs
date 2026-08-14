@@ -1,5 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // В dev смешение app router (api) и pages router роняет клиентский
+  // hot-reloader на сообщении isrManifest (обработчик статик-индикатора),
+  // из-за чего страница не гидрируется и уходит в цикл перезагрузок.
+  devIndicators: false,
   images: {
     remotePatterns: [
       {

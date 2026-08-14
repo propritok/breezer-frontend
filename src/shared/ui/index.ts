@@ -7,3 +7,4 @@ export { default as CustomInput } from './CustomInput';
 export { default as LoadingSpinner } from './LoadingSpinner';
 export { default as MailAdress } from './MailAdress';
 export { default as PhoneNumber } from './PhoneNumber';
+export { default as SocialLinks } from './SocialLinks';

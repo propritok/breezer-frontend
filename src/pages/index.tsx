@@ -56,6 +56,7 @@ export default function Home({ popularProducts, reviews }: HomeProps) {
           name='description'
           content='Купить и установить бризер для дома. Качественная вентиляция с гарантией.'
         />
+        <meta name="yandex-verification" content="5ed367577c1e6891" />
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />
       </Head>

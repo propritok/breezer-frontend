@@ -1,4 +1,3 @@
-import { BreadcrumbItem, Breadcrumbs } from '@heroui/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useMemo } from 'react';
@@ -6,6 +5,7 @@ import React, { useMemo } from 'react';
 // Карта названий для сегментов URL
 const segmentTitleMap: Record<string, string> = {
   catalog: 'Каталог',
+  cart: 'Корзина',
   about: 'О нас',
   contact: 'Контакты',
   workprocess: 'Процесс работы',
@@ -31,7 +31,6 @@ function toTitle(segment: string): string {
 }
 
 const SiteBreadcrumbs: React.FC<{ pageTitle?: string }> = ({ pageTitle }) => {
-  console.log('pageTitle', pageTitle);
   const pathname = usePathname();
 
   const crumbs = useMemo(() => {
@@ -69,23 +68,22 @@ const SiteBreadcrumbs: React.FC<{ pageTitle?: string }> = ({ pageTitle }) => {
   }
 
   return (
-    <div className='max-w-7xl mx-auto px-4 pt-4'>
-      <Breadcrumbs>
-        {crumbs.map((crumb, idx) => (
-          <BreadcrumbItem key={`${crumb.label}-${idx}`}>
-            {crumb.href ? (
-              <Link
-                href={crumb.href}
-                className='text-gray-600 hover:text-[var(--secondary-color)] transition-colors'>
-                {crumb.label}
-              </Link>
-            ) : (
-              <span className='text-gray-900 font-medium'>{crumb.label}</span>
-            )}
-          </BreadcrumbItem>
-        ))}
-      </Breadcrumbs>
-    </div>
+    <nav
+      aria-label='Хлебные крошки'
+      className='mx-auto max-w-page px-5 md:px-8 pt-8 text-sm text-ink-3 flex items-center gap-2 flex-wrap'>
+      {crumbs.map((crumb, idx) => (
+        <React.Fragment key={`${crumb.label}-${idx}`}>
+          {idx > 0 && <span aria-hidden='true'>/</span>}
+          {crumb.href ? (
+            <Link href={crumb.href} className='hover:text-brand-700 transition-colors'>
+              {crumb.label}
+            </Link>
+          ) : (
+            <span className='text-ink font-semibold'>{crumb.label}</span>
+          )}
+        </React.Fragment>
+      ))}
+    </nav>
   );
 };
 

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Propritok — редизайн · макеты</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="assets/tw-config.js?v=4"></script>
+  <link rel="stylesheet" href="assets/shared.css?v=4" />
+  <script src="assets/shared.js?v=4"></script>
+  <style>
+    .frame { transform-origin: 0 0; border: 0; background: #F7F5F0; }
+  </style>
+</head>
+<body>
+  <div class="mx-auto max-w-[1600px] px-5 md:px-10 py-10">
+    <div class="flex items-center justify-between flex-wrap gap-4">
+      <div class="flex items-center gap-3" id="logo"></div>
+      <nav class="flex flex-wrap gap-2 text-sm font-bold">
+        <a href="system.html" class="chip">Дизайн-система</a>
+        <a href="home.html" class="chip">Главная</a>
+        <a href="catalog.html" class="chip">Каталог</a>
+        <a href="product.html" class="chip">Товар</a>
+        <a href="cart.html" class="chip">Корзина и заказ</a>
+        <a href="pages.html" class="chip">Процесс · О нас · Контакты</a>
+        <a href="hero-variants.html" class="chip">Варианты hero</a>
+      </nav>
+    </div>
+    <h1 class="mt-10 text-[40px] md:text-display font-light tracking-[-0.045em]">Редизайн <b class="font-extrabold">propritok.ru</b></h1>
+    <p class="mt-3 text-ink-2 max-w-[640px]">Главная — desktop 1440 и mobile 375. Макеты живые: скролл, hover и аккордеоны работают внутри рамок.</p>
+
+    <div class="mt-10 flex gap-8 items-start" id="frames">
+      <div>
+        <div class="text-xs font-bold uppercase tracking-[0.14em] text-ink-3 mb-3">Desktop · 1440</div>
+        <div class="rounded-xl overflow-hidden shadow-lift bg-white" id="d-wrap"><iframe class="frame" id="d" src="home.html?static&nofloat" width="1440" height="3200"></iframe></div>
+      </div>
+      <div class="shrink-0">
+        <div class="text-xs font-bold uppercase tracking-[0.14em] text-ink-3 mb-3">Mobile · 375</div>
+        <div class="rounded-[44px] p-3 bg-ink shadow-lift">
+          <div class="rounded-[34px] overflow-hidden"><iframe class="frame block" src="home.html" width="375" height="812"></iframe></div>
+        </div>
+        <div class="mt-4 space-y-2 w-[400px]">
+          <div class="text-xs font-bold uppercase tracking-[0.14em] text-ink-3">Каталог · mobile</div>
+          <div class="rounded-[44px] p-3 bg-ink shadow-lift"><div class="rounded-[34px] overflow-hidden"><iframe class="frame block" src="catalog.html?static&nofloat" width="375" height="812"></iframe></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    document.getElementById('logo').innerHTML = logoFull(34);
+    // scale desktop frame to available width
+    const fit = () => {
+      const avail = document.getElementById('frames').clientWidth - 400 - 32;
+      const k = Math.min(1, avail / 1440);
+      const f = document.getElementById('d');
+      f.style.transform = `scale(${k})`;
+      document.getElementById('d-wrap').style.width = 1440 * k + 'px';
+      document.getElementById('d-wrap').style.height = 3200 * k + 'px';
+    };
+    addEventListener('resize', fit); fit();
+  </script>
+</body>
+</html>

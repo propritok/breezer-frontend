@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Propritok — Главная (редизайн)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Unbounded:wght@400..700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="assets/tw-config.js?v=4"></script>
+  <link rel="stylesheet" href="assets/shared.css?v=4" />
+  <script src="assets/shared.js?v=4"></script>
+</head>
+<body class="overflow-x-hidden">
+  <div data-slot="header"></div>
+
+  <!-- ============ HERO · вариант A «Тишина» ============ -->
+  <style>
+    .ring-wave { position: absolute; inset: 0; border-radius: 999px; border: 1px solid #BFE6E3; animation: ringw 6s ease-out infinite; }
+    .ring-wave:nth-child(2) { animation-delay: 2s; } .ring-wave:nth-child(3) { animation-delay: 4s; }
+    @keyframes ringw { from { transform: scale(.7); opacity: 1; } to { transform: scale(1.5); opacity: 0; } }
+  </style>
+  <section class="relative -mt-20 pt-28 md:pt-36 overflow-hidden bg-gradient-to-b from-white via-white to-air">
+    <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[500px] rounded-full bg-brand-50 blur-3xl opacity-80 animate-breathe"></div>
+    <div class="relative text-center reveal">
+      <a href="#price" class="inline-flex items-center gap-2 h-9 pl-1.5 pr-4 rounded-full bg-white border border-line shadow-soft text-sm font-semibold text-ink-2 hover:border-brand-300 transition">
+        <span class="h-6 px-2.5 rounded-full bg-brand-700 text-white text-xs font-bold inline-flex items-center">−30%</span>
+        на монтаж при покупке бризера
+      </a>
+      <h1 class="mt-7 mx-auto max-w-[1040px] px-5 text-[44px] leading-[1] sm:text-[64px] md:text-[112px] md:leading-[0.95] font-extralight tracking-[-0.055em]">
+        Чистый воздух<br /><span class="font-bold">в каждый дом</span>
+      </h1>
+      <p class="mt-6 mx-auto max-w-[480px] px-5 text-body-lg text-ink-2">Бризеры для здорового микроклимата. Установка под ключ с&nbsp;гарантией качества.</p>
+      <div class="mt-8 flex flex-col sm:flex-row gap-3 justify-center px-5">
+        <a href="catalog.html" class="btn btn-primary !h-14 !px-8">Перейти в каталог <span data-i="arrow"></span></a>
+        <a href="#lead" class="btn btn-secondary sm:!bg-transparent sm:!border-transparent sm:btn-ghost !h-14">Получить консультацию</a>
+      </div>
+    </div>
+
+    <!-- прибор на волнах -->
+    <div class="relative mt-10 md:mt-14 h-[330px] md:h-[460px] reveal" data-d="2">
+      <div data-slot="airflow" data-h="460" data-color="#2EB1B0" data-op=".45" class="absolute inset-0 w-full h-full"></div>
+      <div class="absolute left-1/2 top-4 -translate-x-1/2 w-[300px] h-[300px] md:w-[440px] md:h-[440px]">
+        <span class="ring-wave"></span><span class="ring-wave"></span><span class="ring-wave"></span>
+        <div class="absolute inset-10 rounded-full bg-gradient-to-b from-brand-50 to-white shadow-[inset_0_-20px_40px_rgba(13,126,139,.06)]"></div>
+        <img src="https://bp.propritok.ru/api/files/pbc_1529214369/qa7wspzic1tsovz/brbxbreezer_bio_xperspective001_7kvi9nlknh.webp" class="absolute inset-12 w-[calc(100%-6rem)] h-[calc(100%-6rem)] object-contain mix-blend-multiply animate-drift" alt="Бризер Tion BIO X" />
+      </div>
+      <!-- факты по бокам (desktop) -->
+      <div class="hidden md:block absolute left-[max(2rem,calc(50%-560px))] top-24 text-left">
+        <div class="text-[64px] font-extralight tracking-[-0.05em] leading-none">18<span class="text-2xl font-semibold ml-1">дБ</span></div>
+        <div class="text-sm text-ink-3 mt-2">тише шёпота —<br/>можно спать</div>
+      </div>
+      <div class="hidden md:block absolute left-[max(2rem,calc(50%-560px))] top-64 text-left">
+        <div class="text-[64px] font-extralight tracking-[-0.05em] leading-none">1,5<span class="text-2xl font-semibold ml-1">ч</span></div>
+        <div class="text-sm text-ink-3 mt-2">монтаж HILTI<br/>без пыли</div>
+      </div>
+      <div class="hidden md:block absolute right-[max(2rem,calc(50%-560px))] top-24 text-right">
+        <div class="text-[64px] font-extralight tracking-[-0.05em] leading-none">5<span class="text-2xl font-semibold ml-1">лет</span></div>
+        <div class="text-sm text-ink-3 mt-2">гарантии<br/>на монтаж</div>
+      </div>
+      <div class="hidden md:block absolute right-[max(2rem,calc(50%-560px))] top-64 text-right">
+        <div class="text-[64px] font-extralight tracking-[-0.05em] leading-none">5,0<span class="text-sun-500 text-2xl align-top ml-1">★</span></div>
+        <div class="text-sm text-ink-3 mt-2">рейтинг на<br/>Яндекс Картах</div>
+      </div>
+    </div>
+    <!-- факты (mobile) -->
+    <dl class="md:hidden relative grid grid-cols-2 gap-2 px-5 pb-10 -mt-2">
+      <div class="rounded-md bg-white shadow-soft p-4"><dt class="text-[28px] font-extralight tracking-[-0.04em] leading-none">18<span class="text-base font-semibold ml-1">дБ</span></dt><dd class="text-xs text-ink-3 mt-1.5">тише шёпота</dd></div>
+      <div class="rounded-md bg-white shadow-soft p-4"><dt class="text-[28px] font-extralight tracking-[-0.04em] leading-none">5<span class="text-base font-semibold ml-1">лет</span></dt><dd class="text-xs text-ink-3 mt-1.5">гарантии на монтаж</dd></div>
+      <div class="rounded-md bg-white shadow-soft p-4"><dt class="text-[28px] font-extralight tracking-[-0.04em] leading-none">1,5<span class="text-base font-semibold ml-1">ч</span></dt><dd class="text-xs text-ink-3 mt-1.5">монтаж без пыли</dd></div>
+      <div class="rounded-md bg-white shadow-soft p-4"><dt class="text-[28px] font-extralight tracking-[-0.04em] leading-none">5,0<span class="text-sun-500 text-base align-top ml-0.5">★</span></dt><dd class="text-xs text-ink-3 mt-1.5">Яндекс Карты</dd></div>
+    </dl>
+  </section>
+
+  <!-- brands marquee -->
+  <div class="border-y border-line/80 bg-white/40">
+    <div class="mx-auto max-w-page px-5 md:px-8 h-20 flex items-center gap-8 md:gap-16 overflow-x-auto no-scrollbar text-ink-3">
+      <span class="text-xs font-bold uppercase tracking-[0.14em] shrink-0">Устанавливаем</span>
+      <span class="text-2xl font-extrabold tracking-[-0.02em] shrink-0">TION</span>
+      <span class="text-2xl font-extrabold tracking-[-0.02em] shrink-0">Ballu</span>
+      <span class="text-2xl font-bold italic tracking-[-0.02em] shrink-0">Royal Clima</span>
+      <span class="text-2xl font-extrabold tracking-[0.1em] shrink-0">ZILON</span>
+      <span class="text-2xl font-semibold tracking-[-0.02em] shrink-0">Xiaomi</span>
+      <span class="text-2xl font-light tracking-[-0.02em] shrink-0">Electrolux</span>
+    </div>
+  </div>
+
+  <!-- ============ GUARANTEE — giant numeral ============ -->
+  <section class="relative py-20 md:py-32">
+    <div class="mx-auto max-w-page px-5 md:px-8 grid md:grid-cols-12 gap-10 items-center">
+      <div class="md:col-span-6 relative flex items-center justify-center md:justify-start reveal">
+        <div class="absolute w-[300px] h-[300px] md:w-[460px] md:h-[460px] rounded-full border border-brand-200 animate-breathe"></div>
+        <div class="absolute w-[220px] h-[220px] md:w-[340px] md:h-[340px] rounded-full border border-brand-200/70 animate-breathe" style="animation-delay:-2s"></div>
+        <div class="absolute w-[140px] h-[140px] md:w-[220px] md:h-[220px] rounded-full bg-brand-50 animate-breathe" style="animation-delay:-4s"></div>
+        <div class="relative flex items-end md:pl-16">
+          <span class="text-[220px] md:text-[360px] leading-[0.8] font-extralight tracking-[-0.08em] text-grad select-none">5</span>
+          <span class="mb-6 md:mb-10 ml-2 text-h4 md:text-h3 font-bold leading-tight">лет<br/><span class="font-light text-ink-2">гарантии</span></span>
+        </div>
+      </div>
+      <div class="md:col-span-6 reveal" data-d="1">
+        <span class="text-xs font-bold uppercase tracking-[0.16em] text-brand-700">Гарантия</span>
+        <h2 class="mt-4 text-[32px] leading-[1.1] md:text-h2 font-bold tracking-[-0.03em]">Дышите спокойно — <span class="font-light">мы&nbsp;отвечаем за&nbsp;монтаж 5&nbsp;лет</span></h2>
+        <p class="mt-5 text-body-lg text-ink-2 max-w-[520px]">Монтируем строго по техническим нормам и рекомендациям производителя. Настолько уверены в работе, что даём расширенную гарантию — в 2,5 раза дольше, чем на сам прибор.</p>
+        <ul class="mt-8 grid sm:grid-cols-2 gap-3">
+          <li class="flex items-center gap-3 rounded-md bg-white shadow-soft p-4"><span class="w-10 h-10 rounded-full bg-brand-50 text-brand-700 grid place-items-center shrink-0" data-i="check"></span><span class="text-sm font-semibold">2 года на бризер от производителя</span></li>
+          <li class="flex items-center gap-3 rounded-md bg-white shadow-soft p-4"><span class="w-10 h-10 rounded-full bg-brand-50 text-brand-700 grid place-items-center shrink-0" data-i="check"></span><span class="text-sm font-semibold">Бесплатный выезд по гарантии</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ INSTALLATION & PRICE — bento ============ -->
+  <section id="price" class="py-16 md:py-24">
+    <div class="mx-auto max-w-page px-5 md:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 md:mb-14 reveal">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-[0.16em] text-brand-700">Монтаж и стоимость</span>
+          <h2 class="mt-4 text-[32px] leading-[1.1] md:text-h2 font-bold tracking-[-0.03em] max-w-[640px]">Чисто, тихо и&nbsp;за&nbsp;пару часов</h2>
+        </div>
+        <p class="text-ink-2 max-w-[380px]">Фиксированные цены без «сюрпризов» на месте. Точную стоимость подтвердит инженер до начала работ.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-5">
+        <!-- HILTI feature card -->
+        <div class="md:col-span-5 md:row-span-2 relative rounded-xl overflow-hidden min-h-[440px] md:min-h-[560px] bg-brand-950 text-white reveal">
+          <img src="../public/work/IMG_1985.PNG" class="absolute inset-0 w-full h-full object-cover opacity-80" alt="Решётка бризера на фасаде" />
+          <div class="absolute inset-0 bg-gradient-to-t from-brand-950 via-brand-950/40 to-transparent"></div>
+          <div class="absolute top-5 left-5 glass-dark rounded-full h-10 px-4 inline-flex items-center gap-2 text-sm font-bold"><span data-i="drill"></span>Инструмент HILTI</div>
+          <div class="absolute bottom-0 inset-x-0 p-6 md:p-8">
+            <h3 class="text-h3 md:text-[34px] font-bold tracking-[-0.03em] leading-tight">Сверлим с пылеудалением</h3>
+            <p class="mt-3 text-white/75 max-w-[380px]">Профессиональный инструмент со встроенным пылесосом: почти без пыли и мусора, и тише обычного перфоратора — соседи не заметят.</p>
+            <div class="mt-6 grid grid-cols-3 gap-2">
+              <div class="glass-dark rounded-md p-3"><div class="text-xl font-extrabold">−95%</div><div class="text-[11px] text-white/60 mt-0.5">пыли</div></div>
+              <div class="glass-dark rounded-md p-3"><div class="text-xl font-extrabold">1,5–2 ч</div><div class="text-[11px] text-white/60 mt-0.5">на монтаж</div></div>
+              <div class="glass-dark rounded-md p-3"><div class="text-xl font-extrabold">∅132</div><div class="text-[11px] text-white/60 mt-0.5">мм отверстие</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- price tiles -->
+        <a href="#lead" class="group md:col-span-4 relative rounded-xl bg-white shadow-soft p-6 md:p-8 card-hover overflow-hidden reveal" data-d="1">
+          <div class="flex items-center justify-between">
+            <span class="h-8 px-3 rounded-full bg-brand-700 text-white text-xs font-bold inline-flex items-center">Чаще всего выбирают</span>
+            <span class="w-10 h-10 rounded-full bg-brand-50 text-brand-700 grid place-items-center group-hover:bg-brand-700 group-hover:text-white transition" data-i="arrow"></span>
+          </div>
+          <h3 class="mt-10 md:mt-16 text-h4 font-bold">Монтаж Стандарт</h3>
+          <p class="text-sm text-ink-3 mt-1">Отверстие, канал, утепление, подключение и настройка</p>
+          <div class="mt-5 flex items-baseline gap-3">
+            <span class="text-[44px] md:text-[52px] font-extrabold tracking-[-0.04em] tnum leading-none">9 500 ₽</span>
+          </div>
+          <div class="mt-3 inline-flex items-center gap-2 text-sm font-bold text-brand-700">с бризером — 6 650 ₽</div>
+          <svg class="absolute -right-10 -bottom-10 w-48 h-48 text-brand-50" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="none" stroke="currentColor" stroke-width="14"/></svg>
+        </a>
+        <div class="md:col-span-3 rounded-xl bg-brand-50 p-6 md:p-7 card-hover reveal" data-d="2">
+          <span class="w-11 h-11 rounded-full bg-white text-brand-700 grid place-items-center" data-i="thermo"></span>
+          <h3 class="mt-8 font-bold text-[17px] leading-snug">С улучшенным утеплением канала</h3>
+          <p class="text-sm text-ink-3 mt-1">Для угловых и холодных стен</p>
+          <div class="mt-5 text-[34px] font-extrabold tracking-[-0.04em] tnum leading-none">11 000 ₽</div>
+        </div>
+        <div class="md:col-span-3 rounded-xl bg-white shadow-soft p-6 md:p-7 card-hover reveal" data-d="1">
+          <span class="w-11 h-11 rounded-full bg-brand-50 text-brand-700 grid place-items-center" data-i="ruler"></span>
+          <h3 class="mt-8 font-bold text-[17px] leading-snug">С выводом в&nbsp;откос</h3>
+          <p class="text-sm text-ink-3 mt-1">Когда на фасад выходить нельзя</p>
+          <div class="mt-5 text-[34px] font-extrabold tracking-[-0.04em] tnum leading-none">14 000 ₽</div>
+        </div>
+        <div class="md:col-span-4 rounded-xl bg-sand p-6 md:p-7 card-hover flex flex-col reveal" data-d="2">
+          <div class="flex items-start justify-between">
+            <span class="w-11 h-11 rounded-full bg-white text-brand-700 grid place-items-center" data-i="layers"></span>
+            <span class="text-xs font-bold text-ink-3 uppercase tracking-[0.12em]">Самый быстрый</span>
+          </div>
+          <h3 class="mt-8 font-bold text-[17px] leading-snug">На готовое отверстие</h3>
+          <p class="text-sm text-ink-3 mt-1">Если канал уже подготовлен застройщиком</p>
+          <div class="mt-5 text-[34px] font-extrabold tracking-[-0.04em] tnum leading-none">6 000 ₽</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROMO ============ -->
+  <section class="py-8 md:py-12">
+    <div class="mx-auto max-w-page px-5 md:px-8">
+      <div class="relative rounded-2xl bg-white shadow-soft overflow-hidden reveal">
+        <div class="absolute inset-y-0 right-0 w-full md:w-3/5 bg-brand-700 md:[clip-path:ellipse(80%_120%_at_100%_50%)] [clip-path:ellipse(130%_42%_at_50%_100%)]"></div>
+        <div data-slot="airflow" data-h="400" data-color="#fff" data-op=".25" class="absolute inset-0 w-full h-full"></div>
+        <div class="relative grid md:grid-cols-2 gap-8 p-7 md:p-14 items-center">
+          <div>
+            <span class="inline-flex h-8 px-3 rounded-full bg-sun-100 text-[#A86A12] text-xs font-bold items-center">Специальное предложение</span>
+            <h2 class="mt-5 text-[30px] leading-[1.1] md:text-[44px] font-bold tracking-[-0.03em]">При покупке бризера — <span class="text-brand-700">скидка на монтаж</span></h2>
+            <p class="mt-4 text-ink-2 max-w-[420px]">Выбирайте любой бризер в каталоге: установка обойдётся на треть дешевле.</p>
+          </div>
+          <div class="flex flex-col md:items-end text-white pt-10 md:pt-0">
+            <div class="flex items-start leading-none">
+              <span class="text-[120px] md:text-[200px] font-extralight tracking-[-0.08em]">30</span>
+              <span class="text-[56px] md:text-[80px] font-bold mt-3 md:mt-6">%</span>
+            </div>
+            <a href="#lead" class="btn btn-light !h-14 !px-7 mt-4">Получить скидку <span data-i="arrow"></span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WORKS SLIDER ============ -->
+  <section class="py-16 md:py-24 overflow-hidden">
+    <div class="mx-auto max-w-page px-5 md:px-8 flex items-end justify-between gap-6 mb-8 md:mb-12 reveal">
+      <div>
+        <span class="text-xs font-bold uppercase tracking-[0.16em] text-brand-700">Наши работы</span>
+        <h2 class="mt-4 text-[32px] leading-[1.1] md:text-h2 font-bold tracking-[-0.03em]">Уже дышат свободно</h2>
+      </div>
+      <div class="hidden md:flex gap-2">
+        <button onclick="document.getElementById('works').scrollBy({left:-400,behavior:'smooth'})" class="w-14 h-14 rounded-full border border-line bg-white grid place-items-center hover:border-brand-700 hover:text-brand-700 transition" data-i="arrowL"></button>
+        <button onclick="document.getElementById('works').scrollBy({left:400,behavior:'smooth'})" class="w-14 h-14 rounded-full bg-ink text-white grid place-items-center hover:bg-brand-700 transition" data-i="arrow"></button>
+      </div>
+    </div>
+    <div id="works" class="flex gap-4 md:gap-5 overflow-x-auto no-scrollbar snap-x snap-mandatory px-5 md:px-[max(2rem,calc((100vw-1280px)/2+2rem))] pb-4">
+      <!-- filled by script below -->
+    </div>
+    <div class="mx-auto max-w-page px-5 md:px-8 mt-6 flex items-center gap-3">
+      <div class="h-1 flex-1 max-w-[240px] rounded-full bg-line overflow-hidden"><div class="h-full w-1/4 rounded-full bg-brand-700"></div></div>
+      <span class="text-sm font-semibold text-ink-3 tnum">01 / 08</span>
+    </div>
+  </section>
+
+  <!-- ============ POPULAR PRODUCTS ============ -->
+  <section class="py-16 md:py-24">
+    <div class="mx-auto max-w-page px-5 md:px-8">
+      <div class="flex items-end justify-between gap-6 mb-8 md:mb-12 reveal">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-[0.16em] text-brand-700">Популярные товары</span>
+          <h2 class="mt-4 text-[32px] leading-[1.1] md:text-h2 font-bold tracking-[-0.03em]">Выбор наших клиентов</h2>
+        </div>
+        <a href="catalog.html" class="hidden md:inline-flex btn btn-ghost">Весь каталог <span data-i="arrow"></span></a>
+      </div>
+      <div data-slot="products" data-from="0" data-to="4" class="grid grid-cols-1 min-[480px]:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 reveal" data-d="1"></div>
+      <a href="catalog.html" class="md:hidden mt-6 btn btn-secondary w-full">Смотреть все 20 моделей</a>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="py-16 md:py-24">
+    <div class="mx-auto max-w-page px-5 md:px-8 grid lg:grid-cols-12 gap-10 lg:gap-16">
+      <div class="lg:col-span-4 reveal">
+        <span class="text-xs font-bold uppercase tracking-[0.16em] text-brand-700">Ответы на вопросы</span>
+        <h2 class="mt-4 text-[32px] leading-[1.1] md:text-h2 font-bold tracking-[-0.03em]">Частые вопросы</h2>
+        <div class="mt-8 hidden lg:block rounded-xl bg-brand-900 text-white p-7 relative overflow-hidden">
+          <div class="absolute -right-16 -top-16 w-48 h-48 rounded-full bg-brand-700 animate-breathe"></div>
+          <div class="relative">
+            <div class="flex -space-x-2">
+              <img src="../public/work/IMG_9708.jpg" class="w-11 h-11 rounded-full object-cover border-2 border-brand-900" alt=""/>
+              <span class="w-11 h-11 rounded-full bg-brand-500 border-2 border-brand-900 grid place-items-center font-bold">Д</span>
+              <span class="w-11 h-11 rounded-full bg-sun-300 text-brand-950 border-2 border-brand-900 grid place-items-center font-bold">И</span>
+            </div>
+            <p class="mt-5 text-h4 font-bold leading-snug">Не нашли ответ? Инженер перезвонит за&nbsp;15&nbsp;минут</p>
+            <a href="#lead" class="btn btn-light btn-sm mt-6">Задать вопрос</a>
+          </div>
+        </div>
+      </div>
+      <div class="lg:col-span-8 acc reveal" data-d="1">
+        <details open><summary>Что такое бризер и зачем он нужен?<span class="pm"></span></summary><div class="body">Бризер — компактное настенное устройство, которое подаёт свежий воздух с улицы. Встроенные фильтры задерживают пыль, аллергены и запахи. Степень фильтрации зависит от габаритов прибора.</div></details>
+        <details><summary>Какой бризер выбрать для квартиры?<span class="pm"></span></summary><div class="body">Зависит от площади, количества жильцов и бюджета. Для однокомнатной подойдёт компактная модель, для больших помещений — мощнее. Поможем подобрать.</div></details>
+        <details><summary>Сколько времени занимает установка?<span class="pm"></span></summary><div class="body">Стандартная установка — 1,5–2 часа. Работаем инструментом HILTI с пылеудалением. После монтажа бризер сразу готов к работе.</div></details>
+        <details><summary>Нужно ли разрешение на установку?<span class="pm"></span></summary><div class="body">В большинстве домов не требуется. Исключение — ЖК со строгими техусловиями, но и для них подбираем решение.</div></details>
+        <details><summary>Как часто менять фильтры?<span class="pm"></span></summary><div class="body">В среднем раз в 5–6 месяцев, у крупных моделей — раз в год.</div></details>
+        <details><summary>Можно ли установить зимой?<span class="pm"></span></summary><div class="body">Да, работаем круглый год. Бризеры с подогревом подают в комнату тёплый воздух.</div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ REVIEWS ============ -->
+  <section class="py-16 md:py-24 bg-white/60">
+    <div class="mx-auto max-w-page px-5 md:px-8">
+      <div class="grid lg:grid-cols-12 gap-5">
+        <div class="lg:col-span-4 rounded-xl bg-air p-7 md:p-9 flex flex-col reveal">
+          <span class="text-xs font-bold uppercase tracking-[0.16em] text-brand-700">Отзывы клиентов</span>
+          <div class="mt-6 flex items-end gap-3">
+            <span class="text-[96px] md:text-[120px] font-extralight leading-[0.85] tracking-[-0.06em]">5,0</span>
+          </div>
+          <div class="mt-3 flex gap-1 text-sun-500"><span data-i="star"></span><span data-i="star"></span><span data-i="star"></span><span data-i="star"></span><span data-i="star"></span></div>
+          <p class="mt-3 text-ink-2">Средняя оценка на Яндекс Картах по 40+ отзывам</p>
+          <a href="#" class="btn btn-secondary btn-sm mt-auto self-start !mt-8">Все отзывы на Картах <span data-i="arrow"></span></a>
+        </div>
+        <div class="lg:col-span-8 grid sm:grid-cols-2 gap-5">
+          <figure class="rounded-xl bg-white shadow-soft p-6 md:p-7 card-hover sm:row-span-2 flex flex-col reveal" data-d="1">
+            <div class="flex gap-0.5 text-sun-500"><span data-i="star"></span><span data-i="star"></span><span data-i="star"></span><span data-i="star"></span><span data-i="star"></span></div>
+            <blockquote class="mt-4 text-[17px] leading-relaxed text-ink">«Сделали предварительный выезд, так как монтаж предусматривал выход в откос. Прибыли точно в срок, провели все работы — два вывода в откос для двух бризеров. Денис и Илья — мастера своего дела!»</blockquote>
+            <figcaption class="mt-auto pt-6 flex items-center gap-3">
+              <span class="w-11 h-11 rounded-full bg-brand-100 text-brand-800 grid place-items-center font-bold">A</span>
+              <span><b class="block">Alex</b><span class="text-sm text-ink-3">Монтаж с выводом в откос · 01.05.2026</span></span>
+            </figcaption>
+          </figure>
+          <figure class="rounded-xl bg-white shadow-soft p-6 md:p-7 card-hover reveal" data-d="2">
+            <div class="flex gap-0.5 text-sun-500"><span data-i="star"></span><span data-i="star"></span><span data-i="star"></span><span data-i="star"></span><span data-i="star"></span></div>
+            <blockquote class="mt-4 text-[17px] leading-relaxed">«За час всё было сделано, монтаж чистый, без пыли. По цене без сюрпризов, как договаривались.»</blockquote>
+            <figcaption class="mt-5 flex items-center gap-3"><span class="w-11 h-11 rounded-full bg-sun-100 text-[#A86A12] grid place-items-center font-bold">S</span><span><b class="block">Sergey Mokin</b><span class="text-sm text-ink-3">24.06.2026</span></span></figcaption>
+          </figure>
+          <figure class="rounded-xl bg-brand-700 text-white p-6 md:p-7 card-hover reveal" data-d="3">
+            <div class="flex gap-0.5 text-sun-300"><span data-i="star"></span><span data-i="star"></span><span data-i="star"></span><span data-i="star"></span><span data-i="star"></span></div>
+            <blockquote class="mt-4 text-[17px] leading-relaxed">«Выходное отверстие где ожидалось, и штора опускается в миллиметре от бризера. Рекомендую!»</blockquote>
+            <figcaption class="mt-5 flex items-center gap-3"><span class="w-11 h-11 rounded-full bg-white/15 grid place-items-center font-bold">V</span><span><b class="block">Vsevolod</b><span class="text-sm text-white/60">22.07.2026</span></span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LEAD FORM ============ -->
+  <section id="lead" class="py-16 md:py-24">
+    <div class="mx-auto max-w-page px-5 md:px-8">
+      <div class="relative rounded-2xl bg-brand-900 text-white overflow-hidden p-7 md:p-14 grid md:grid-cols-2 gap-10 items-center reveal">
+        <div data-slot="airflow" data-h="500" data-color="#8FD3CF" data-op=".25" class="absolute inset-0 w-full h-full"></div>
+        <div class="absolute -right-24 -bottom-24 w-80 h-80 rounded-full bg-brand-700/60 blur-2xl animate-breathe"></div>
+        <div class="relative">
+          <h2 class="text-[32px] leading-[1.1] md:text-h2 font-bold tracking-[-0.03em]">Подберём бризер <span class="font-light text-brand-300">за&nbsp;10&nbsp;минут</span></h2>
+          <p class="mt-4 text-white/70 max-w-[420px]">Оставьте номер — инженер перезвонит, уточнит площадь и&nbsp;стены, посчитает монтаж с&nbsp;учётом скидки.</p>
+          <ul class="mt-6 space-y-2 text-sm text-white/80">
+            <li class="flex items-center gap-2"><span class="text-brand-300" data-i="check"></span>Бесплатная консультация</li>
+            <li class="flex items-center gap-2"><span class="text-brand-300" data-i="check"></span>Перезвоним в течение 15 минут</li>
+          </ul>
+        </div>
+        <form class="relative glass rounded-xl p-5 md:p-7 text-ink space-y-3" onsubmit="event.preventDefault()">
+          <div class="field"><input id="n" placeholder=" " /><label for="n">Ваше имя</label></div>
+          <div class="field"><input id="p" placeholder=" " inputmode="tel" value="+7 (9" /><label for="p">Телефон</label></div>
+          <button class="btn btn-primary w-full !h-14">Жду звонка <span data-i="arrow"></span></button>
+          <p class="text-xs text-ink-3 text-center">Нажимая кнопку, вы соглашаетесь с <a href="#" class="underline">обработкой данных</a></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <div data-slot="footer"></div>
+  <div data-slot="floaters"></div>
+
+  <script>
+    // Works slider cards
+    const works = [['3141','Гостиная','ЖК «Level Нагатинская»'],['9708','Кабинет','Хамовники'],['2068','Лофт','Красная Пресня'],['3164','Спальня','ЖК «Символ»'],['9951','Спальня','Раменки'],['2480','Кухня-гостиная','Сокол'],['1392','Детская','Новая Москва'],['2255','Гардероб','Одинцово']];
+    document.getElementById('works').innerHTML = works.map(([n,t,l],i)=>`
+      <figure class="group relative shrink-0 snap-start w-[78vw] sm:w-[360px] md:w-[380px] aspect-[3/4] rounded-xl overflow-hidden card-hover ${i%2?'md:mt-12':''}">
+        <img src="${WORK(n)}" class="zoom absolute inset-0 w-full h-full object-cover" loading="lazy" alt="${t}"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+        <figcaption class="absolute left-4 right-4 bottom-4 bg-white/85 backdrop-blur-md rounded-md px-4 py-3 flex items-center justify-between">
+          <span><b class="block text-[15px]">${t}</b><span class="text-xs text-ink-3">${l}</span></span>
+          <span class="w-9 h-9 rounded-full bg-white grid place-items-center text-brand-700 group-hover:bg-brand-700 group-hover:text-white transition">${ic.plus(16)}</span>
+        </figcaption>
+      </figure>`).join('');
+  </script>
+</body>
+</html>

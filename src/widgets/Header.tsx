@@ -1,28 +1,47 @@
 "use client";
 
 import { ContactCTAButton } from "@/features";
-import { PhoneNumber } from "@/shared";
+import { useCart } from "@/features/cart";
+import { config, PhoneNumber } from "@/shared";
 import Logo from "@/shared/ui/Logo";
-import {
-  Button,
-  Drawer,
-  DrawerBody,
-  DrawerContent,
-  DrawerHeader,
-} from "@heroui/react";
+import { Drawer, DrawerBody, DrawerContent, DrawerHeader } from "@heroui/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { LuMenu, LuPhone, LuShoppingCart, LuX } from "react-icons/lu";
 
 type NavItem = { href: string; label: string };
 
 const navItems: NavItem[] = [
-  { href: "/", label: "Главная" },
   { href: "/catalog", label: "Каталог" },
+  { href: "/workprocess", label: "Процесс работы" },
   { href: "/about", label: "О нас" },
   { href: "/contact", label: "Контакты" },
-  { href: "/workprocess", label: "Процесс работы" },
 ];
+
+const phoneHref = `tel:${config.contact.phone}`;
+
+const CartButton: React.FC = () => {
+  const { totals, ready } = useCart();
+  const count = ready ? totals.units : 0;
+  return (
+    <Link
+      href="/cart"
+      aria-label={count ? `Корзина, товаров: ${count}` : "Корзина"}
+      className="relative w-11 h-11 md:w-12 md:h-12 rounded-full bg-white border border-line grid place-items-center hover:border-brand-700 hover:text-brand-700 transition"
+    >
+      <LuShoppingCart className="w-5 h-5" />
+      {count > 0 && (
+        <span
+          key={count}
+          className="absolute -top-1 -right-1 min-w-[20px] h-5 px-1 rounded-full bg-brand-700 text-white text-[11px] font-extrabold grid place-items-center ring-2 ring-white animate-[fadeIn_.4s_ease]"
+        >
+          {count}
+        </span>
+      )}
+    </Link>
+  );
+};
 
 const Header: React.FC = () => {
   const [open, setOpen] = useState(false);
@@ -38,84 +57,61 @@ const Header: React.FC = () => {
 
   const closeMenu = () => setOpen(false);
 
-  // Функция для проверки активного пункта меню
   const isActive = (href: string) => {
     if (!pathname) return false;
-    if (href === "/") {
-      return pathname === "/";
-    }
+    if (href === "/") return pathname === "/";
     return pathname.startsWith(href);
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm border-b">
-      <div className="max-w-7xl mx-auto px-4 py-4">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <div className="flex items-center">
+    <header className="sticky top-0 z-50 px-3 md:px-6 pt-3">
+      <div className="glass shadow-soft mx-auto max-w-page rounded-full h-16 pl-4 pr-2 md:pl-6 flex items-center gap-4">
+        <Link href="/" className="flex items-center gap-2 shrink-0" aria-label="Propritok — на главную">
+          <Logo height={30} />
+          <span className="font-extrabold tracking-[0.14em] text-[15px] text-ink">PROPRITOK</span>
+        </Link>
+
+        {/* Desktop nav */}
+        <nav className="hidden lg:flex items-center gap-8 mx-auto text-[15px] font-semibold text-ink-2">
+          {navItems.map((item) => (
             <Link
-              href="/"
-              className="text-2xl font-bold text-[var(--secondary-color)]"
+              key={item.href}
+              href={item.href}
+              className={`nav-link transition ${isActive(item.href) ? "active text-ink" : "hover:text-ink"}`}
             >
-              <Logo />
+              {item.label}
             </Link>
-            <Link
-              href="/"
-              className="hidden md:block text-2xl font-Montserrat font-bold text-[var(--secondary-color)]"
-            >
-              PROPRITOK
-            </Link>
+          ))}
+        </nav>
+
+        <div className="ml-auto lg:ml-0 flex items-center gap-2">
+          <div className="hidden md:flex flex-col items-end leading-tight mr-2">
+            <PhoneNumber className="font-extrabold text-[15px] tnum" />
+            <span className="text-xs text-ink-3">Пн–Пт {config.contact.workingHours.weekdays}</span>
           </div>
-
-          {/* Desktop nav */}
-          <nav className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <div key={item.href} className="relative">
-                <Link
-                  href={item.href}
-                  className={`transition-colors relative ${
-                    isActive(item.href)
-                      ? "text-[var(--secondary-color)] font-semibold"
-                      : "text-gray-700 hover:text-[var(--secondary-color)]"
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              </div>
-            ))}
-          </nav>
-
-          {/* CTA + Burger */}
-          <div className="flex items-center space-x-4">
-            <ContactCTAButton
-              label="Заказать звонок"
-              color="primary"
-              formButtonLabel="Заказать звонок"
-              className="w-full bg-[var(--secondary-color)] text-white"
-            />
-
-            {/* Burger (mobile) */}
-            <button
-              type="button"
-              className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-md border border-gray-200 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[var(--secondary-color)]"
-              aria-label="Открыть меню"
-              aria-expanded={open}
-              onClick={() => setOpen(true)}
-            >
-              <span className="sr-only">Toggle menu</span>
-              <svg
-                className="h-5 w-5"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path d="M3 6h18" />
-                <path d="M3 12h18" />
-                <path d="M3 18h18" />
-              </svg>
-            </button>
-          </div>
+          <a
+            href={phoneHref}
+            className="md:hidden w-11 h-11 rounded-full bg-brand-50 text-brand-700 grid place-items-center"
+            aria-label="Позвонить"
+          >
+            <LuPhone className="w-[18px] h-[18px]" />
+          </a>
+          <CartButton />
+          <ContactCTAButton
+            label="Заявка"
+            formButtonLabel="Заказать звонок"
+            modalTitle="Заказать звонок"
+            className="hidden sm:inline-flex h-12 min-w-0 px-5 rounded-full font-bold"
+          />
+          <button
+            type="button"
+            className="lg:hidden w-11 h-11 rounded-full bg-ink text-white grid place-items-center"
+            aria-label="Открыть меню"
+            aria-expanded={open}
+            onClick={() => setOpen(true)}
+          >
+            <LuMenu className="w-[18px] h-[18px]" />
+          </button>
         </div>
       </div>
 
@@ -126,61 +122,57 @@ const Header: React.FC = () => {
         onOpenChange={setOpen}
         placement="right"
         size="sm"
-        className="md:hidden rounded-none"
+        className="lg:hidden rounded-l-[32px] bg-air"
       >
         <DrawerContent>
-          <DrawerHeader className="border-b">
+          <DrawerHeader className="px-6 pt-6">
             <div className="flex w-full items-center justify-between">
-              <PhoneNumber
-                className="text-xl font-bold text-[var(--secondary-color)]"
+              <Link href="/" onClick={closeMenu} className="flex items-center gap-2">
+                <Logo height={28} />
+                <span className="font-extrabold tracking-[0.14em] text-sm text-ink">PROPRITOK</span>
+              </Link>
+              <button
+                type="button"
                 onClick={closeMenu}
-              />
-              <Button
-                variant="flat"
-                onPress={closeMenu}
-                className="min-w-0 h-9 w-9 p-0"
+                className="w-10 h-10 rounded-full bg-white border border-line grid place-items-center"
                 aria-label="Закрыть меню"
               >
-                <svg
-                  className="h-5 w-5"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <path d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </Button>
+                <LuX className="w-5 h-5" />
+              </button>
             </div>
           </DrawerHeader>
 
-          <DrawerBody className="px-4 py-3">
+          <DrawerBody className="px-6 py-4 flex flex-col">
             <nav>
               <ul className="space-y-1">
-                {navItems.map((item) => (
-                  <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      className={`block rounded-md px-3 py-2 transition-colors font-medium ${
-                        isActive(item.href)
-                          ? "bg-[var(--secondary-color)] text-white shadow-sm"
-                          : "text-gray-800 hover:bg-gray-50 hover:text-[var(--secondary-color)]"
-                      }`}
-                      onClick={closeMenu}
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
+                {[{ href: "/", label: "Главная" }, ...navItems, { href: "/cart", label: "Корзина" }].map(
+                  (item) => (
+                    <li key={item.href}>
+                      <Link
+                        href={item.href}
+                        onClick={closeMenu}
+                        className={`block rounded-2xl px-4 py-3 text-[22px] font-bold tracking-[-0.02em] transition ${
+                          isActive(item.href) ? "bg-white text-brand-700 shadow-soft" : "text-ink hover:bg-white"
+                        }`}
+                      >
+                        {item.label}
+                      </Link>
+                    </li>
+                  ),
+                )}
               </ul>
             </nav>
 
-            <div className="mt-4">
+            <div className="mt-auto pt-6 space-y-3">
+              <PhoneNumber className="block text-2xl font-extrabold tnum text-ink" />
+              <p className="text-sm text-ink-3">
+                Пн–Пт {config.contact.workingHours.weekdays}, Сб–Вс {config.contact.workingHours.weekends}
+              </p>
               <ContactCTAButton
                 label="Заказать звонок"
-                color="primary"
                 formButtonLabel="Заказать звонок"
-                className="w-full bg-[var(--secondary-color)] text-white"
+                modalTitle="Заказать звонок"
+                className="w-full h-14 rounded-full font-bold"
               />
             </div>
           </DrawerBody>

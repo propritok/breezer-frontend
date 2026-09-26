@@ -6,23 +6,24 @@ interface ProductDescriptionProps {
   title?: string;
 }
 
-export const ProductDescription: React.FC<ProductDescriptionProps> = ({
-  product,
-  title = 'Описание',
-  
-}) => {
+export const ProductDescription: React.FC<ProductDescriptionProps> = ({ product, title = 'Описание' }) => {
   const description = product?.description;
 
   if (!description) {
     return null;
   }
 
+  const [lead, ...rest] = description.split(/\n\s*\n/);
+
   return (
-    <div className='mb-10'>
-      <h2 className='text-2xl font-bold mb-4'>{title}</h2>
-      <div className='prose prose-gray max-w-none'>
-        <p className='text-gray-700 leading-relaxed whitespace-pre-line'>{description}</p>
-      </div>
+    <div>
+      <h2 className='text-[30px] leading-[1.1] md:text-[40px] font-bold tracking-[-0.03em]'>{title}</h2>
+      <p className='mt-5 text-body-lg text-ink leading-relaxed'>{lead}</p>
+      {rest.map((p, i) => (
+        <p key={i} className='mt-4 text-ink-2 leading-relaxed whitespace-pre-line'>
+          {p}
+        </p>
+      ))}
     </div>
   );
 };

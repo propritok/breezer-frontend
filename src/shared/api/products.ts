@@ -1,4 +1,4 @@
-import { Product, ProductBrand, ProductShort } from "../../entities/Product";
+import { Product, ProductBrand, ProductHighlights, ProductShort } from "../../entities/Product";
 import { config } from "../config";
 
 // Интерфейс для ответа PocketBase
@@ -20,6 +20,7 @@ interface PocketBaseProduct {
   modelNameRu: string;
   description: string;
   price: number;
+  oldPrice?: number;
   inStock: boolean;
   images: string[];
   spec: any;
@@ -36,6 +37,10 @@ const getImageUrl = (
   return `${config.pocketbase.baseUrl}/files/${collectionId}/${recordId}/${filename}`;
 };
 
+// Старая цена нужна только если она больше текущей (иначе скидки нет). Без undefined — Next не сериализует его в props
+const pickOldPrice = (p: PocketBaseProduct) =>
+  p.oldPrice && p.oldPrice > p.price ? { oldPrice: p.oldPrice } : {};
+
 // Функция для преобразования продукта из PocketBase в наш формат
 const transformPocketBaseProduct = (pbProduct: PocketBaseProduct): Product => {
   return {
@@ -45,6 +50,7 @@ const transformPocketBaseProduct = (pbProduct: PocketBaseProduct): Product => {
     description: pbProduct.description,
     inStock: pbProduct.inStock,
     price: `${pbProduct.price} руб.`,
+    ...pickOldPrice(pbProduct),
     images: pbProduct.images.map((filename) =>
       getImageUrl(pbProduct.collectionId, pbProduct.id, filename)
     ),
@@ -53,14 +59,26 @@ const transformPocketBaseProduct = (pbProduct: PocketBaseProduct): Product => {
   };
 };
 
+// Ключевые характеристики для карточки в каталоге (без undefined — иначе Next не сериализует props)
+const pickHighlights = (spec: any): ProductHighlights => {
+  const h: ProductHighlights = {};
+  if (spec?.roomAreaMaxM2) h.areaM2 = spec.roomAreaMaxM2;
+  if (spec?.noiseLevelDb?.min) h.noiseMinDb = spec.noiseLevelDb.min;
+  if (spec?.filterClassMax) h.filter = spec.filterClassMax;
+  if (spec?.airflowMaxM3h) h.airflowM3h = spec.airflowMaxM3h;
+  return h;
+};
+
 // Функция для преобразования в ProductShort
 const transformToProductShort = (product: PocketBaseProduct): ProductShort => {
   return {
+    highlights: pickHighlights(product.spec),
     id: product.id,
     modelNameEn: product.modelNameEn,
     modelNameRu: product.modelNameRu,
     inStock: product.inStock,
     price: `${product.price} руб.`,
+    ...pickOldPrice(product),
     images: product.images.map((filename) =>
       getImageUrl(product.collectionId, product.id, filename)
     ),

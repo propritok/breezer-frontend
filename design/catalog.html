@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Propritok — Каталог (редизайн)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="assets/tw-config.js?v=4"></script>
+  <link rel="stylesheet" href="assets/shared.css?v=4" />
+  <script src="assets/shared.js?v=4"></script>
+</head>
+<body class="overflow-x-hidden">
+  <div data-slot="header" data-active="Каталог"></div>
+
+  <!-- Title + search -->
+  <section class="relative pt-10 md:pt-16 pb-8 overflow-hidden">
+    <div class="absolute -top-40 right-0 w-[520px] h-[520px] rounded-full bg-brand-100 blur-3xl opacity-60 animate-breathe"></div>
+    <div class="relative mx-auto max-w-page px-5 md:px-8">
+      <nav class="text-sm text-ink-3 flex items-center gap-2"><a href="home.html" class="hover:text-brand-700">Главная</a><span>/</span><span class="text-ink font-semibold">Каталог</span></nav>
+      <div class="mt-6 flex flex-col lg:flex-row lg:items-end justify-between gap-8">
+        <div>
+          <h1 class="text-[40px] leading-[1.02] md:text-display font-light tracking-[-0.045em]">Каталог <span class="font-extrabold">бризеров</span></h1>
+          <p class="mt-4 text-ink-2 text-body-lg max-w-[520px]">20 моделей от 4 брендов. Все — с установкой под ключ и скидкой 30% на монтаж.</p>
+        </div>
+        <!-- search (HeroUI <Input variant="bordered" radius="full" startContent>) -->
+        <label class="group relative w-full lg:w-[440px]">
+          <span class="absolute left-5 top-1/2 -translate-y-1/2 text-ink-3 group-focus-within:text-brand-700" data-i="search"></span>
+          <input class="w-full h-16 rounded-full bg-white shadow-soft border border-line pl-14 pr-32 text-[16px] font-semibold outline-none focus:border-brand-700 focus:ring-4 focus:ring-brand-700/10 transition" placeholder="Поиск по модели, например «Tion 4S»" />
+          <span class="absolute right-2 top-1/2 -translate-y-1/2 btn btn-primary btn-sm !h-12">Найти</span>
+        </label>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filters -->
+  <section class="sticky top-[84px] z-30">
+    <div class="mx-auto max-w-page px-5 md:px-8">
+      <div class="glass shadow-soft rounded-xl p-3 md:p-4 space-y-3">
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar">
+          <span class="text-xs font-bold uppercase tracking-[0.12em] text-ink-3 shrink-0 w-20 hidden md:block">Бренд</span>
+          <span class="chip on">Все <span class="count">20</span></span>
+          <span class="chip">Tion <span class="count">13</span></span>
+          <span class="chip">Ballu <span class="count">3</span></span>
+          <span class="chip">Royal Clima <span class="count">3</span></span>
+          <span class="chip">Zilon <span class="count">1</span></span>
+          <span class="ml-auto shrink-0 hidden md:flex items-center gap-2 text-sm font-semibold text-ink-2 pl-4 border-l border-line">
+            Сортировка:
+            <button class="h-10 px-4 rounded-full bg-white border border-line inline-flex items-center gap-2">Популярные <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg></button>
+          </span>
+        </div>
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar">
+          <span class="text-xs font-bold uppercase tracking-[0.12em] text-ink-3 shrink-0 w-20 hidden md:block">Подбор</span>
+          <span class="chip on"><span data-i="home" data-s="16"></span>До 40 м²<span class="ml-1 opacity-80">×</span></span>
+          <span class="chip"><span data-i="volume" data-s="16"></span>Тихие ≤ 20 дБ</span>
+          <span class="chip"><span data-i="thermo" data-s="16"></span>С подогревом</span>
+          <span class="chip"><span data-i="sparkle" data-s="16"></span>HEPA H13</span>
+          <span class="chip"><span data-i="wind" data-s="16"></span>CO₂-датчик</span>
+          <span class="chip">Умный дом</span>
+          <span class="chip">В наличии</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Grid -->
+  <section class="py-8 md:py-12">
+    <div class="mx-auto max-w-page px-5 md:px-8">
+      <div class="flex items-center justify-between mb-6 text-sm">
+        <span class="text-ink-2"><b class="text-ink">14 моделей</b> по выбранным фильтрам</span>
+        <button class="text-brand-700 font-semibold hover:underline">Сбросить фильтры</button>
+      </div>
+      <div id="grid" class="grid grid-cols-1 min-[480px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5"></div>
+      <div class="mt-12 flex justify-center"><button class="btn btn-secondary !h-14 !px-8">Показать ещё 6 моделей</button></div>
+    </div>
+  </section>
+
+  <div data-slot="footer"></div>
+  <div data-slot="floaters"></div>
+
+  <script>
+    // Grid with an inline "help me choose" promo tile after the 5th card
+    const promo = `<div class="relative rounded-xl bg-brand-900 text-white p-7 overflow-hidden flex flex-col min-h-[420px] min-[480px]:col-span-2 lg:col-span-1">
+      ${airflow({ h: 500, w: 400, color: '#8FD3CF', op: .3, cls: 'absolute inset-0 w-full h-full' })}
+      <div class="absolute -right-10 -top-10 w-40 h-40 rounded-full bg-brand-700 animate-breathe"></div>
+      <span class="relative w-12 h-12 rounded-full bg-white/10 grid place-items-center">${ic.chat(22)}</span>
+      <h3 class="relative mt-auto text-h3 font-bold leading-tight tracking-[-0.02em]">Не знаете, какой выбрать?</h3>
+      <p class="relative mt-3 text-white/70 text-sm">Инженер подберёт модель под площадь, стены и бюджет — бесплатно.</p>
+      <a href="home.html#lead" class="relative btn btn-light btn-sm mt-6 self-start">Подобрать бризер ${ic.arrow(16)}</a>
+    </div>`;
+    const cards = PRODUCTS.map(productCard);
+    cards.splice(5, 0, promo);
+    document.getElementById('grid').innerHTML = cards.join('');
+    document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => c.classList.toggle('on')));
+  </script>
+</body>
+</html>

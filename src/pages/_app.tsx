@@ -1,9 +1,12 @@
-import { CookieNotice, FloatingSocialButtons, Footer, Header, SiteBreadcrumbs } from '@/widgets';
+import { CartProvider, CartToast } from '@/features/cart';
+import { CookieNotice, FloatingSocialButtons, Footer, Header } from '@/widgets';
 import { HeroUIProvider } from '@heroui/react';
-import type { AppProps } from 'next/app';
+import { DEFAULT_SETTINGS, settingsApi, SiteSettings } from '@/shared/api/settings';
+import { SiteSettingsProvider } from '@/shared/lib/siteSettings';
+import NextApp, { type AppContext, type AppProps } from 'next/app';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -17,8 +20,12 @@ declare global {
   }
 }
 
-export default function App({ Component, pageProps }: AppProps) {
+type PropritokAppProps = AppProps & { siteSettings?: SiteSettings };
+
+export default function App({ Component, pageProps, siteSettings }: PropritokAppProps) {
   const router = useRouter();
+  // Настройки из PocketBase приходят с первым серверным рендером и живут всю сессию
+  const [settings] = useState<SiteSettings>(siteSettings ?? DEFAULT_SETTINGS);
 
   useEffect(() => {
     const handleRouteChange = (url: string) => {
@@ -53,14 +60,24 @@ export default function App({ Component, pageProps }: AppProps) {
           />
         </div>
       </noscript>
-      <div className='pt-16'>
-        <Header />
-
-        <Component {...pageProps} />
-        <Footer />
-        <FloatingSocialButtons />
-        <CookieNotice />
-      </div>
+      <SiteSettingsProvider value={settings}>
+        <CartProvider>
+          <Header />
+          <Component {...pageProps} />
+          <Footer />
+          <FloatingSocialButtons />
+          <CookieNotice />
+          <CartToast />
+        </CartProvider>
+      </SiteSettingsProvider>
     </HeroUIProvider>
   );
 }
+
+// Скидка, цены монтажа и мессенджеры задаются в PocketBase (см. src/shared/api/settings.ts).
+// Грузим на сервере; при клиентской навигации не перезапрашиваем — они уже в состоянии App
+App.getInitialProps = async (appContext: AppContext) => {
+  const appProps = await NextApp.getInitialProps(appContext);
+  if (typeof window !== 'undefined') return appProps;
+  return { ...appProps, siteSettings: await settingsApi.get() };
+};

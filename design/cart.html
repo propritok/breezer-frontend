@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Propritok — Корзина (редизайн)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="assets/tw-config.js?v=4"></script>
+  <link rel="stylesheet" href="assets/shared.css?v=4" />
+  <script src="assets/shared.js?v=4"></script>
+  <style>
+    .radio-card { transition: border-color .2s, background-color .2s, box-shadow .2s; }
+    .radio-card.on { border-color: #0D7E8B; background: #EEF8F6; box-shadow: 0 0 0 3px rgba(13,126,139,.12); }
+    .radio-card .dot { transition: all .2s; }
+    .radio-card.on .dot { border-width: 6px; border-color: #0D7E8B; }
+    .collapse-y { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .45s cubic-bezier(.2,.7,.2,1); }
+    .collapse-y.open { grid-template-rows: 1fr; }
+    .collapse-y > div { overflow: hidden; }
+    .switch { width: 48px; height: 28px; border-radius: 99px; background: #E6E2DA; position: relative; transition: background .25s; flex: none; }
+    .switch::after { content: ''; position: absolute; top: 4px; left: 4px; width: 20px; height: 20px; border-radius: 99px; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.2); transition: transform .3s cubic-bezier(.2,.7,.2,1); }
+    .switch.on { background: #0D7E8B; } .switch.on::after { transform: translateX(20px); }
+  </style>
+</head>
+<body class="overflow-x-hidden pb-28 lg:pb-0">
+  <div data-slot="header"></div>
+
+  <main class="mx-auto max-w-page px-5 md:px-8 pt-8 md:pt-12 pb-16">
+    <!-- title + stepper -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+      <div>
+        <nav class="text-sm text-ink-3 flex items-center gap-2"><a href="home.html" class="hover:text-brand-700">Главная</a><span>/</span><span class="text-ink font-semibold">Корзина</span></nav>
+        <h1 id="title" class="mt-4 text-[40px] leading-[1.02] md:text-h1 font-light tracking-[-0.04em]"></h1>
+      </div>
+      <ol id="stepper" class="flex items-center gap-2 text-sm font-bold"></ol>
+    </div>
+
+    <div id="view" class="mt-8 md:mt-10"></div>
+  </main>
+
+  <div data-slot="footer"></div>
+
+  <script>
+    const DEMO = [{ id: 'biox', qty: 1, install: 'std' }, { id: 'asp100', qty: 2, install: 'slope' }, { id: 'rcb150', qty: 1, install: null }];
+    if (!localStorage.getItem('pp_cart') || new URLSearchParams(location.search).has('demo')) localStorage.setItem('pp_cart', JSON.stringify(DEMO));
+    if (location.hash === '#empty') localStorage.setItem('pp_cart', '[]');
+    const prod = (id) => PRODUCTS.find((p) => p.id === id);
+
+    const totals = () => {
+      const c = getCart();
+      const goods = c.reduce((a, r) => a + prod(r.id).price * r.qty, 0);
+      const instFull = c.reduce((a, r) => a + (r.install ? INSTALL.find((i) => i.id === r.install).price * r.qty : 0), 0);
+      const inst = c.reduce((a, r) => a + (r.install ? instPrice(r.install) * r.qty : 0), 0);
+      const units = c.reduce((a, r) => a + r.qty, 0);
+      const instUnits = c.reduce((a, r) => a + (r.install ? r.qty : 0), 0);
+      return { goods, inst, instFull, units, instUnits, total: goods + inst, save: instFull - inst };
+    };
+    const plural = (n, a, b, c) => (n % 10 === 1 && n % 100 !== 11 ? a : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? b : c);
+
+    /* ---------- stepper ---------- */
+    function stepper(step) {
+      const s = ['Корзина', 'Контакты', 'Готово'];
+      document.getElementById('stepper').innerHTML = s.map((t, i) => `
+        <li class="flex items-center gap-2 ${i ? 'before:content-[\'\'] before:w-6 md:before:w-10 before:h-[2px] before:rounded before:' + (i <= step ? 'bg-brand-700' : 'bg-line') : ''}">
+          <span class="w-8 h-8 rounded-full grid place-items-center text-xs ${i < step ? 'bg-brand-700 text-white' : i === step ? 'bg-ink text-white' : 'bg-white border border-line text-ink-3'}">${i < step ? ic.check(14) : i + 1}</span>
+          <span class="${i === step ? 'text-ink' : 'text-ink-3'} ${i === step ? '' : 'hidden sm:inline'}">${t}</span>
+        </li>`).join('');
+    }
+
+    /* ---------- summary (desktop sticky aside + mobile bottom bar) ---------- */
+    function summary(step) {
+      const t = totals();
+      const cta = step === 0 ? `<button onclick="go('#checkout')" class="btn btn-primary w-full !h-14">Перейти к оформлению ${ic.arrow(18)}</button>`
+                             : `<button form="order" class="btn btn-primary w-full !h-14">Оформить заказ ${ic.arrow(18)}</button>`;
+      return `<aside class="hidden lg:block lg:col-span-4 lg:sticky lg:top-28 self-start">
+        <div class="rounded-xl bg-white shadow-lift p-6">
+          <h2 class="text-h4 font-bold">Ваш заказ</h2>
+          <dl class="mt-5 space-y-3 text-[15px]">
+            <div class="flex justify-between"><dt class="text-ink-2">Бризеры · ${t.units} шт</dt><dd class="font-semibold tnum">${rub(t.goods)}</dd></div>
+            <div class="flex justify-between"><dt class="text-ink-2">Монтаж · ${t.instUnits} шт</dt><dd class="font-semibold tnum">${t.inst ? `<s class="text-ink-3 font-normal mr-1.5">${rub(t.instFull)}</s>${rub(t.inst)}` : '—'}</dd></div>
+            ${t.save ? `<div class="flex justify-between items-center rounded-md bg-sun-100 px-3 py-2 text-[#A86A12]"><dt class="font-semibold text-sm">Скидка 30% на монтаж</dt><dd class="font-extrabold tnum">−${rub(t.save)}</dd></div>` : ''}
+            <div class="flex justify-between"><dt class="text-ink-2">Доставка по Москве</dt><dd class="font-semibold text-[#15855F]">Бесплатно</dd></div>
+          </dl>
+          <div class="mt-5 pt-5 border-t border-line flex items-end justify-between">
+            <span class="font-bold">Итого</span><span class="text-[34px] leading-none font-extrabold tracking-[-0.04em] tnum">${rub(t.total)}</span>
+          </div>
+          <div class="mt-5">${cta}</div>
+          <div class="mt-4 flex gap-3 rounded-md bg-brand-50 p-3.5 text-sm text-ink-2">
+            <span class="text-brand-700 shrink-0 mt-0.5">${ic.shield(18)}</span>
+            <span>Онлайн-оплаты нет. Инженер перезвонит, подтвердит состав и время — оплата после монтажа.</span>
+          </div>
+        </div>
+      </aside>
+      <div class="lg:hidden fixed inset-x-0 bottom-0 z-40 p-3">
+        <div class="glass shadow-lift rounded-xl p-3 pl-5 flex items-center gap-3">
+          <div class="flex-1 min-w-0"><div class="text-xs text-ink-3">${t.units} ${plural(t.units, 'товар', 'товара', 'товаров')}${t.save ? ` · <span class="text-[#A86A12] font-bold">−${rub(t.save)}</span>` : ''}</div><div class="text-[22px] font-extrabold tracking-[-0.03em] tnum">${rub(t.total)}</div></div>
+          ${step === 0 ? `<button onclick="go('#checkout')" class="btn btn-primary !h-12 !px-5">Оформить ${ic.arrow(16)}</button>` : `<button form="order" class="btn btn-primary !h-12 !px-5">Заказать</button>`}
+        </div>
+      </div>`;
+    }
+
+    /* ---------- STEP 1: cart ---------- */
+    function row(r, idx) {
+      const p = prod(r.id);
+      const on = !!r.install;
+      return `<article class="rounded-xl bg-white shadow-soft overflow-hidden">
+        <div class="p-4 md:p-5 flex gap-4">
+          <a href="product.html" class="w-24 h-24 md:w-32 md:h-32 rounded-lg bg-gradient-to-b from-brand-50 to-white shrink-0 overflow-hidden"><img src="${p.img}" onerror="${imgFallback}" class="w-full h-full object-contain p-3 mix-blend-multiply" alt=""></a>
+          <div class="flex-1 min-w-0 flex flex-col">
+            <div class="flex items-start justify-between gap-3">
+              <div class="min-w-0">
+                <div class="flex items-center gap-3 flex-wrap"><span class="text-xs font-bold uppercase tracking-[0.12em] text-ink-3">${p.brand}</span>${statusChip(p.stock)}</div>
+                <a href="product.html" class="mt-1 block font-bold text-[17px] md:text-h4 leading-snug hover:text-brand-700">${p.name}</a>
+              </div>
+              <button onclick="removeRow(${idx})" class="w-9 h-9 rounded-full text-ink-3 hover:bg-[#FBEAE6] hover:text-[#D2553F] grid place-items-center shrink-0 transition" aria-label="Удалить"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg></button>
+            </div>
+            <div class="mt-auto pt-3 flex items-end justify-between gap-3">
+              <div class="inline-flex items-center h-11 rounded-full border border-line bg-air/60">
+                <button onclick="qty(${idx},-1)" class="w-11 h-11 grid place-items-center text-lg font-bold hover:text-brand-700 disabled:opacity-30" ${r.qty < 2 ? 'disabled' : ''}>−</button>
+                <span class="w-6 text-center font-extrabold tnum">${r.qty}</span>
+                <button onclick="qty(${idx},1)" class="w-11 h-11 grid place-items-center text-lg font-bold hover:text-brand-700">+</button>
+              </div>
+              <div class="text-right"><div class="text-xs text-ink-3 tnum">${r.qty > 1 ? r.qty + ' × ' + rub(p.price) : ''}</div><div class="text-[20px] md:text-[22px] font-extrabold tracking-[-0.02em] tnum">${rub(p.price * r.qty)}</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- install toggle -->
+        <div class="border-t border-line ${on ? 'bg-brand-50/50' : ''} transition-colors">
+          <label class="flex items-center gap-4 px-4 md:px-5 py-4 cursor-pointer select-none" onclick="toggleInst(${idx})">
+            <span class="switch ${on ? 'on' : ''}"></span>
+            <span class="flex-1 leading-tight">
+              <b class="block text-[15px]">Нужен монтаж</b>
+              <span class="text-sm text-ink-3">${on ? `${INSTALL.find((i) => i.id === r.install).name} · скидка 30% применена` : 'Установим под ключ со скидкой 30%'}</span>
+            </span>
+            <span class="text-right shrink-0 tnum">${on ? `<s class="block text-xs text-ink-3">${rub(INSTALL.find((i) => i.id === r.install).price * r.qty)}</s><b class="text-brand-700">+${rub(instPrice(r.install) * r.qty)}</b>` : `<span class="text-sm font-bold text-brand-700">от ${rub(instPrice('ready'))}</span>`}</span>
+          </label>
+          <div class="collapse-y ${on ? 'open' : ''}"><div>
+            <div class="px-4 md:px-5 pb-5 grid sm:grid-cols-2 gap-2">
+              ${INSTALL.map((i) => `<button onclick="setInst(${idx},'${i.id}')" class="radio-card ${r.install === i.id ? 'on' : ''} text-left rounded-md border border-line bg-white p-3.5 flex gap-3 items-start">
+                <span class="dot mt-0.5 w-5 h-5 rounded-full border-2 border-line bg-white shrink-0"></span>
+                <span class="flex-1 min-w-0"><b class="block text-sm">${i.name}</b><span class="block text-xs text-ink-3 mt-0.5">${i.hint}</span></span>
+                <span class="text-right shrink-0 tnum"><s class="block text-[11px] text-ink-3">${rub(i.price)}</s><b class="text-sm">${rub(instPrice(i.id))}</b></span>
+              </button>`).join('')}
+              <p class="sm:col-span-2 text-xs text-ink-3 flex items-center gap-1.5 mt-1">${ic.chat(14)}Не знаете, какой вариант? Оставьте «Стандарт» — инженер уточнит по фото стены.</p>
+            </div>
+          </div></div>
+        </div>
+      </article>`;
+    }
+
+    function viewCart() {
+      const c = getCart();
+      if (!c.length) return viewEmpty();
+      const t = totals();
+      document.getElementById('title').innerHTML = `Корзина <span class="font-extrabold">${t.units}</span>`;
+      stepper(0);
+      document.getElementById('view').innerHTML = `<div class="grid lg:grid-cols-12 gap-6 lg:gap-8">
+        <div class="lg:col-span-8 min-w-0 space-y-4">
+          ${c.map(row).join('')}
+          <!-- upsell -->
+          <div class="rounded-xl bg-sand p-5 md:p-6">
+            <div class="flex items-center justify-between"><b class="text-h4">Добавить к заказу</b><span class="text-xs text-ink-3">поставим за один выезд</span></div>
+            <div class="mt-4 flex gap-3 overflow-x-auto no-scrollbar -mx-1 px-1 pb-1">
+              ${[['Датчик CO₂ Z19', 3900], ['Сменный фильтр E11', 2490], ['Нагреватель PTC-1000', 4200]].map(([n, pr]) => `<div class="shrink-0 w-[220px] rounded-md bg-white p-3 flex items-center gap-3"><span class="w-12 h-12 rounded-sm bg-brand-50 text-brand-700 grid place-items-center">${ic.sparkle(20)}</span><span class="flex-1 min-w-0"><b class="block text-sm truncate">${n}</b><span class="text-sm tnum text-ink-2">${rub(pr)}</span></span><button class="w-9 h-9 rounded-full bg-ink text-white grid place-items-center hover:bg-brand-700 transition">${ic.plus(16)}</button></div>`).join('')}
+            </div>
+          </div>
+        </div>
+        ${summary(0)}
+      </div>`;
+    }
+
+    function viewEmpty() {
+      document.getElementById('title').innerHTML = `Корзина <span class="font-extrabold">пуста</span>`;
+      document.getElementById('stepper').innerHTML = '';
+      document.getElementById('view').innerHTML = `<div class="relative rounded-2xl bg-white shadow-soft overflow-hidden py-20 md:py-28 px-6 text-center">
+        ${airflow({ h: 400, color: '#2EB1B0', op: .3, cls: 'absolute inset-0 w-full h-full' })}
+        <div class="relative mx-auto w-28 h-28 rounded-full bg-brand-50 grid place-items-center text-brand-700 animate-breathe">${ic.cart(40)}</div>
+        <h2 class="relative mt-8 text-h3 font-bold">Здесь пока только свежий воздух</h2>
+        <p class="relative mt-2 text-ink-2 max-w-[420px] mx-auto">Выберите бризер в каталоге — монтаж добавим одной галочкой и со скидкой 30%.</p>
+        <div class="relative mt-8 flex flex-col sm:flex-row gap-3 justify-center"><a href="catalog.html" class="btn btn-primary">Перейти в каталог ${ic.arrow(18)}</a><a href="home.html#lead" class="btn btn-secondary">Помочь с выбором</a></div>
+      </div>`;
+    }
+
+    /* ---------- STEP 2: checkout (no payment) ---------- */
+    function viewCheckout() {
+      const c = getCart(); if (!c.length) return viewEmpty();
+      const t = totals();
+      document.getElementById('title').innerHTML = `Оформление <span class="font-extrabold">заказа</span>`;
+      stepper(1);
+      const chip = (txt, on) => `<span class="chip ${on ? 'on' : ''}" onclick="this.parentElement.querySelectorAll('.chip').forEach(x=>x.classList.remove('on'));this.classList.add('on')">${txt}</span>`;
+      document.getElementById('view').innerHTML = `<div class="grid lg:grid-cols-12 gap-6 lg:gap-8">
+        <form id="order" onsubmit="event.preventDefault();go('#done')" class="lg:col-span-8 min-w-0 space-y-4">
+          <section class="rounded-xl bg-white shadow-soft p-5 md:p-7">
+            <div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-ink text-white grid place-items-center text-sm font-bold">1</span><h2 class="text-h4 font-bold">Контакты</h2></div>
+            <div class="mt-5 grid sm:grid-cols-2 gap-3">
+              <div class="field"><input id="f1" placeholder=" " required /><label for="f1">Имя</label></div>
+              <div class="field"><input id="f2" placeholder=" " inputmode="tel" required /><label for="f2">Телефон</label></div>
+            </div>
+            <div class="mt-4 text-sm font-semibold text-ink-2">Как удобнее связаться?</div>
+            <div class="mt-2 flex flex-wrap gap-2">${chip('Позвонить', 1)}${chip('WhatsApp')}${chip('Telegram')}${chip('MAX')}</div>
+          </section>
+
+          <section class="rounded-xl bg-white shadow-soft p-5 md:p-7">
+            <div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-ink text-white grid place-items-center text-sm font-bold">2</span><h2 class="text-h4 font-bold">${t.instUnits ? 'Адрес монтажа' : 'Адрес доставки'}</h2></div>
+            <div class="mt-5 grid sm:grid-cols-6 gap-3">
+              <div class="field sm:col-span-4"><input id="f3" placeholder=" " /><label for="f3">Улица и дом</label></div>
+              <div class="field sm:col-span-2"><input id="f4" placeholder=" " /><label for="f4">Квартира</label></div>
+            </div>
+            ${t.instUnits ? `<div class="mt-5 text-sm font-semibold text-ink-2">Когда удобно провести монтаж?</div>
+            <div class="mt-2 flex flex-wrap gap-2">${chip('Как можно скорее', 1)}${chip('Завтра')}${chip('На выходных')}${chip('Выберу с инженером')}</div>
+            <div class="mt-4 rounded-md bg-brand-50 p-4 flex gap-3 text-sm text-ink-2"><span class="text-brand-700 shrink-0">${ic.drill(18)}</span><span>Монтаж ${t.instUnits} ${plural(t.instUnits, 'бризера', 'бризеров', 'бризеров')} займёт около ${Math.max(2, t.instUnits * 1.5).toString().replace('.', ',')} ч. Работаем HILTI с пылеудалением — мебель можно не выносить.</span></div>` : ''}
+          </section>
+
+          <section class="rounded-xl bg-white shadow-soft p-5 md:p-7">
+            <div class="flex items-center gap-3"><span class="w-8 h-8 rounded-full bg-ink text-white grid place-items-center text-sm font-bold">3</span><h2 class="text-h4 font-bold">Комментарий</h2><span class="text-sm text-ink-3">необязательно</span></div>
+            <div class="mt-5 field"><textarea id="f5" placeholder=" "></textarea><label for="f5">Тип стен, этаж, пожелания по месту установки</label></div>
+            <label class="mt-4 flex items-start gap-3 text-sm text-ink-2"><span class="mt-0.5 w-5 h-5 rounded-[6px] bg-brand-700 text-white grid place-items-center shrink-0">${ic.check(14)}</span>Согласен на обработку персональных данных</label>
+          </section>
+
+          <!-- compact order recap -->
+          <section class="rounded-xl bg-air border border-line p-5 md:p-6">
+            <div class="flex items-center justify-between"><b>Состав заказа</b><a href="#" onclick="go('');return false" class="text-sm font-semibold text-brand-700 hover:underline">Изменить</a></div>
+            <ul class="mt-3 divide-y divide-line">${c.map((r) => { const p = prod(r.id); return `<li class="py-3 flex items-center gap-3"><img src="${p.img}" class="w-12 h-12 rounded-sm bg-white object-contain p-1"/><span class="flex-1 min-w-0"><b class="block text-sm truncate">${p.name} × ${r.qty}</b><span class="text-xs ${r.install ? 'text-brand-700 font-semibold' : 'text-ink-3'}">${r.install ? '✓ Монтаж: ' + INSTALL.find((i) => i.id === r.install).name.toLowerCase() : 'Без монтажа'}</span></span><span class="text-sm font-bold tnum">${rub(p.price * r.qty + (r.install ? instPrice(r.install) * r.qty : 0))}</span></li>`; }).join('')}</ul>
+          </section>
+        </form>
+        ${summary(1)}
+      </div>`;
+    }
+
+    /* ---------- STEP 3: success ---------- */
+    function viewDone() {
+      const t = totals();
+      document.getElementById('title').innerHTML = `Заказ <span class="font-extrabold">принят</span>`;
+      stepper(2);
+      document.getElementById('view').innerHTML = `<div class="grid lg:grid-cols-12 gap-5">
+        <div class="lg:col-span-7 relative rounded-2xl bg-brand-900 text-white overflow-hidden p-8 md:p-12">
+          ${airflow({ h: 500, color: '#8FD3CF', op: .25, cls: 'absolute inset-0 w-full h-full' })}
+          <div class="relative w-24 h-24">
+            <span class="pulse-ring !border-brand-300"></span>
+            <div class="absolute inset-0 rounded-full bg-brand-700 grid place-items-center shadow-glow">${ic.check(40)}</div>
+          </div>
+          <h2 class="relative mt-8 text-[34px] md:text-h2 font-bold tracking-[-0.03em] leading-tight">Спасибо! Заказ №&nbsp;1042<br/><span class="font-light text-brand-300">уже у инженера</span></h2>
+          <p class="relative mt-4 text-white/70 max-w-[460px]">Перезвоним в течение 15 минут (ежедневно 9:00–21:00), подтвердим состав заказа и согласуем время${t.instUnits ? ' монтажа' : ' доставки'}.</p>
+          <div class="relative mt-8 flex flex-wrap gap-3"><a href="catalog.html" class="btn btn-light">Вернуться в каталог</a><a href="${PHONE_HREF}" class="btn border border-white/30 text-white hover:bg-white/10">${ic.phone(18)} ${PHONE}</a></div>
+        </div>
+        <div class="lg:col-span-5 rounded-2xl bg-white shadow-soft p-6 md:p-8">
+          <b class="text-h4">Что дальше</b>
+          <ol class="mt-6 relative space-y-6">
+            <div class="absolute left-[19px] top-2 bottom-2 w-[2px] bg-gradient-to-b from-brand-700 to-line"></div>
+            ${[['phone', 'Звонок инженера', 'в течение 15 минут'], ['ruler', 'Подтверждаем детали', 'модель, тип монтажа, дата'], ['drill', t.instUnits ? 'Доставка и монтаж' : 'Доставка', t.instUnits ? '1,5–2 часа, без пыли' : 'бесплатно по Москве'], ['shield', 'Оплата и гарантия', 'после работ · 5 лет на монтаж']].map(([i, a, b], n) => `<li class="relative flex gap-4"><span class="w-10 h-10 rounded-full ${n ? 'bg-white border border-line text-ink-3' : 'bg-brand-700 text-white'} grid place-items-center shrink-0 z-10">${ic[i](18)}</span><span><b class="block">${a}</b><span class="text-sm text-ink-3">${b}</span></span></li>`).join('')}
+          </ol>
+          <div class="mt-8 pt-6 border-t border-line flex justify-between items-end"><span class="text-ink-2">Сумма заказа</span><span class="text-h3 font-extrabold tnum">${rub(t.total)}</span></div>
+        </div>
+      </div>`;
+    }
+
+    /* ---------- actions ---------- */
+    const render = () => ({ '#checkout': viewCheckout, '#done': viewDone, '#empty': viewEmpty }[location.hash] || viewCart)();
+    const go = (h) => { history.pushState(null, '', h || location.pathname + location.search); render(); scrollTo({ top: 0, behavior: 'smooth' }); };
+    addEventListener('popstate', render);
+    const mut = (fn) => { const c = getCart(); fn(c); setCart(c); render(); };
+    const qty = (i, d) => mut((c) => { c[i].qty = Math.max(1, c[i].qty + d); });
+    const removeRow = (i) => mut((c) => c.splice(i, 1));
+    const toggleInst = (i) => mut((c) => { c[i].install = c[i].install ? null : 'std'; });
+    const setInst = (i, id) => mut((c) => { c[i].install = id; });
+    document.addEventListener('DOMContentLoaded', render);
+  </script>
+</body>
+</html>

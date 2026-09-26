@@ -1,5 +1,4 @@
 import { Product } from '@/entities';
-import { Button } from '@heroui/react';
 import React, { useState } from 'react';
 
 interface SpecsTableProps {
@@ -132,25 +131,30 @@ export function getSpecsRows(product?: Product): SpecRow[] {
 
 export const SpecsTable: React.FC<SpecsTableProps> = ({ rows }) => {
   const [showAll, setShowAll] = useState(false);
-  const visible = showAll ? rows : rows?.slice(0, 8);
+  const visible = showAll ? rows : rows?.slice(0, 12);
 
   return (
-    <div>
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-3'>
-        {visible?.map((row) => (
-          <div key={row.label} className='flex justify-between border-b py-2'>
-            <span className='text-gray-600'>{row.label}</span>
-            <span className='font-medium text-right'>{row.value}</span>
+    <div className='rounded-card bg-white shadow-soft overflow-hidden'>
+      <dl className='grid md:grid-cols-2'>
+        {visible?.map((row, i) => (
+          <div
+            key={row.label}
+            className={`grid grid-cols-2 gap-4 px-5 md:px-7 py-3.5 text-[15px] border-b border-line/70 ${
+              Math.floor(i / 2) % 2 === 0 ? 'md:bg-air/60' : ''
+            } ${i % 2 === 0 ? 'max-md:bg-air/60' : ''}`}>
+            <dt className='text-ink-2'>{row.label}</dt>
+            <dd className='font-semibold text-right md:text-left'>{row.value}</dd>
           </div>
         ))}
-      </div>
+      </dl>
 
-      {rows?.length > 8 && (
-        <div className='mt-4'>
-          <Button size='sm' variant='bordered' onPress={() => setShowAll((v) => !v)}>
-            {showAll ? 'Скрыть' : 'Показать ещё'}
-          </Button>
-        </div>
+      {rows?.length > 12 && (
+        <button
+          type='button'
+          onClick={() => setShowAll((v) => !v)}
+          className='w-full h-14 text-sm font-bold text-brand-700 hover:bg-brand-50 transition'>
+          {showAll ? 'Свернуть' : `Все ${rows.length} характеристик`}
+        </button>
       )}
     </div>
   );

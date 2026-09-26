@@ -4,28 +4,24 @@ import { Question, questionsApi } from '@/shared/api';
 import { useEffect, useState } from 'react';
 
 interface FAQProps {
-  title?: string;
   maxQuestions?: number;
 }
 
-const FAQ: React.FC<FAQProps> = ({ title = 'Часто задаваемые вопросы', maxQuestions }) => {
+// Аккордеон вопросов (данные из PocketBase). Заголовок и раскладку задаёт FAQSection
+const FAQ: React.FC<FAQProps> = ({ maxQuestions }) => {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [openId, setOpenId] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
         setLoading(true);
         const response = await questionsApi.getQuestions();
-        let questionsToShow = response.items;
-
-        // Ограничиваем количество вопросов если указано
-        if (maxQuestions) {
-          questionsToShow = response.items.slice(0, maxQuestions);
-        }
-
-        setQuestions(questionsToShow);
+        const items = maxQuestions ? response.items.slice(0, maxQuestions) : response.items;
+        setQuestions(items);
+        setOpenId(items[0]?.id ?? null);
         setError(null);
       } catch (err) {
         setError('Не удалось загрузить вопросы');
@@ -40,69 +36,58 @@ const FAQ: React.FC<FAQProps> = ({ title = 'Часто задаваемые во
 
   if (loading) {
     return (
-      <section>
-        <div className='max-w-4xl mx-auto px-4'>
-          <h2 className='text-3xl font-bold text-center text-gray-900 mb-8'>{title}</h2>
-          <div className='space-y-4'>
-            {[...Array(3)].map((_, i) => (
-              <div key={i} className='bg-white rounded-lg p-6 shadow-sm animate-pulse'>
-                <div className='h-6 bg-gray-200 rounded mb-3'></div>
-                <div className='h-4 bg-gray-200 rounded w-3/4'></div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <div className='space-y-3'>
+        {[...Array(4)].map((_, i) => (
+          <div key={i} className='h-16 rounded-2xl bg-white/70 animate-pulse' />
+        ))}
+      </div>
     );
   }
 
-  if (error) {
-    return (
-      <section>
-        <div className='max-w-4xl mx-auto px-4 text-center'>
-          <h2 className='text-3xl font-bold text-gray-900 mb-8'>{title}</h2>
-          <p className='text-red-600'>{error}</p>
-        </div>
-      </section>
-    );
-  }
-
-  if (questions.length === 0) {
-    return (
-      <section>
-        <div className='max-w-4xl mx-auto px-4 text-center'>
-          <h2 className='text-3xl font-bold text-gray-900 mb-8'>{title}</h2>
-          <p className='text-gray-600'>Вопросы не найдены</p>
-        </div>
-      </section>
-    );
-  }
+  if (error) return <p className='text-ink-2'>{error}</p>;
+  if (questions.length === 0) return <p className='text-ink-2'>Вопросы не найдены</p>;
 
   return (
-    <section>
-      <div className='max-w-4xl mx-auto px-4'>
-        <h2 className='text-3xl font-bold text-center text-gray-900 mb-8'>{title}</h2>
-
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
-          {questions.map((item) => (
+    <div>
+      {questions.map((item) => {
+        const open = openId === item.id;
+        return (
+          <div key={item.id} className='border-b border-line'>
+            <button
+              type='button'
+              onClick={() => setOpenId(open ? null : item.id)}
+              aria-expanded={open}
+              className='w-full flex justify-between items-center gap-6 py-5 md:py-6 text-left font-bold text-[17px] md:text-lg tracking-[-0.01em] hover:text-brand-700 transition-colors'>
+              {item.question}
+              <span
+                className={`relative w-9 h-9 shrink-0 rounded-full transition-all duration-300 ${
+                  open ? 'bg-brand-700 rotate-180' : 'bg-brand-50'
+                }`}
+                aria-hidden='true'>
+                <span
+                  className={`absolute left-1/2 top-1/2 w-3 h-0.5 -translate-x-1/2 -translate-y-1/2 rounded ${
+                    open ? 'bg-white' : 'bg-brand-700'
+                  }`}
+                />
+                <span
+                  className={`absolute left-1/2 top-1/2 w-3 h-0.5 -translate-x-1/2 -translate-y-1/2 rounded transition-transform duration-300 ${
+                    open ? 'bg-white rotate-0' : 'bg-brand-700 rotate-90'
+                  }`}
+                />
+              </span>
+            </button>
             <div
-              key={item.id}
-              className='bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow'>
-              <div className='p-6'>
-                <h3 className='text-lg font-semibold text-[var(--secondary-color)] mb-3 leading-tight'>
-                  {item.question}
-                </h3>
-                <div className='border-t border-gray-100 pt-3'>
-                  <p className='text-gray-900 leading-relaxed whitespace-pre-wrap text-sm'>
-                    {item.answer}
-                  </p>
-                </div>
+              className={`grid transition-[grid-template-rows] duration-500 ease-[cubic-bezier(.2,.7,.2,1)] ${
+                open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
+              }`}>
+              <div className='overflow-hidden'>
+                <p className='pb-6 pr-12 text-ink-2 leading-relaxed whitespace-pre-wrap'>{item.answer}</p>
               </div>
             </div>
-          ))}
-        </div>
-      </div>
-    </section>
+          </div>
+        );
+      })}
+    </div>
   );
 };
 

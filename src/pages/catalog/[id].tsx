@@ -1,17 +1,14 @@
 import { Product } from '@/entities';
-import { ContactCTAButton } from '@/features';
 import { productsApi } from '@/shared/api/products';
+import { Reveal } from '@/shared/lib/useReveal';
 import {
   ProductDescription,
   ProductGallery,
-  ProductHeader,
-  ProductInfoBadges,
-  ProductPurchaseSection,
-  ProductStatusChips,
+  PromoConsultationCard,
   SiteBreadcrumbs,
 } from '@/widgets';
+import ProductBuyBox from '@/widgets/ProductBuyBox';
 import { getSpecsRows, SpecsTable } from '@/widgets/SpecsTable';
-import { Card, CardBody } from '@heroui/react';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 
@@ -57,13 +54,7 @@ export default function CatalogItemPage({ product }: CatalogItemPageProps) {
     product?.description?.substring(0, 160) ||
     `Купить ${productName} в Propritok. Качественная вентиляция для дома.`;
   const canonicalUrl = `${siteUrl}/catalog/${product?.id}`;
-  const actionBuy = `хочет купить id-[${product?.id}]-${
-    product?.modelNameEn || product?.modelNameRu
-  }`;
-
-  const actionConsult = `хочет консультацию по id-[${product?.id}]-${
-    product?.modelNameEn || product?.modelNameRu
-  }`;
+  const specRows = getSpecsRows(product);
 
   return (
     <>
@@ -85,62 +76,41 @@ export default function CatalogItemPage({ product }: CatalogItemPageProps) {
         <meta name='googlebot' content='index, follow' />
       </Head>
       <SiteBreadcrumbs pageTitle={product?.modelNameEn} />
-      <div className='min-h-screen flex flex-col'>
-        <main className='flex-grow'>
-          <div className='max-w-7xl mx-auto px-4 py-8'>
-            <div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
-              {/* Левая колонка - галерея */}
-              <div>
-                <ProductGallery images={product?.images || []} />
-              </div>
 
-              {/* Правая колонка - информация о продукте */}
-              <div className='space-y-6'>
-                <ProductHeader product={product} />
-                <ProductInfoBadges />
-                <ProductStatusChips product={product} />
-                <ProductPurchaseSection product={product}>
-                  <ContactCTAButton
-                    action={actionBuy}
-                    className='w-[240px] bg-[var(--secondary-color)] text-white px-6 py-3'
-                    size='lg'
-                    label='Получить консультацию'
-                    formButtonLabel='Получить консультацию'
-                    showMessageField
-                  />
-                  {/* <ContactCTAButton
-                    size='lg'
-                    action={actionConsult}
-                    label='Получить консультацию'
-                    formButtonLabel='Получить консультацию'
-                    showMessageField
-                    ctaVariant='secondary'
-                  /> */}
-                </ProductPurchaseSection>
-
-                {/* <PromoConsultationCard /> */}
-              </div>
-            </div>
-
-            {/* Описание продукта */}
-            <div className='mt-12'>
-              <ProductDescription product={product} />
-            </div>
-
-            {/* Характеристики */}
-            {product?.specs && (
-              <div className='mt-12'>
-                <Card>
-                  <CardBody>
-                    <h2 className='text-2xl font-bold mb-6'>Характеристики</h2>
-                    <SpecsTable rows={getSpecsRows(product)} />
-                  </CardBody>
-                </Card>
-              </div>
-            )}
+      <main className='mx-auto max-w-page px-5 md:px-8 pt-6 pb-16'>
+        <section className='grid lg:grid-cols-12 gap-6 lg:gap-10 items-start'>
+          <div className='lg:col-span-7 min-w-0'>
+            <ProductGallery images={product?.images || []} title={productName} />
           </div>
-        </main>
-      </div>
+          <div className='lg:col-span-5 min-w-0'>
+            <ProductBuyBox product={product} />
+          </div>
+        </section>
+
+        {(product?.description || specRows.length > 0) && (
+          <section className='mt-16 md:mt-24 grid lg:grid-cols-12 gap-8 lg:gap-10 items-start'>
+            <div className='lg:col-span-8 min-w-0 space-y-16 md:space-y-20'>
+              {product?.description && (
+                <Reveal>
+                  <ProductDescription product={product} />
+                </Reveal>
+              )}
+              {specRows.length > 0 && (
+                <Reveal>
+                  <h2 className='text-[30px] md:text-[40px] font-bold tracking-[-0.03em] mb-6'>Характеристики</h2>
+                  <SpecsTable rows={specRows} />
+                </Reveal>
+              )}
+            </div>
+            <Reveal delay={1} className='lg:col-span-4 lg:sticky lg:top-28'>
+              <PromoConsultationCard
+                title={`Сомневаетесь, подойдёт ли ${productName}?`}
+                action={`хочет консультацию по id-[${product?.id}]-${productName}`}
+              />
+            </Reveal>
+          </section>
+        )}
+      </main>
     </>
   );
 }

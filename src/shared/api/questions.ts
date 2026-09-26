@@ -51,7 +51,7 @@ export const questionsApi = {
       if (params.sort) searchParams.append('sort', params.sort);
       if (params.filter) searchParams.append('filter', params.filter);
 
-      const url = `${API_BASE_URL}/api/collections/questions/records?${searchParams.toString()}`;
+      const url = `${API_BASE_URL}/collections/questions/records?${searchParams.toString()}`;
       const response = await fetch(url);
 
       if (!response.ok) {

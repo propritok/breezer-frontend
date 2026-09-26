@@ -6,6 +6,8 @@ export interface Product {
   rating?: number; // 0..5
   inStock?: boolean;
   price?: string;
+  // Старая цена (₽) — есть только если в админке задана и она больше текущей
+  oldPrice?: number;
   images?: string[];
   brand?: string;
   specs?: {
@@ -84,13 +86,22 @@ export interface Product {
   };
 }
 
+export interface ProductHighlights {
+  areaM2?: number;
+  noiseMinDb?: number;
+  filter?: string;
+  airflowM3h?: number;
+}
+
 export interface ProductShort {
   id?: string;
+  highlights?: ProductHighlights;
   modelNameEn?: string;
   modelNameRu?: string;
   rating?: number; // 0..5
   inStock?: boolean;
   price?: string;
+  oldPrice?: number;
   images?: string[];
   brand?: string;
 }

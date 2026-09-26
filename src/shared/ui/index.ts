@@ -8,3 +8,5 @@ export { default as LoadingSpinner } from './LoadingSpinner';
 export { default as MailAdress } from './MailAdress';
 export { default as PhoneNumber } from './PhoneNumber';
 export { default as SocialLinks } from './SocialLinks';
+export { default as Airflow } from './Airflow';
+export { default as Logo } from './Logo';

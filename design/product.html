@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Propritok — Tion BIO X Standard (редизайн)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="assets/tw-config.js?v=4"></script>
+  <link rel="stylesheet" href="assets/shared.css?v=4" />
+  <script src="assets/shared.js?v=4"></script>
+</head>
+<body class="overflow-x-hidden">
+  <div data-slot="header" data-active="Каталог"></div>
+
+  <main class="mx-auto max-w-page px-5 md:px-8 pt-8 md:pt-12">
+    <nav class="text-sm text-ink-3 flex items-center gap-2 flex-wrap"><a href="home.html" class="hover:text-brand-700">Главная</a><span>/</span><a href="catalog.html" class="hover:text-brand-700">Каталог</a><span>/</span><a class="hover:text-brand-700">Tion</a><span>/</span><span class="text-ink font-semibold">BIO X Standard</span></nav>
+
+    <!-- ============ Top: gallery + buy box ============ -->
+    <section class="mt-6 grid lg:grid-cols-12 gap-6 lg:gap-10 items-start">
+      <!-- Gallery -->
+      <div class="lg:col-span-7 grid grid-cols-[72px_1fr] md:grid-cols-[88px_1fr] gap-3 md:gap-4">
+        <div class="flex flex-col gap-3" id="thumbs"></div>
+        <div class="relative aspect-square rounded-2xl bg-gradient-to-b from-brand-50 via-white to-white shadow-soft overflow-hidden">
+          <div data-slot="airflow" data-h="600" data-color="#2EB1B0" data-op=".25" class="absolute inset-0 w-full h-full"></div>
+          <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 rounded-full bg-brand-100/60 animate-breathe"></div>
+          <img id="main" src="" class="relative w-full h-full object-contain p-12 md:p-16 mix-blend-multiply" alt="Tion BIO X Standard" />
+          <div class="absolute left-5 top-5 flex flex-wrap gap-2">
+            <span class="h-8 px-3 rounded-full bg-ink text-white text-xs font-bold inline-flex items-center">Хит продаж</span>
+            <span class="h-8 px-3 rounded-full bg-sun-100 text-[#A86A12] text-xs font-bold inline-flex items-center">−5%</span>
+          </div>
+          <div class="absolute right-5 bottom-5 glass shadow-glass rounded-md px-4 py-3 flex items-center gap-3">
+            <span class="w-9 h-9 rounded-full bg-brand-700 text-white grid place-items-center" data-i="volume" data-s="18"></span>
+            <span class="leading-tight"><b class="text-[15px] block">19 дБ</b><span class="text-xs text-ink-3">в ночном режиме</span></span>
+          </div>
+          <button class="absolute left-5 bottom-5 h-10 px-4 rounded-full glass text-sm font-semibold inline-flex items-center gap-2 hover:text-brand-700"><span data-i="search" data-s="16"></span>Увеличить</button>
+        </div>
+      </div>
+
+      <!-- Buy box (HeroUI Card + Chip + Button) -->
+      <aside class="lg:col-span-5 lg:sticky lg:top-28 space-y-4">
+        <div>
+          <div class="flex items-center gap-3 flex-wrap">
+            <span class="text-xs font-bold uppercase tracking-[0.14em] text-ink-3">Tion</span>
+            <span class="h-7 px-3 rounded-full bg-[#E3F5EC] text-[#15855F] text-xs font-bold inline-flex items-center gap-2"><span class="dot-live !w-1.5 !h-1.5"></span>В наличии · 12 шт</span>
+            <span class="text-sm text-ink-3 inline-flex items-center gap-1"><span class="text-sun-500" data-i="star" data-s="14"></span><b class="text-ink">4,9</b> · 38 отзывов</span>
+          </div>
+          <h1 class="mt-3 text-[34px] leading-[1.05] md:text-[44px] font-bold tracking-[-0.035em]">Tion BIO X Standard</h1>
+          <p class="mt-2 text-ink-2">Бризер с подогревом, угольным фильтром и управлением со смартфона</p>
+        </div>
+
+        <!-- key facts -->
+        <div class="grid grid-cols-4 gap-2">
+          <div class="rounded-md bg-white shadow-soft p-3"><div class="text-ink-3" data-i="home" data-s="18"></div><div class="mt-2 font-extrabold text-[17px]">50 м²</div><div class="text-[11px] text-ink-3">площадь</div></div>
+          <div class="rounded-md bg-white shadow-soft p-3"><div class="text-ink-3" data-i="wind" data-s="18"></div><div class="mt-2 font-extrabold text-[17px]">160</div><div class="text-[11px] text-ink-3">м³/ч</div></div>
+          <div class="rounded-md bg-white shadow-soft p-3"><div class="text-ink-3" data-i="sparkle" data-s="18"></div><div class="mt-2 font-extrabold text-[17px]">E11</div><div class="text-[11px] text-ink-3">+ уголь</div></div>
+          <div class="rounded-md bg-white shadow-soft p-3"><div class="text-ink-3" data-i="thermo" data-s="18"></div><div class="mt-2 font-extrabold text-[17px]">−40°</div><div class="text-[11px] text-ink-3">на улице</div></div>
+        </div>
+
+        <!-- modification -->
+        <div>
+          <div class="text-sm font-semibold text-ink-2 mb-2">Модификация</div>
+          <div class="flex flex-wrap gap-2">
+            <span class="chip">Base</span><span class="chip on">Standard</span><span class="chip">SM Base</span><span class="chip">SM Standard</span>
+          </div>
+        </div>
+
+        <!-- price card -->
+        <div class="rounded-xl bg-white shadow-lift p-5 md:p-6">
+          <div class="flex items-end justify-between gap-4">
+            <div>
+              <div class="text-sm text-ink-3 line-through tnum">61 200 ₽</div>
+              <div class="text-[40px] leading-none font-extrabold tracking-[-0.04em] tnum">58 140 ₽</div>
+            </div>
+            <div class="text-right text-sm text-ink-3">или <b class="text-ink">4 845 ₽/мес</b><br/>в рассрочку</div>
+          </div>
+          <!-- install toggle -->
+          <label class="mt-5 flex items-center gap-4 rounded-md bg-brand-50 p-4 cursor-pointer">
+            <span class="relative w-12 h-7 rounded-full bg-brand-700 shrink-0"><span class="absolute right-1 top-1 w-5 h-5 rounded-full bg-white shadow"></span></span>
+            <span class="flex-1 leading-tight"><b class="block text-[15px]">Монтаж под ключ</b><span class="text-sm text-ink-2">Стандарт <s class="text-ink-3">9 500</s> <b class="text-brand-700">6 650 ₽</b> · скидка 30%</span></span>
+          </label>
+          <div class="mt-5 flex gap-2">
+            <button onclick="addToCart('biox', 'std')" class="btn btn-primary flex-1 !h-14">В корзину с монтажом · 64 790 ₽</button>
+            <button class="w-14 h-14 rounded-full border border-line grid place-items-center hover:text-brand-700 hover:border-brand-700 transition" data-i="heart"></button>
+          </div>
+          <button class="btn btn-ghost w-full mt-2">Купить в 1 клик</button>
+          <ul class="mt-4 pt-4 border-t border-line grid grid-cols-2 gap-3 text-sm text-ink-2">
+            <li class="flex items-center gap-2"><span class="text-brand-700" data-i="truck" data-s="18"></span>Доставка завтра</li>
+            <li class="flex items-center gap-2"><span class="text-brand-700" data-i="shield" data-s="18"></span>5 лет на монтаж</li>
+            <li class="flex items-center gap-2"><span class="text-brand-700" data-i="check" data-s="18"></span>2 года на прибор</li>
+            <li class="flex items-center gap-2"><span class="text-brand-700" data-i="clock" data-s="18"></span>Монтаж 1,5–2 ч</li>
+          </ul>
+        </div>
+      </aside>
+    </section>
+
+    <!-- ============ Tabs row ============ -->
+    <div class="mt-16 md:mt-24 sticky top-[84px] z-20">
+      <div class="inline-flex glass shadow-soft rounded-full p-1.5 gap-1 text-sm font-bold overflow-x-auto no-scrollbar max-w-full">
+        <a href="#desc" class="h-10 px-5 rounded-full bg-ink text-white inline-flex items-center shrink-0">Описание</a>
+        <a href="#specs" class="h-10 px-5 rounded-full hover:bg-white inline-flex items-center shrink-0">Характеристики</a>
+        <a href="#install" class="h-10 px-5 rounded-full hover:bg-white inline-flex items-center shrink-0">Монтаж</a>
+        <a href="#rev" class="h-10 px-5 rounded-full hover:bg-white inline-flex items-center shrink-0">Отзывы · 38</a>
+      </div>
+    </div>
+
+    <!-- ============ Description: bento of features ============ -->
+    <section id="desc" class="mt-10 grid lg:grid-cols-12 gap-5">
+      <div class="lg:col-span-5 reveal">
+        <h2 class="text-[30px] leading-[1.1] md:text-[40px] font-bold tracking-[-0.03em]">Свежий воздух без&nbsp;шума, пыли и&nbsp;запахов</h2>
+        <p class="mt-5 text-ink-2 text-body-lg">Улучшенная версия BIO X с угольным фильтром AK: он убирает запахи, вредные газы и летучие органические соединения. Работает в режимах притока, рециркуляции и клапана.</p>
+        <p class="mt-4 text-ink-2">Встроенный нагреватель 1200 Вт подогревает воздух зимой, а приложение Tion Smart позволяет задать расписание и следить за качеством воздуха.</p>
+      </div>
+      <div class="lg:col-span-7 grid sm:grid-cols-2 gap-4 reveal" data-d="1">
+        <div class="rounded-xl bg-white shadow-soft p-6 card-hover">
+          <div class="flex gap-1.5">
+            <span class="h-8 px-3 rounded-full bg-sand text-xs font-bold inline-flex items-center">G4</span>
+            <span class="h-8 px-3 rounded-full bg-brand-100 text-brand-800 text-xs font-bold inline-flex items-center">E11</span>
+            <span class="h-8 px-3 rounded-full bg-ink text-white text-xs font-bold inline-flex items-center">AK</span>
+          </div>
+          <h3 class="mt-6 font-bold text-h4">3 ступени очистки</h3>
+          <p class="mt-1 text-sm text-ink-2">Пыль, пыльца, аллергены, микроорганизмы и запахи</p>
+        </div>
+        <div class="rounded-xl bg-brand-700 text-white p-6 card-hover relative overflow-hidden">
+          <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full border-[14px] border-white/10"></div>
+          <div class="text-[44px] font-extralight leading-none tracking-[-0.04em]">7</div>
+          <h3 class="mt-4 font-bold text-h4">скоростей</h3>
+          <p class="mt-1 text-sm text-white/70">от 30 до 160 м³/ч, ночной режим 19 дБ</p>
+        </div>
+        <div class="rounded-xl bg-sand p-6 card-hover">
+          <span class="w-11 h-11 rounded-full bg-white text-brand-700 grid place-items-center" data-i="thermo"></span>
+          <h3 class="mt-6 font-bold text-h4">Тёплый воздух при −40°</h3>
+          <p class="mt-1 text-sm text-ink-2">Нагреватель 1200 Вт с отключаемым подогревом</p>
+        </div>
+        <div class="rounded-xl bg-white shadow-soft p-6 card-hover">
+          <span class="w-11 h-11 rounded-full bg-brand-50 text-brand-700 grid place-items-center" data-i="phone"></span>
+          <h3 class="mt-6 font-bold text-h4">Умный дом</h3>
+          <p class="mt-1 text-sm text-ink-2">Wi-Fi, приложение Tion Smart, Smart Life, расписание</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Specs + promo ============ -->
+    <section id="specs" class="mt-16 md:mt-24 grid lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+      <div class="lg:col-span-8 reveal">
+        <h2 class="text-[30px] md:text-[40px] font-bold tracking-[-0.03em]">Характеристики</h2>
+        <div class="mt-6 rounded-xl bg-white shadow-soft overflow-hidden">
+          <div id="specs-table"></div>
+          <button class="w-full h-14 border-t border-line text-sm font-bold text-brand-700 hover:bg-brand-50 transition">Все 48 характеристик</button>
+        </div>
+      </div>
+      <!-- Promo consultation card -->
+      <aside class="lg:col-span-4 lg:sticky lg:top-44 reveal" data-d="1">
+        <div class="relative rounded-xl overflow-hidden bg-brand-900 text-white min-h-[460px] flex flex-col">
+          <img src="../public/work/IMG_9951.jpg" class="absolute inset-0 w-full h-full object-cover opacity-60" alt="" />
+          <div class="absolute inset-0 bg-gradient-to-t from-brand-950 via-brand-950/60 to-transparent"></div>
+          <div class="relative p-6 md:p-7 mt-auto">
+            <span class="glass-dark rounded-full h-9 px-3 inline-flex items-center gap-2 text-xs font-bold"><span class="dot-live !w-1.5 !h-1.5"></span>Инженер онлайн</span>
+            <h3 class="mt-4 text-h3 font-bold leading-tight">Сомневаетесь, подойдёт ли BIO X?</h3>
+            <p class="mt-2 text-white/70 text-sm">Проверим стены, площадь и место под розетку по фото — бесплатно, за 15 минут.</p>
+            <div class="mt-5 flex flex-col gap-2">
+              <a href="home.html#lead" class="btn btn-light">Получить консультацию</a>
+              <div id="promo-msg" class="grid grid-cols-3 gap-2"></div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- ============ Related ============ -->
+    <section class="mt-16 md:mt-24 mb-16">
+      <div class="flex items-end justify-between mb-8">
+        <h2 class="text-[30px] md:text-[40px] font-bold tracking-[-0.03em]">С этим смотрят</h2>
+        <a href="catalog.html" class="btn btn-ghost hidden md:inline-flex">В каталог <span data-i="arrow"></span></a>
+      </div>
+      <div data-slot="products" data-from="1" data-to="5" class="grid grid-cols-1 min-[480px]:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5"></div>
+    </section>
+  </main>
+
+  <div data-slot="footer"></div>
+  <div data-slot="floaters"></div>
+
+  <script>
+    const gal = [PB + 'qa7wspzic1tsovz/brbxbreezer_bio_xperspective001_7kvi9nlknh.webp', PB + 'zbzycgq4s2pwf3f/brbxbreezer_bio_xperspective001_qwianvj2ah.webp', PB + '7wv1nqm5s7x6a0t/brbxbreezer_bio_xperspective001_739sk97vyq.webp', WORK('3164'), WORK('9949')];
+    const main = document.getElementById('main');
+    const setMain = (i) => {
+      const photo = gal[i].includes('/work/');
+      main.src = gal[i];
+      main.className = photo ? 'relative w-full h-full object-cover mix-blend-normal' : 'relative w-full h-full object-contain p-12 md:p-16 mix-blend-multiply';
+      document.querySelectorAll('#thumbs button').forEach((b, j) => b.classList.toggle('ring-2', j === i));
+    };
+    document.getElementById('thumbs').innerHTML = gal.map((g, i) => `<button onclick="setMain(${i})" class="aspect-square rounded-md bg-white shadow-soft overflow-hidden ring-brand-700 ring-offset-2 ring-offset-air transition hover:-translate-y-0.5">
+      <img src="${g}" class="w-full h-full ${g.includes('/work/') ? 'object-cover' : 'object-contain p-2 mix-blend-multiply'}" alt=""/></button>`).join('');
+    setMain(0);
+    document.getElementById('promo-msg').innerHTML = [['#25D366', msg.wa], ['#2AABEE', msg.tg], ['#5B3DF5', msg.max]].map(([c, g]) => `<a href="#" class="float-btn h-11 rounded-full grid place-items-center" style="background:${c}">${g}</a>`).join('');
+
+    const specs = [
+      ['Основное', [['Тип', 'Бризер, приточный проветриватель'], ['Производительность', '30–160 м³/ч, 7 скоростей'], ['Площадь помещения', 'до 50 м² (рекомендуется 40 м²)'], ['Уровень шума', '19–50 дБ'], ['Шумоподавление', '40 дБ']]],
+      ['Очистка и климат', [['Фильтры', 'G4 + E11 + угольный AK'], ['Нагреватель', '1200 Вт, отключаемый'], ['Температура на улице', '−40…+50 °C'], ['Режимы', 'Приток, рециркуляция, клапан']]],
+      ['Монтаж и размеры', [['Габариты', '600 × 352 × 183 мм'], ['Вес', '7 кг'], ['Монтажное отверстие', '∅132 мм, стены 10–3000 мм'], ['Гарантия', '2 года на прибор · 5 лет на монтаж']]],
+    ];
+    document.getElementById('specs-table').innerHTML = specs.map(([g, rows]) => `
+      <div class="px-5 md:px-7 pt-6 pb-2 text-xs font-bold uppercase tracking-[0.14em] text-brand-700">${g}</div>
+      <dl>${rows.map(([k, v], i) => `<div class="grid grid-cols-2 gap-4 px-5 md:px-7 py-3.5 text-[15px] ${i % 2 ? '' : 'bg-air/60'}"><dt class="text-ink-2">${k}</dt><dd class="font-semibold">${v}</dd></div>`).join('')}</dl>`).join('');
+  </script>
+</body>
+</html>

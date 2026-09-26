@@ -30,29 +30,34 @@ const ContactCTAButton: React.FC<ContactCTAButtonProps> = ({
   action,
   onSuccess,
   ctaVariant = "accent",
+  className,
   ...buttonProps
 }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const variantClass =
     ctaVariant === "accent"
-      ? "bg-[var(--secondary-color)] text-white"
-      : "border-1 border-[var(--secondary-color)] bg-transparent text-[var(--secondary-color)]";
+      ? "bg-brand-700 text-white font-bold rounded-full shadow-glow data-[hover=true]:!opacity-100 hover:bg-[#0a6f7a]"
+      : "border-1 border-line bg-white text-ink font-bold rounded-full hover:border-brand-700 hover:text-brand-700";
 
   return (
     <>
       <Button
         onPress={onOpen}
-        className={`${variantClass} ${buttonProps.className ?? ""}`}
         {...buttonProps}
+        className={`${variantClass} ${className ?? ""}`}
       >
         {label}
       </Button>
       {isOpen && (
         <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="center">
-          <ModalContent className="p-0 overflow-hidden rounded-lg">
-            <div className="bg-gradient-to-r from-[var(--secondary-color)] to-[#B8F0EE] px-6 py-4">
-              <ModalHeader className="flex flex-col gap-1 p-0 text-white">
+          <ModalContent className="p-0 overflow-hidden rounded-[32px]">
+            <div className="relative bg-brand-900 px-6 py-6 overflow-hidden">
+              <div className="absolute -right-10 -top-10 w-40 h-40 rounded-full bg-brand-700 animate-breathe" />
+              <ModalHeader className="relative flex flex-col gap-1 p-0 text-white text-2xl font-bold tracking-[-0.02em]">
                 {modalTitle}
+                <span className="text-sm font-medium text-white/70">
+                  Перезвоним и ответим на вопросы
+                </span>
               </ModalHeader>
             </div>
             <ModalBody className="p-6">

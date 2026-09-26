@@ -5,3 +5,4 @@ export * from './products';
 export * from './questions';
 export * from './reviews';
 export * from './users';
+export * from './settings';

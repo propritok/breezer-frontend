@@ -1,6 +1,8 @@
+"use client";
+
 import React from "react";
 import { FaTelegramPlane, FaWhatsapp } from "react-icons/fa";
-import { config } from "../config";
+import { useSiteSettings } from "../lib/siteSettings";
 
 interface SocialLinksProps {
   className?: string;
@@ -19,29 +21,27 @@ export const MaxBubbleIcon: React.FC<{ className?: string }> = ({ className = ""
   </svg>
 );
 
-const links = [
-  {
-    href: config.contact.socials.whatsapp,
-    label: "Написать в WhatsApp",
-    Icon: FaWhatsapp,
-  },
-  {
-    href: config.contact.socials.telegram,
-    label: "Написать в Telegram",
-    Icon: FaTelegramPlane,
-  },
-  {
-    href: config.contact.socials.max,
-    label: "Написать в MAX",
-    Icon: MaxBubbleIcon,
-  },
-];
+// Оформление мессенджеров по коду из коллекции socials
+export const SOCIAL_META: Record<
+  string,
+  { label: string; bg: string; Icon: React.ComponentType<{ className?: string }> }
+> = {
+  whatsapp: { label: "WhatsApp", bg: "bg-[#25D366]", Icon: FaWhatsapp },
+  telegram: { label: "Telegram", bg: "bg-[#229ED9]", Icon: FaTelegramPlane },
+  max: { label: "MAX", bg: "bg-gradient-to-tr from-[#44ccff] via-[#5533ee] to-[#9933dd]", Icon: MaxBubbleIcon },
+};
+
+// Включённые в админке мессенджеры с иконками (неизвестные коды пропускаем)
+export const useSocials = () => {
+  const { socials } = useSiteSettings();
+  return socials
+    .filter((s) => SOCIAL_META[s.code])
+    .map((s) => ({ ...SOCIAL_META[s.code], code: s.code, href: s.url }));
+};
 
 // Ряд иконок мессенджеров для футера/контактов
-const SocialLinks: React.FC<SocialLinksProps> = ({
-  className = "",
-  iconClassName = "w-5 h-5",
-}) => {
+const SocialLinks: React.FC<SocialLinksProps> = ({ className = "", iconClassName = "w-5 h-5" }) => {
+  const links = useSocials();
   return (
     <div className={`flex items-center gap-3 ${className}`}>
       {links.map(({ href, label, Icon }) => (
@@ -50,8 +50,8 @@ const SocialLinks: React.FC<SocialLinksProps> = ({
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label={label}
-          title={label}
+          aria-label={`Написать в ${label}`}
+          title={`Написать в ${label}`}
           className="text-gray-400 hover:text-[var(--secondary-color)] transition-colors"
         >
           <Icon className={iconClassName} />

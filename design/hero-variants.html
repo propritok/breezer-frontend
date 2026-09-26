@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Propritok — Варианты hero</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Unbounded:wght@300..800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="assets/tw-config.js?v=4"></script>
+  <link rel="stylesheet" href="assets/shared.css?v=4" />
+  <script src="assets/shared.js?v=4"></script>
+  <style>
+    .blob { border-radius: 58% 42% 46% 54% / 52% 44% 56% 48%; animation: morph 12s ease-in-out infinite; }
+    @keyframes morph { 50% { border-radius: 44% 56% 58% 42% / 44% 58% 42% 56%; } }
+    .ring-wave { position: absolute; inset: 0; border-radius: 999px; border: 1px solid #BFE6E3; animation: ringw 6s ease-out infinite; }
+    .ring-wave:nth-child(2) { animation-delay: 2s; } .ring-wave:nth-child(3) { animation-delay: 4s; }
+    @keyframes ringw { from { transform: scale(.7); opacity: 1; } to { transform: scale(1.5); opacity: 0; } }
+  </style>
+</head>
+<body class="overflow-x-hidden">
+  <div class="mx-auto max-w-page px-5 md:px-8 pt-10 pb-6 flex items-end justify-between gap-6 flex-wrap">
+    <div>
+      <a href="index.html" class="text-sm font-semibold text-ink-3 hover:text-brand-700">← Все макеты</a>
+      <h1 class="mt-4 text-[36px] md:text-h1 font-light tracking-[-0.04em]">Hero: <b class="font-extrabold">два направления</b></h1>
+    </div>
+    <p class="text-ink-2 max-w-[520px]">Базовый вариант на главной — «фото + стеклянные карточки». Ниже две альтернативы: предельно спокойная и более смелая. Токены общие — меняется только композиция и акцидентный шрифт.</p>
+  </div>
+
+  <!-- ================= A · CALM MINIMALISM ================= -->
+  <div class="mx-auto max-w-page px-5 md:px-8 mt-8 mb-3 flex items-center gap-3"><span class="h-8 px-3 rounded-full bg-ink text-white text-xs font-bold inline-flex items-center">A</span><b>«Тишина» — спокойный минимализм</b><span class="text-sm text-ink-3 hidden md:inline">центр, один предмет, много воздуха, волны вокруг прибора</span></div>
+  <section class="relative mx-3 md:mx-6 rounded-2xl bg-white overflow-hidden shadow-soft">
+    <div class="px-5 md:px-8 pt-5"><div class="max-w-page mx-auto flex items-center justify-between">
+
+    </div></div>
+    <div class="relative pt-14 md:pt-20 pb-0 text-center">
+      <span class="text-xs font-bold uppercase tracking-[0.2em] text-brand-700">Бризеры · установка под ключ · Москва</span>
+      <h2 class="mt-6 mx-auto max-w-[1000px] px-5 text-[46px] leading-[1] md:text-[112px] md:leading-[0.95] font-extralight tracking-[-0.055em]">Чистый воздух<br/><span class="font-bold">в каждый дом</span></h2>
+      <p class="mt-6 mx-auto max-w-[480px] px-5 text-body-lg text-ink-2">Бризеры для здорового микроклимата. Установка под ключ с гарантией качества.</p>
+      <div class="mt-8 flex flex-col sm:flex-row gap-3 justify-center px-5">
+        <a class="btn btn-primary !h-14 !px-8">Перейти в каталог <span data-i="arrow"></span></a>
+        <a class="btn btn-ghost !h-14">Получить консультацию</a>
+      </div>
+      <!-- product on waves -->
+      <div class="relative mt-12 md:mt-16 h-[320px] md:h-[440px]">
+        <div data-slot="airflow" data-h="440" data-color="#2EB1B0" data-op=".45" class="absolute inset-0 w-full h-full"></div>
+        <div class="absolute left-1/2 top-6 -translate-x-1/2 w-[300px] h-[300px] md:w-[420px] md:h-[420px]">
+          <span class="ring-wave"></span><span class="ring-wave"></span><span class="ring-wave"></span>
+          <div class="absolute inset-10 rounded-full bg-gradient-to-b from-brand-50 to-white"></div>
+          <img src="https://bp.propritok.ru/api/files/pbc_1529214369/qa7wspzic1tsovz/brbxbreezer_bio_xperspective001_7kvi9nlknh.webp" class="absolute inset-12 w-[calc(100%-6rem)] h-[calc(100%-6rem)] object-contain mix-blend-multiply animate-drift" alt="" />
+        </div>
+        <!-- side facts -->
+        <div class="hidden md:block absolute left-[8%] top-24 text-left">
+          <div class="text-[56px] font-extralight tracking-[-0.05em] leading-none">18<span class="text-2xl font-semibold ml-1">дБ</span></div>
+          <div class="text-sm text-ink-3 mt-1">тише шёпота</div>
+        </div>
+        <div class="hidden md:block absolute right-[8%] top-24 text-right">
+          <div class="text-[56px] font-extralight tracking-[-0.05em] leading-none">5<span class="text-2xl font-semibold ml-1">лет</span></div>
+          <div class="text-sm text-ink-3 mt-1">гарантии на монтаж</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= B · BOLD & PLAYFUL ================= -->
+  <div class="mx-auto max-w-page px-5 md:px-8 mt-16 mb-3 flex items-center gap-3"><span class="h-8 px-3 rounded-full bg-brand-700 text-white text-xs font-bold inline-flex items-center">B</span><b>«Вдох» — смелый и игривый</b><span class="text-sm text-ink-3 hidden md:inline">Unbounded, полноцветный фон, фото в «живой» форме, стикеры</span></div>
+  <section class="relative mx-3 md:mx-6 rounded-2xl bg-brand-700 text-white overflow-hidden min-h-[760px]">
+    <!-- big wave shapes -->
+    <svg class="absolute inset-x-0 bottom-0 w-full h-[55%]" viewBox="0 0 1440 400" preserveAspectRatio="none"><path d="M0 120 C 240 40, 420 220, 720 140 S 1200 20, 1440 120 V400 H0Z" fill="#109C93" opacity=".6"/><path d="M0 220 C 300 140, 520 300, 820 220 S 1260 140, 1440 220 V400 H0Z" fill="#0A5C66" opacity=".7"/></svg>
+    <div data-slot="airflow" data-h="760" data-color="#fff" data-op=".18" class="absolute inset-0 w-full h-full"></div>
+
+    <div class="relative mx-auto max-w-page px-5 md:px-10 pt-12 md:pt-20 pb-16 grid lg:grid-cols-12 gap-10 items-center">
+      <div class="lg:col-span-7">
+        <span class="inline-flex items-center gap-2 h-10 px-4 rounded-full bg-sun-300 text-brand-950 text-sm font-bold -rotate-2">☀ −30% на монтаж с бризером</span>
+        <h2 class="mt-6 font-display font-semibold text-[48px] leading-[0.98] md:text-[104px] md:leading-[0.92] tracking-[-0.05em]">Дышите.<br/><span class="text-brand-200">Остальное</span><br/>на нас.</h2>
+        <p class="mt-6 text-lg md:text-xl text-white/80 max-w-[500px]">Чистый воздух в каждый дом: подберём бризер и установим за пару часов — чисто, тихо, с гарантией 5 лет.</p>
+        <div class="mt-8 flex flex-col sm:flex-row gap-3">
+          <a class="btn btn-light !h-14 !px-8 !text-brand-900">Перейти в каталог <span data-i="arrow"></span></a>
+          <a class="btn !h-14 !px-8 border-2 border-white/40 text-white hover:bg-white/10">Получить консультацию</a>
+        </div>
+      </div>
+      <div class="lg:col-span-5 relative h-[420px] md:h-[540px]">
+        <div class="blob absolute inset-4 md:inset-0 overflow-hidden shadow-lift">
+          <img src="../public/work/IMG_9708.jpg" class="w-full h-full object-cover" alt="" />
+        </div>
+        <!-- stickers -->
+        <div class="absolute -left-2 md:-left-10 top-10 rotate-[-6deg] bg-white text-ink rounded-lg px-5 py-4 shadow-lift animate-drift">
+          <div class="font-display text-[40px] font-bold leading-none text-brand-700">5<span class="text-lg ml-1">лет</span></div>
+          <div class="text-xs font-bold text-ink-2 mt-1">гарантии на монтаж</div>
+        </div>
+        <div class="absolute right-0 md:-right-4 bottom-24 rotate-[5deg] bg-sun-300 text-brand-950 rounded-full h-14 px-6 inline-flex items-center gap-2 font-bold shadow-lift animate-drift" style="animation-delay:-3s"><span data-i="volume"></span>18 дБ — тсс!</div>
+        <div class="absolute left-6 bottom-4 rotate-[-3deg] glass-dark rounded-full h-12 px-5 inline-flex items-center gap-2 text-sm font-bold"><span data-i="drill" data-s="18"></span>HILTI · 0 пыли</div>
+      </div>
+    </div>
+    <!-- marquee strip -->
+    <div class="relative bg-brand-950/60 backdrop-blur py-4 overflow-hidden">
+      <div class="flex gap-10 whitespace-nowrap font-display text-lg md:text-2xl font-medium text-white/80 animate-[marq_30s_linear_infinite]">
+        <span>Tion ✦ Ballu ✦ Royal Clima ✦ Zilon ✦ Монтаж от 6 000 ₽ ✦ Гарантия 5 лет ✦ Tion ✦ Ballu ✦ Royal Clima ✦ Zilon ✦ Монтаж от 6 000 ₽ ✦ Гарантия 5 лет ✦</span>
+        <span>Tion ✦ Ballu ✦ Royal Clima ✦ Zilon ✦ Монтаж от 6 000 ₽ ✦ Гарантия 5 лет ✦ Tion ✦ Ballu ✦ Royal Clima ✦ Zilon ✦ Монтаж от 6 000 ₽ ✦ Гарантия 5 лет ✦</span>
+      </div>
+    </div>
+    <style>@keyframes marq { to { transform: translateX(-50%); } }</style>
+  </section>
+
+  <div class="mx-auto max-w-page px-5 md:px-8 py-16 grid md:grid-cols-3 gap-5 text-sm">
+    <div class="rounded-xl bg-white shadow-soft p-6"><b class="text-h4 block">База · «Фото + стекло»</b><p class="mt-2 text-ink-2">Лучше всего продаёт: сразу видно реальный результат монтажа. Рекомендую как основной — см. <a href="home.html" class="text-brand-700 font-semibold">главную</a>.</p></div>
+    <div class="rounded-xl bg-white shadow-soft p-6"><b class="text-h4 block">A · «Тишина»</b><p class="mt-2 text-ink-2">Премиальный, как у Dyson/Airthings. Требует качественного рендера прибора на прозрачном фоне. На мобиле — самый лёгкий по весу.</p></div>
+    <div class="rounded-xl bg-white shadow-soft p-6"><b class="text-h4 block">B · «Вдох»</b><p class="mt-2 text-ink-2">Запоминается и выделяет среди конкурентов-шаблонов. Подходит для рекламных лендингов и акций; Unbounded добавляет ~40 КБ шрифта.</p></div>
+  </div>
+
+  <script>
+    // mini header inside variant A
+    document.querySelector('section .max-w-page').innerHTML = logoFull(28) + `<nav class="hidden md:flex gap-8 text-sm font-semibold text-ink-2"><a>Каталог</a><a>Процесс</a><a>О нас</a><a>Контакты</a></nav><a class="font-extrabold text-sm tnum">${PHONE}</a>`;
+  </script>
+</body>
+</html>

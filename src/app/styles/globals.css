@@ -62,9 +62,9 @@
 :root {
   --primary-color: #ffffff;
   --secondary-color: #0d7e8b;
-  --text-primary: #1a1a1a;
-  --text-secondary: #666666;
-  --background-primary: #f9f9f9;
+  --text-primary: #0f1f22;
+  --text-secondary: #4a5a5d;
+  --background-primary: #f7f5f0;
   --background-secondary: #f8f9fa;
 
   /* стили для Swiper (слайдер) */
@@ -99,6 +99,281 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ============ Дизайн-система «Воздух» (design/system.html) ============ */
+@layer components {
+  /* Кнопки */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 h-[52px] px-[26px] rounded-full font-bold text-[15px] whitespace-nowrap select-none;
+    transition: transform 0.25s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.25s, background-color 0.25s, color 0.25s,
+      border-color 0.25s;
+  }
+  .btn:active {
+    transform: scale(0.97);
+  }
+  .btn:disabled {
+    @apply opacity-50 pointer-events-none;
+  }
+  .btn-sm {
+    @apply h-10 px-[18px] text-sm;
+  }
+  .btn-primary {
+    @apply bg-brand-700 text-white;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25) inset, 0 8px 20px -8px rgba(13, 126, 139, 0.7);
+  }
+  .btn-primary:hover {
+    background: #0a6f7a;
+    transform: translateY(-2px);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25) inset, 0 16px 30px -10px rgba(13, 126, 139, 0.8);
+  }
+  .btn-secondary {
+    @apply bg-white text-ink border border-line;
+  }
+  .btn-secondary:hover {
+    @apply border-brand-700 text-brand-700;
+    transform: translateY(-2px);
+  }
+  .btn-ghost {
+    @apply bg-transparent text-brand-700 px-3.5;
+  }
+  .btn-ghost:hover {
+    @apply bg-brand-50;
+  }
+  .btn-light {
+    @apply bg-white text-brand-900;
+  }
+  .btn-light:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 30px -12px rgba(0, 0, 0, 0.35);
+  }
+  .btn .arrow {
+    transition: transform 0.25s;
+  }
+  .btn:hover .arrow {
+    transform: translateX(3px);
+  }
+
+  /* Карточки */
+  .card-hover {
+    transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.35s;
+  }
+  .card-hover:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 2px 4px rgba(6, 63, 70, 0.04), 0 28px 56px -18px rgba(6, 63, 70, 0.25);
+  }
+  .card-hover .zoom {
+    transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .card-hover:hover .zoom {
+    transform: scale(1.05);
+  }
+
+  /* Чипсы-фильтры */
+  .chip {
+    @apply inline-flex items-center gap-1.5 h-10 px-4 rounded-full bg-white border border-line text-sm font-semibold text-ink-2 cursor-pointer whitespace-nowrap select-none shrink-0;
+    transition: all 0.2s;
+  }
+  .chip:hover {
+    @apply border-brand-300 text-brand-700;
+  }
+  .chip-on,
+  .chip-on:hover {
+    @apply bg-brand-700 border-brand-700 text-white;
+    box-shadow: 0 6px 16px -8px rgba(13, 126, 139, 0.8);
+  }
+
+  /* Стекло */
+  .glass {
+    background: rgba(255, 255, 255, 0.62);
+    backdrop-filter: blur(18px) saturate(1.4);
+    -webkit-backdrop-filter: blur(18px) saturate(1.4);
+    border: 1px solid rgba(255, 255, 255, 0.75);
+  }
+  .glass-dark {
+    background: rgba(4, 44, 49, 0.45);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .eyebrow {
+    @apply text-xs font-bold uppercase tracking-[0.16em] text-brand-700;
+  }
+  .section-title {
+    @apply text-[32px] leading-[1.1] md:text-h2 font-bold tracking-[-0.03em];
+  }
+  .text-grad {
+    /* Отрицательный трекинг делает бокс уже глифа, а градиент рисуется только в боксе —
+       добавляем поле справа и компенсируем его отрицательным отступом */
+    padding-right: 0.12em;
+    margin-right: -0.12em;
+    background: linear-gradient(120deg, #0d7e8b 0%, #2eb1b0 60%, #8fd3cf 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .dot-live {
+    @apply inline-block w-2 h-2 rounded-full bg-[#22B07D];
+    box-shadow: 0 0 0 4px rgba(34, 176, 125, 0.18);
+  }
+  .dot-order {
+    @apply inline-block w-2 h-2 rounded-full bg-sun-500;
+    box-shadow: 0 0 0 4px rgba(233, 162, 59, 0.2);
+  }
+  .nav-link {
+    position: relative;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -6px;
+    height: 2px;
+    border-radius: 2px;
+    background: #0d7e8b;
+    transform: scaleX(0);
+    transition: transform 0.3s;
+  }
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    transform: scaleX(1);
+  }
+
+  /* Переключатель (монтаж в корзине / на странице товара) */
+  .switch {
+    @apply relative w-12 h-7 rounded-full bg-line shrink-0;
+    transition: background 0.25s;
+  }
+  .switch::after {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 20px;
+    height: 20px;
+    border-radius: 99px;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .switch-on {
+    @apply bg-brand-700;
+  }
+  .switch-on::after {
+    transform: translateX(20px);
+  }
+}
+
+/* Появление при скролле (useReveal) */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Линии воздушного потока */
+.airflow path {
+  fill: none;
+  stroke-linecap: round;
+  stroke-dasharray: 160 440;
+  animation: flow 14s linear infinite;
+}
+.airflow path:nth-child(2) {
+  animation-duration: 18s;
+  animation-delay: -4s;
+}
+.airflow path:nth-child(3) {
+  animation-duration: 22s;
+  animation-delay: -9s;
+}
+.airflow path:nth-child(4) {
+  animation-duration: 16s;
+  animation-delay: -2s;
+}
+.airflow path:nth-child(5) {
+  animation-duration: 25s;
+  animation-delay: -12s;
+}
+@keyframes flow {
+  to {
+    stroke-dashoffset: -600;
+  }
+}
+
+/* Волны вокруг прибора в hero */
+.ring-wave {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  border: 1px solid #bfe6e3;
+  animation: ringw 6s ease-out infinite;
+}
+.ring-wave:nth-child(2) {
+  animation-delay: 2s;
+}
+.ring-wave:nth-child(3) {
+  animation-delay: 4s;
+}
+@keyframes ringw {
+  from {
+    transform: scale(0.7);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+.pulse-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  border: 2px solid #2eb1b0;
+  animation: ring 2.4s ease-out infinite;
+}
+@keyframes ring {
+  from {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  to {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+  }
 }
 
 /* Кастомные цвета для NextUI */

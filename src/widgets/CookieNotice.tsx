@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@heroui/react";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
@@ -33,26 +32,23 @@ const CookieNotice: React.FC = () => {
   if (!visible) return null;
 
   return (
-    <div className="fixed bottom-4 left-4 right-20 md:right-auto md:max-w-md z-50 rounded-lg bg-gray-900 text-white shadow-xl p-4">
-      <p className="text-sm leading-relaxed text-gray-200">
-        Мы используем файлы cookie и сервис аналитики Яндекс.Метрика, чтобы сайт
-        работал корректно и становился удобнее. Оставаясь на сайте, вы
-        соглашаетесь с обработкой cookie. Подробнее — в{" "}
-        <Link
-          href="/privacy"
-          className="underline text-[var(--secondary-color)]"
-        >
-          политике конфиденциальности
-        </Link>
-        .
-      </p>
-      <Button
-        size="sm"
-        onPress={accept}
-        className="mt-3 bg-[var(--secondary-color)] text-white"
-      >
-        Хорошо
-      </Button>
+    <div className="fixed left-3 right-20 bottom-3 md:left-6 md:right-auto md:bottom-6 md:max-w-[460px] z-50 glass shadow-glass rounded-3xl p-4 flex items-start gap-3">
+      <div className="w-10 h-10 shrink-0 rounded-full bg-sun-100 grid place-items-center text-lg" aria-hidden="true">
+        🍪
+      </div>
+      <div className="flex-1">
+        <p className="text-[13px] leading-snug text-ink-2">
+          Мы используем файлы cookie и сервис аналитики Яндекс.Метрика, чтобы сайт работал корректно и
+          становился удобнее. Оставаясь на сайте, вы соглашаетесь с обработкой cookie. Подробнее — в{" "}
+          <Link href="/privacy" className="text-brand-700 font-semibold underline underline-offset-2">
+            политике конфиденциальности
+          </Link>
+          .
+        </p>
+        <button type="button" onClick={accept} className="btn btn-sm mt-3 bg-ink text-white hover:bg-brand-900">
+          Хорошо
+        </button>
+      </div>
     </div>
   );
 };

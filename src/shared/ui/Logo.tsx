@@ -1,15 +1,14 @@
 import React from 'react';
 
-const Logo: React.FC<any> = () => {
+const Logo: React.FC<{ height?: number }> = ({ height = 40 }) => {
   return (
     <div className='logo-container'>
       <svg
         xmlns='http://www.w3.org/2000/svg'
-        width='70'
-        height='40'
+        width={Math.round(height * 1.23)}
+        height={height}
         viewBox='0 0 202 164'
         fill='none'>
-        <rect width='202' height='164' fill='white' />
         <rect
           className='cable-1'
           x='0.25'

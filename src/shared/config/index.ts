@@ -47,8 +47,8 @@ export const config = {
     email: 'info@propritok.ru',
     address: 'г. Москва',
     workingHours: {
-      weekdays: '9:00 - 18:00',
-      weekends: '10:00 - 16:00',
+      weekdays: '10:00–21:00',
+      weekends: '10:00–18:00',
     },
     socials: {
       whatsapp: 'https://wa.me/79295850880',

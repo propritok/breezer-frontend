@@ -77,7 +77,7 @@ const ProductBuyBox: React.FC<ProductBuyBoxProps> = ({ product }) => {
           </div>
         )}
         <div
-          className={`text-[40px] leading-none font-extrabold tracking-[-0.04em] tnum ${oldPrice ? 'text-[#C2410C]' : ''}`}>
+          className={`text-[40px] leading-none font-extrabold tracking-[-0.04em] tnum ${oldPrice ? 'text-brand-700' : ''}`}>
           {price ? formatRub(price) : 'Цена по запросу'}
         </div>
 

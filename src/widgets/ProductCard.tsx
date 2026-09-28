@@ -84,7 +84,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <div className='mt-auto pt-5 flex items-end justify-between gap-3'>
           <div>
             {discount > 0 && <s className='block text-sm text-ink-3 tnum'>{formatRub(oldPrice!)}</s>}
-            <div className={`text-[22px] font-extrabold tracking-[-0.02em] tnum ${discount ? 'text-[#C2410C]' : ''}`}>
+            <div className={`text-[22px] font-extrabold tracking-[-0.02em] tnum ${discount ? 'text-brand-700' : ''}`}>
               {formatRub(current)}
             </div>
           </div>

@@ -570,7 +570,8 @@ export default function CartPage() {
                 </h2>
                 <p className="relative mt-4 text-white/70 max-w-[460px]">
                   Мы свяжемся с вами в рабочее время (Пн–Пт{" "}
-                  {config.contact.workingHours.weekdays}), подтвердим состав
+                  {config.contact.workingHours.weekdays}, Сб–Вс{" "}
+                  {config.contact.workingHours.weekends}), подтвердим состав
                   заказа и согласуем время
                   {placed.totals.installUnits ? " монтажа" : " доставки"}.
                 </p>

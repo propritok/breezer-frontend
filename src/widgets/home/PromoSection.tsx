@@ -22,7 +22,7 @@ const PromoSection: React.FC = () => {
               При покупке бризера — <span className='text-brand-700'>скидка на монтаж</span>
             </h2>
             <p className='mt-4 text-ink-2 max-w-[420px]'>
-              Выбирайте любой бризер в каталоге: установка обойдётся на {installDiscount}% дешевле.
+              Выбирайте любой бризер в каталоге — стоимость установки будет на {installDiscount}% ниже.
             </p>
           </div>
           <div className='flex flex-col md:items-end text-white pt-10 md:pt-0'>

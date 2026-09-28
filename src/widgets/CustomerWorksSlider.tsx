@@ -110,7 +110,7 @@ const CustomerWorksSlider: React.FC = () => {
             style={{ width: `${Math.max(10, progress * 100)}%` }}
           />
         </div>
-        <span className="text-sm font-semibold text-ink-3 tnum">{workImages.length} объектов</span>
+        <span className="text-sm font-semibold text-ink-3 tnum">{workImages.length} объекта</span>
       </div>
     </section>
   );
